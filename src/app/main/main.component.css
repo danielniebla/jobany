@@ -1,0 +1,78 @@
+@import '@clr/ui/clr-ui.css';
+clr-control-error{
+    display: none !important;
+}
+clr-control-error.clr-error{
+    display: block!important;
+}
+clr-control-helper.clr-error{
+  display: none;
+}
+textarea{
+    width: 98%;
+    margin: 0 1% 0 1%;
+}
+clr-textarea-container{
+    width: 100%;
+}
+.clr-form-control{
+    display: flex;
+    flex-direction: column !important;
+    margin: 0 ;
+}
+
+label, .clr-control-label{
+    width: 98%!important;
+    margin: 0 1% 0 1%;
+}
+h4{
+    margin: 0;
+}
+.indi{
+    display: inline;
+    user-select: none;
+}
+img{
+    height:16px;
+    width: auto;
+}
+.but{
+    height:40px;
+    width: auto;
+    margin: auto 1% auto auto;
+}
+.butt{
+    height:20px;
+    width: auto;
+    margin: 24px auto auto 1%;
+    
+}
+.table{
+    width: 98%;
+    margin: 2%;
+}
+button, .dropdown, .dropdown-menu,.expandable, .dropdown-item,td{
+    @media screen and (max-width: 768px) {
+        font-size: 10px!important;
+        padding: 0!important ;
+        margin: 0 !important;
+        white-space: pre-line;
+        max-width: 150px;
+    }
+    
+}
+td, .left{
+    max-width: 10px !important;
+    font-size: 10px !important;
+}
+.flex{
+    display: flex;
+}
+
+.pen{
+    height: 15px;
+    width: auto;
+}
+#indicador{
+    display: none;
+}

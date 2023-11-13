@@ -1,1 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+@import '@clr/ui/clr-ui.css';
+body{
+    background-color: var(--cds-global-color-warm-gray-200);
+}
+.btn{
+    background-color: var(--cds-global-color-blue-100);
+    border-color: var(--cds-global-color-blue-300);
+    color: var(--cds-global-color-black);
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+.cont{
+    background-color: var(--cds-global-color-blue-50);
+    width: 96%;
+    margin: 2%;
+    height: min-content;
+}
+
