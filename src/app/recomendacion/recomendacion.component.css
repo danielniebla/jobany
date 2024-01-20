@@ -1,0 +1,126 @@
+@import '@clr/ui/clr-ui.css';
+img {
+    height: 16px;
+    width: auto;
+    margin: 0;
+}
+.oculta{
+    visibility: hidden ;
+    pointer-events: none;
+}
+.flex {
+    display: flex;
+    -ms-flex-align: start;
+    margin: 0;
+    padding: 0;
+}
+.butt {
+    height: 20px;
+    width: auto;
+    margin: 24px auto auto 1%;
+
+}
+button{
+    border: none;
+    background-color: transparent;
+}
+.table-space {
+    @media screen and (min-width:600px) {
+        width: 98%;
+        margin: 2%;
+    }
+    width: 100%;
+    background-color: var(--cds-alias-object-container-background);
+}
+.new,.new textarea ,.new input {
+    background-color: var(--cds-global-color-blue-200) !important;
+}
+.txtArea{
+    background-color: var(--cds-global-color-yellow-200);
+}
+td,textarea,.tr{
+    margin: 0 !important;
+    padding: 0;
+    align-content: flex-start;
+    -ms-flex-align: start;
+    pointer-events: auto;
+
+}
+.cumplio .txtArea, .cumplio{
+    background-color: var(--cds-global-color-green-200) !important;
+}
+.incumplio .txtArea, .incumplio{
+    background-color: var(--cds-global-color-red-300) !important;
+}
+.disk{
+    visibility: hidden;
+    pointer-events: none;
+}
+.cumplido{
+    pointer-events: none;
+}
+.edit{
+    visibility: visible;
+    pointer-events: all !important;
+    background-color: var(--cds-global-color-blue-100);
+}
+input{
+    border: none;
+    width: 100%;
+    pointer-events: auto;
+}
+textarea {
+    margin: 0 !important;
+    height: auto;
+    border: none;
+    padding: 0 !important;
+    @media screen and (min-width:600px) {
+        width:  96%;
+    }
+}
+clr-textarea-container {
+    width: 100%;
+}
+.clr-form-control {
+    display: flex;
+    flex-direction: column !important;
+    margin: 0;
+}
+
+.cabecera{
+    @media screen and (max-width:650px) {
+        padding: .01rem !important;
+        margin: 0 !important;
+    }
+    background-color: var(--cds-alias-object-container-background-tint);
+    width: 100%;
+    align-self: flex-start;
+    text-align: left;
+    pointer-events: none;
+}
+.campo{
+    text-align: left;
+    align-content: flex-start;
+    width: 100%;
+    background-color: var(--cds-global-color-yellow-200);
+}
+.tabla{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr ;
+    gap: 0;
+    width: 100%;
+}
+.Acciones { 
+    grid-column: 1 / 2; 
+    margin: 0;
+}
+#accion{
+    width: 90% !important;
+}
+.Recomendacion { grid-column: 2 / 3; }
+.Objetivos { grid-column: 3 / 4; }
+.Responsable { grid-column: 4 / 5; }
+.Fecha_limite { grid-column: 5 / 6; }
+.Metas { grid-column: 6 / 7; }
+.cum { grid-column: 7 / 8; }
+

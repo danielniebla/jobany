@@ -1,0 +1,139 @@
+<div class="flex">
+  <h5 class="sub-tittle">carreras:</h5>
+  <img
+    class="butt"
+    src="../../assets/mas.png"
+    alt="+"
+    (click)="agregarRecomendacion()"
+  />
+</div>
+<div class="table-space">
+  <div class="tabla">
+    <div class="Acciones cabecera">Id</div>
+    <div class="Fecha_limite cabecera">facultad</div>
+    <div class="cabecera contrasena">carrera</div>
+    <ng-container *ngIf="nueva">
+      <div class="campo flex Acciones new">
+        <img
+          src="../../assets/guardar.png"
+          alt="guardar"
+          class=""
+          (click)="nuevaRecomendacion()"
+        />
+      </div>
+      <div class="campo Fecha new">
+        <select name="options" [(ngModel)]="selectedfacultad[0]">
+          <ng-container *ngFor="let facultad of facultades">
+            <option [ngValue]="facultad.id_facultad">
+              {{ facultad.nombre }}
+            </option></ng-container
+          >
+        </select>
+      </div>
+      <div class="campo contrasena new">
+        <input type="text" [(ngModel)]="carrera" />
+      </div>
+    </ng-container>
+    <ng-container *ngFor="let carrera of carreras" class="campos">
+      <div class="campo flex Acciones">
+        <textarea
+          class="txtArea"
+          [attr.data-index]="carrera.id_carrera"
+          [(ngModel)]="carrera.id_carrera"
+          name="zona"
+          id="accion"
+        ></textarea>
+        <img
+          src="../../assets/guardar.png"
+          alt="guardar"
+          class="disk"
+          (click)="actualizarRecomendacion(carrera)"
+          [attr.data-index]="carrera.id_carrera"
+        />
+
+        <img
+          class="pen"
+          src="../../assets/lapiz.png"
+          alt="editar"
+          (click)="editarRecomendacion(carrera.id_carrera)"
+        />
+        <img
+          class="eraser"
+          src="../../assets/borrar.png"
+          alt="borrar"
+          (click)="verificarBorradoRecomendacion(carrera.id_carrera)"
+        />
+      </div>
+      <div class="campo Fecha">
+        <ng-container *ngIf="selctFlag[carrera.id_carrera]; else elseBlock">
+          <select
+            name="options"
+            [(ngModel)]="selectedfacultad[carrera.id_carrera]"
+          >
+            <ng-container *ngFor="let facultad of facultades">
+              <option [ngValue]="facultad.id_facultad">
+                {{ facultad.nombre }}
+              </option>
+            </ng-container>
+          </select>
+        </ng-container>
+
+        <ng-template #elseBlock>
+          {{ facultad(carrera.id_carrera) }}
+        </ng-template>
+      </div>
+      <div class="campo contrasena">
+        <input
+          type="text"
+          [(ngModel)]="carrera.nombre"
+          class="txtArea"
+          [attr.data-index]="carrera.id_carrera"
+        />
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<div class="modal static bump-down" *ngIf="alert">
+  <div class="modal-dialog" role="dialog" aria-hidden="true">
+    <div class="modal-content">
+      <div class="alert alert-danger" role="alert">
+        <div class="alert-items">
+          <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+              <cds-icon
+                class="alert-icon"
+                shape="exclamation-circle"
+              ></cds-icon>
+            </div>
+            <span class="alert-text">
+              Alerta la carrera seleccionada se borrara permanentemente.
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-header">
+        <h3 class="modal-title">Esta seguro de borrar la carrera?</h3>
+      </div>
+      <div class="modal-body">
+        <p>La carrera se borrara en {{ contador }}</p>
+      </div>
+      <div class="modal-footer">
+        <button
+          class="btn btn-outline"
+          type="button"
+          (click)="cancelarBorrado()"
+        >
+          Cancelar
+        </button>
+        <button
+          class="btn btn-primary"
+          type="button"
+          (click)="aceptarBorrado()"
+        >
+          borrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

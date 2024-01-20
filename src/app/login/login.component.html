@@ -1,1 +1,51 @@
-<p>login works!</p>
+<div class="cont">
+  <form class="clr-form" (ngSubmit)="autenticarUsuario()">
+    <div class="clr-form-control">
+      <label for="nombreUsuario" class="clr-control-label">Usuario</label>
+      <div class="clr-control-container">
+        <div class="clr-input-wrapper" appClickAway>
+          <input
+            type="text"
+            id="nombreUsuario"
+            name="text"
+            placeholder="Escriba aqui"
+            class="clr-input"
+            [(ngModel)]="nombre"
+          />
+          <cds-icon
+            class="clr-validate-icon"
+            shape="exclamation-circle"
+          ></cds-icon>
+          <clr-control-error>El campo es requerido!</clr-control-error>
+          <clr-control-helper>Escriba su correo de usuario</clr-control-helper>
+        </div>
+      </div>
+    </div>
+    <div class="clr-form-control">
+      <label for="contra" class="clr-control-label">Contraseña</label>
+      <div class="clr-control-container">
+        <div class="clr-input-wrapper" appClickAway>
+          <input
+            type="password"
+            id="contra"
+            name="contraseña"
+            placeholder="Escriba aqui"
+            class="clr-input"
+            [(ngModel)]="contrasena"
+          />
+          <cds-icon
+            class="clr-validate-icon"
+            shape="exclamation-circle"
+          ></cds-icon>
+          <clr-control-error>El campo es requerido!</clr-control-error>
+          <clr-control-helper>Escriba su contraseña</clr-control-helper>
+        </div>
+      </div>
+    </div>
+    <br />
+    <div class="button">
+      <button class="btn boton btn-outline" type="submit">Entrar</button>
+      <span class="clr-subtext" id="error"></span>
+    </div>
+  </form>
+</div>

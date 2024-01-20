@@ -1,0 +1,16 @@
+@import '@clr/ui/clr-ui.css';
+
+.indi {
+    display: inline;
+    user-select: none;
+}
+.togle{
+    display: flex;
+    flex-direction: row;
+    width: max-content;
+}
+img {
+    height: 16px;
+    width: 16px;
+    margin: 1.7rem auto 1.7rem auto;
+}

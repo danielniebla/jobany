@@ -1,0 +1,187 @@
+<div class="flex">
+  <h5 class="sub-tittle">Etapa de planeacion:</h5>
+  <img
+    class="butt"
+    src="../../assets/mas.png"
+    alt="+"
+    (click)="agregarRecomendacion()"
+  />
+</div>
+<div class="table-space">
+  <div class="tabla">
+    <div class="Acciones cabecera">Acciones</div>
+    <div class="Recomendacion cabecera">Recomendacion</div>
+    <div class="Objetivos cabecera">Objetivos</div>
+    <div class="Responsable cabecera">Responsable</div>
+    <div class="Fecha_limite cabecera">Fecha limite</div>
+    <div class="Metas cabecera">Metas(%)</div>
+    <div class="cum cabecera">Acciones/cumplido</div>
+    <ng-container *ngIf="nueva">
+      <div class="campo flex Acciones new">
+        <textarea [(ngModel)]="accion" name="accion" id="accion"></textarea>
+      </div>
+      <div class="campo Recomendacion new">
+        <form>
+          <textarea [(ngModel)]="nombre" name="recomendacion"> </textarea>
+        </form>
+      </div>
+      <div class="campo Objetivos new">
+        <textarea [(ngModel)]="objetivos" name="objetivos"></textarea>
+      </div>
+      <div class="campo Responsable new">
+        <textarea [(ngModel)]="responsable" name="responsable"></textarea>
+      </div>
+      <div class="campo Fecha_limite new">
+        <input
+          type="date"
+          [(ngModel)]="fecha_l"
+        />
+      </div>
+      <div class="campo Metas new">
+        <input type="number" [(ngModel)]="meta" />
+      </div>
+      <div class="campo cum new">
+        <img
+          src="../../assets/guardar.png"
+          alt="guardar"
+          class=""
+          (click)="nuevaRecomendacion()"
+        />
+      </div>
+    </ng-container>
+    <ng-container *ngFor="let recomendacion of recomendaciones" class="campos">
+      
+      <div class="campo flex Acciones" [attr.data-index]="recomendacion.id_recomendacion" [ngClass]="determinarClase(recomendacion)">
+        <textarea
+          class="txtArea"
+          [attr.data-index]="recomendacion.id_recomendacion"
+          [(ngModel)]="recomendacion.accion"
+          name="accion"
+          id="accion"
+        ></textarea>
+      </div>
+      <div class="campo Recomendacion" [attr.data-index]="recomendacion.id_recomendacion" [ngClass]="determinarClase(recomendacion)">
+        <form>
+          <textarea
+            [attr.data-index]="recomendacion.id_recomendacion"
+            class="txtArea"
+            [(ngModel)]="recomendacion.nombre"
+            name="recomendacion"
+          >
+          </textarea>
+        </form>
+      </div>
+      <div class="campo Objetivos" [attr.data-index]="recomendacion.id_recomendacion" [ngClass]="determinarClase(recomendacion)">
+        <textarea
+          class="txtArea"
+          [attr.data-index]="recomendacion.id_recomendacion"
+          [(ngModel)]="recomendacion.objetivos"
+          name="objetivos"
+        ></textarea>
+      </div>
+      <div class="campo Responsable" [attr.data-index]="recomendacion.id_recomendacion" [ngClass]="determinarClase(recomendacion)">
+        <textarea
+          class="txtArea"
+          [attr.data-index]="recomendacion.id_recomendacion"
+          [(ngModel)]="recomendacion.responsable"
+          name="responsable"
+        ></textarea>
+      </div>
+      <div class="campo Fecha_limite" [attr.data-index]="recomendacion.id_recomendacion" [ngClass]="determinarClase(recomendacion)">
+        <input
+          type="date"
+          [(ngModel)]="recomendacion.fecha_limite"
+          class="txtArea"
+          [attr.data-index]="recomendacion.id_recomendacion"
+        />
+      </div>
+      <div class="campo Metas" [attr.data-index]="recomendacion.id_recomendacion" [ngClass]="determinarClase(recomendacion)">
+        <input
+          type="text"
+          pattern="[0-9]{1,3}"
+          inputmode="numeric"
+          maxlength="3"
+          [(ngModel)]="recomendacion.porcentaje_metas"
+          class="txtArea"
+          [attr.data-index]="recomendacion.id_recomendacion"
+        />
+      </div>
+      <div class="campo cum" [attr.data-index]="recomendacion.id_recomendacion" [ngClass]="determinarClase(recomendacion)">
+        <img
+          src="../../assets/guardar.png"
+          alt="guardar"
+          class="disk"
+          (click)="actualizarRecomendacion(recomendacion)"
+          [attr.data-index]="recomendacion.id_recomendacion"
+        />
+
+        <img
+          class="pen"
+          src="../../assets/lapiz.png"
+          alt="editar"
+          (click)="editarRecomendacion(recomendacion.id_recomendacion)"
+        />
+        <img
+          class="eraser"
+          src="../../assets/borrar.png"
+          alt="borrar"
+          (click)="
+            verificarBorradoRecomendacion(recomendacion.id_recomendacion)
+          "
+        />
+        <img  
+          class="cumplido"
+          [src]="recomendacion.cumplido ? '../../assets/icons8-alternar-encendido-96.png' : '../../assets/icons8-alternar-apagado-80.png'" 
+          alt="cumplio" 
+          [attr.data-index]="recomendacion.id_recomendacion"
+          (click)="cumplioToggle(recomendacion)"
+        />
+      </div>
+      
+    </ng-container>
+  </div>
+</div>
+
+<div class="modal static bump-down" *ngIf="alert">
+  <div class="modal-dialog" role="dialog" aria-hidden="true">
+    <div class="modal-content">
+      <div class="alert alert-danger" role="alert">
+        <div class="alert-items">
+          <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+              <cds-icon
+                class="alert-icon"
+                shape="exclamation-circle"
+              ></cds-icon>
+            </div>
+            <span class="alert-text">
+              Alerta la recomendacion seleccionada se borrara permanentemente.
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-header">
+        <h3 class="modal-title">Esta seguro de borrar la recomendacion?</h3>
+      </div>
+      <div class="modal-body">
+        <p>La recomendacion se borrara en {{ contador }}</p>
+      </div>
+      <div class="modal-footer">
+        <button
+          class="btn btn-outline"
+          type="button"
+          (click)="cancelarBorrado()"
+        >
+          Cancelar
+        </button>
+        <button
+          class="btn btn-primary"
+          type="button"
+          (click)="aceptarBorrado()"
+        >
+          borrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

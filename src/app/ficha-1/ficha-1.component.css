@@ -1,0 +1,30 @@
+.flex{
+    display: flex;
+}
+h3{
+    margin: 0 10px  !important;
+}
+img {
+    height: 16px;
+    width: auto;
+    margin: 0;
+}
+input{
+    width: 300px;
+    border: none;
+}
+.lf{
+    background-color: var(--cds-alias-status-disabled-shade) !important;
+}
+.disk{
+    visibility: hidden;
+    pointer-events: none;
+}
+.editing{
+    visibility: visible !important;
+    pointer-events: auto;
+}
+.edit {
+    pointer-events: auto;
+    background-color: var(--cds-alias-status-neutral-tint) !important;
+}

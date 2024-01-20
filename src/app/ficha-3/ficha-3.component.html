@@ -1,0 +1,43 @@
+<div class="grid">
+    <h4>{{faculta}}</h4>
+    <h5>Mision</h5>
+    <div class="flex">
+        <textarea class="lf3" type="string" [(ngModel)]="ficha[0].mision"></textarea>
+    <img
+          class="pen"
+          src="../../assets/lapiz.png"
+          alt="editar"
+          (click)="editar()"
+        />
+        <img
+            src="../../assets/guardar.png"
+            alt="guardar"
+            class="disk3"
+            (click)="editarficha()"
+          />
+    </div>
+    <h5>Nombre</h5>
+    <div class="flex">
+        <textarea class="lf3" type="string" [(ngModel)]="ficha[0].nombre"></textarea>
+    </div>
+    <h5>Campus</h5>
+    <div class="flex">
+        <textarea class="lf3" type="string" [(ngModel)]="ficha[0].campus"></textarea>
+    </div>
+    <h5>Fecha de incio</h5>
+    <div class="flex">
+        <input class="lf3" type="date" [(ngModel)]="ficha[0].fecha_inicio">
+    </div>
+    <h5>Mision</h5>
+    <div class="flex">
+        <textarea class="lf3" type="string" [(ngModel)]="ficha[0].mision"></textarea>
+    </div>
+    <h5>Vision</h5>
+    <div class="flex">
+        <textarea class="lf3" type="string" [(ngModel)]="ficha[0].vision"></textarea>
+    </div>
+    <h5>Objetivos estrategicos</h5>
+    <div class="flex">
+        <textarea class="lf3" type="string" [(ngModel)]="ficha[0].objetivos_estrategicos"></textarea>
+    </div>
+</div>

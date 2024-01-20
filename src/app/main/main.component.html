@@ -1,118 +1,17 @@
-<div class="dropdown "  [class.open]="open" >
-    <button class="dropdown-toggle btn btn-primary" type="button"  (click)="toggle()">Unidad academica<cds-icon shape="angle" direction="down"></cds-icon>
-    </button>
-    <div class="dropdown-menu">
-        <div class="dropdown right-top" *ngFor="let zona of zonas" [class.open]="zona.agregarClaseFlag">
-            <button class="dropdown-item expandable"  (click)="agcz(zona)" [class.active]="zona.agregarClaseFlag" aria-haspopup="menu">{{ zona.zona }}</button>
-                <div class="dropdown-menu" >
-                    <div class="dropdown  right-top" *ngFor="let facultad of facultades" [class.open]="facultad.agregarClaseFlag" >
-                        <ng-container *ngIf="zona.zona == facultad.zona" >
-                            <button class="dropdown-item  expandable"  (click)="agcf(facultad)" [class.active]="facultad.agregarClaseFlag" aria-haspopup="menu">{{facultad.nombre}}.</button>
-                            <div class="dropdown-menu" >
-                                <ng-container *ngFor="let programaEducativo of programasEducativos">
-                                    <button class="dropdown-item " *ngIf="programaEducativo.facultad == facultad.nombre " >{{ programaEducativo.nombre }}</button>
-                                </ng-container>
-                                
-                            </div>
-                        </ng-container>
-                    </div>
-                </div>
-        </div>
-    </div>
+<div *ngIf="user == '1'">
+  <app-unidad-academica></app-unidad-academica>
 </div>
+
 <div class="cont">
-      <nav>
-        <button class="btn">Recomendacion</button><button class="btn">Fichas tecnicas</button>
-    </nav>
-    <div class="flex">
-        <img class="but" src="../../assets/mas.png" alt="+" (click)="toggle3()">
-        <form class="clr-form"   >
-              
-            <div class="clr-form-control" id="indicador" >
-              <label  class="clr-control-label">indicador</label>
-                <div class="clr-control-container " >
-                  <div class="clr-input-wrapper " appClickAway >
-                    <input type="password" id="password" name="text" placeholder="Escriba aqui" class="clr-input"  />
-                    <cds-icon class="clr-validate-icon" shape="exclamation-circle"></cds-icon>
-                    <clr-control-error >El campo es requerido!</clr-control-error>
-                    <clr-control-helper>Escriba su contraseña</clr-control-helper>
-                  </div>
-                </div>
-                <br>
-                <div class="button">
-                    <button class="btn btn-outline" type="submit" >Registrar</button>
-                    <span class="clr-subtext" id="error"></span>
-                </div>
-            </div>
-          </form>
-    </div>
-    <ng-container *ngFor="let indicador of indicadores">
-        <form clrForm>
-            <div (click)="toggle2(indicador)">
-                <img [src]="indicador.flag ? '../../assets/menos.png' : '../../assets/mas+.png'" class="indi"><h4 class="indi">{{indicador.nombre}}</h4>
-            </div>
-            <ng-container *ngIf="indicador.flag">
-                <div class="clr-form-control">
-                  
-                    <clr-textarea-container >
-                      <label for="basic" class="clr-control-label">valoracion <img class="pen" src="../../assets/lapiz.png" alt="+" ></label>
-                      <textarea clrTextarea [(ngModel)]="indicador.valoracion" placeholder="Explicacion" name="description" required  style="height: 100px;">{{indicador.valoracion}}</textarea>
-                      <clr-control-error *clrIfError="'required'" >El campo es requerido!</clr-control-error><br>
-                    </clr-textarea-container>
-                </div>
-                <div class="flex">
-                  <h5 class="sub-tittle">Etapa de planeacion:</h5>
-                  <img class="butt" src="../../assets/mas.png" alt="+" >
-                </div>
-                <div class="table">
-                    <table class="table table-noborder table-compact">
-                        <thead>
-                          <tr>
-                            <th class="left">Recomendacion</th>
-                            <th class="left">Acciones</th>
-                            <th class="left">Objetivos</th>
-                            <th class="left">Metas</th>
-                            <th class="left">Fecha limite</th>
-                            <th class="left">Acciones</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td class="left">Wolfman <img class="pen" src="../../assets/lapiz.png" alt="+" ></td>
-                            <td class="left">Nondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countryside</td>
-                            <td class="left">Sometimes</td>
-                            <td class="left">Not really</td>
-                            <td class="left">Not really</td>
-                            <td class="left"><i class="fa fa-pencil"></i></td>
-                          </tr>
-                        </tbody>
-                      </table>
-                </div>
-                <div class="flex">
-                  <h5 class="sub-tittle">Etapa de cumplimiento:</h5>
-                  <img class="butt" src="../../assets/mas.png" alt="+" >
-                </div>
-                <div class="table">
-                    <table class="table table-noborder table-compact">
-                        <thead>
-                          <tr>
-                            <th class="left">Acciones</th>
-                            <th class="left">Fecha de cumplimiento</th>
-                            <th class="left">Meta alcanzada</th>
-                            <th class="left">Documentos</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td class="left">Nondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countrysideNondisclosed countryside <img class="pen" src="../../assets/lapiz.png" alt="+" ></td>
-                            <td class="left">Sometimes</td>
-                            <td class="left">Not really</td>
-                            <td class="left">Not really</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                </div>
-            </ng-container>
-          </form>
+  <nav>
+    <button class="boton btn" (click)="recomendacion()">Recomendaciones</button>
+    <button class="boton btn" (click)="fichasTecnicas()">
+      Fichas tecnicas
+    </button>
+    <ng-container *ngIf="user == '1'" >
+      <button class="boton btn" (click)="cruds()">Administrador</button>
     </ng-container>
+    
+  </nav>
+  <app-indicador></app-indicador>
 </div>

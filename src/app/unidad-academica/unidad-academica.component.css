@@ -1,0 +1,17 @@
+@import '@clr/ui/clr-ui.css';
+
+button,
+.dropdown,
+.dropdown-menu,
+.expandable,
+.dropdown-item,
+td {
+    @media screen and (max-width: 768px) {
+        font-size: 10px !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        white-space: pre-line;
+        max-width: 150px;
+    }
+
+}

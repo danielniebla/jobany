@@ -1,0 +1,20 @@
+@import '@clr/ui/clr-ui.css';
+
+.table-space {
+    width: 98%;
+    margin: 2%;
+}
+.table{
+    background-color: var(--cds-alias-object-container-background);
+    
+}
+td,
+.left {
+    max-width: 10px !important;
+    font-size: 10px !important;
+}
+
+.pen {
+    height: 15px;
+    width: auto;
+}

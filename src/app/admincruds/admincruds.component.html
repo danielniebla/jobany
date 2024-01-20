@@ -1,0 +1,37 @@
+<nav>
+  <button class="boton btn" (click)="recomendacion()">Recomendaciones</button
+  ><button class="boton btn" (click)="fichasTecnicas()">Fichas tecnicas</button>
+  <button class="boton btn" (click)="cruds()">Administrador</button>
+</nav>
+<div class="togle" (click)="user()">
+  <img
+    [src]="tu ? '../../assets/menos.png' : '../../assets/mas+.png'"
+    class="indi"
+  />
+  <h3>Administrar usuarios</h3>
+</div>
+<app-crud-users *ngIf="tu"></app-crud-users>
+<div class="togle" (click)="zonas()">
+  <img
+    [src]="tz ? '../../assets/menos.png' : '../../assets/mas+.png'"
+    class="indi"
+  />
+  <h3>Administrar zonas</h3>
+</div>
+<app-crudzonas *ngIf="tz"></app-crudzonas>
+<div class="togle" (click)="facultades()">
+  <img
+    [src]="tf ? '../../assets/menos.png' : '../../assets/mas+.png'"
+    class="indi"
+  />
+  <h3>Administrar facultades</h3>
+</div>
+<app-crudfacultades *ngIf="tf"></app-crudfacultades>
+<div class="togle" (click)="carreras()">
+  <img
+    [src]="tc ? '../../assets/menos.png' : '../../assets/mas+.png'"
+    class="indi"
+  />
+  <h3>Administrar carreras</h3>
+</div>
+<app-crudfacarreras *ngIf="tc"></app-crudfacarreras>

@@ -1,0 +1,137 @@
+<div class="flex">
+  <h5 class="sub-tittle">facultades:</h5>
+  <img
+    class="butt"
+    src="../../assets/mas.png"
+    alt="+"
+    (click)="agregarRecomendacion()"
+  />
+</div>
+<div class="table-space">
+  <div class="tabla">
+    <div class="Acciones cabecera">Id</div>
+    <div class="Fecha_limite cabecera">zona</div>
+    <div class="cabecera contrasena">facultad</div>
+    <ng-container *ngIf="nueva">
+      <div class="campo flex Acciones new">
+        <img
+          src="../../assets/guardar.png"
+          alt="guardar"
+          class=""
+          (click)="nuevaRecomendacion()"
+        />
+      </div>
+      <div class="campo Fecha new">
+        <select name="options" [(ngModel)]="selectedzona[0]">
+          <ng-container *ngFor="let zona of zonas">
+            <option [ngValue]="zona.id_zona">
+              {{ zona.nombre }}
+            </option></ng-container
+          >
+        </select>
+      </div>
+      <div class="campo contrasena new">
+        <input type="text" [(ngModel)]="facultad" />
+      </div>
+    </ng-container>
+    <ng-container *ngFor="let facultad of facultades" class="campos">
+      <div class="campo flex Acciones">
+        <textarea
+          class="txtArea"
+          [attr.data-index]="facultad.id_facultad"
+          [(ngModel)]="facultad.id_facultad"
+          name="zona"
+          id="accion"
+        ></textarea>
+        <img
+          src="../../assets/guardar.png"
+          alt="guardar"
+          class="disk"
+          (click)="actualizarRecomendacion(facultad)"
+          [attr.data-index]="facultad.id_facultad"
+        />
+
+        <img
+          class="pen"
+          src="../../assets/lapiz.png"
+          alt="editar"
+          (click)="editarRecomendacion(facultad.id_facultad)"
+        />
+        <img
+          class="eraser"
+          src="../../assets/borrar.png"
+          alt="borrar"
+          (click)="verificarBorradoRecomendacion(facultad.id_facultad)"
+        />
+      </div>
+      <div class="campo Fecha">
+        <ng-container *ngIf="selctFlag[facultad.id_facultad]; else elseBlock">
+          <select
+            name="options"
+            [(ngModel)]="selectedzona[facultad.id_facultad]"
+          >
+            <ng-container *ngFor="let zona of zonas">
+              <option [ngValue]="zona.id_zona">{{ zona.nombre }}</option>
+            </ng-container>
+          </select>
+        </ng-container>
+
+        <ng-template #elseBlock>
+          {{ zona(facultad.id_facultad) }}
+        </ng-template>
+      </div>
+      <div class="campo contrasena">
+        <input
+          type="text"
+          [(ngModel)]="facultad.nombre"
+          class="txtArea"
+          [attr.data-index]="facultad.id_facultad"
+        />
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<div class="modal static bump-down" *ngIf="alert">
+  <div class="modal-dialog" role="dialog" aria-hidden="true">
+    <div class="modal-content">
+      <div class="alert alert-danger" role="alert">
+        <div class="alert-items">
+          <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+              <cds-icon
+                class="alert-icon"
+                shape="exclamation-circle"
+              ></cds-icon>
+            </div>
+            <span class="alert-text">
+              Alerta la facultad seleccionada se borrara permanentemente.
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-header">
+        <h3 class="modal-title">Esta seguro de borrar la facultad?</h3>
+      </div>
+      <div class="modal-body">
+        <p>La facultad se borrara en {{ contador }}</p>
+      </div>
+      <div class="modal-footer">
+        <button
+          class="btn btn-outline"
+          type="button"
+          (click)="cancelarBorrado()"
+        >
+          Cancelar
+        </button>
+        <button
+          class="btn btn-primary"
+          type="button"
+          (click)="aceptarBorrado()"
+        >
+          borrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

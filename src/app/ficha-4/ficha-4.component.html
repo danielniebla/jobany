@@ -1,0 +1,43 @@
+<div class="grid">
+    <h4>{{carre}}</h4>
+    <h5>Documento oficial</h5>
+    <div class="flex">
+        <textarea class="lf4" type="string" [(ngModel)]="ficha[0].documento_oficial"></textarea>
+    <img
+          class="pen"
+          src="../../assets/lapiz.png"
+          alt="editar"
+          (click)="editar()"
+        />
+        <img
+            src="../../assets/guardar.png"
+            alt="guardar"
+            class="disk4"
+            (click)="editarficha()"
+          />
+    </div>
+    <h5>Numero rvoe</h5>
+    <div class="flex">
+        <textarea class="lf4" type="string" [(ngModel)]="ficha[0].numero_rvoe"></textarea>
+    </div>
+    <h5>Fecha de otorgamiento de rvoe</h5>
+    <div class="flex">
+        <textarea class="lf4" type="string" [(ngModel)]="ficha[0].fecha_rvoe"></textarea>
+    </div>
+    <h5>Instituto que otorga el rvoe</h5>
+    <div class="flex">
+        <textarea class="lf4" type="string" [(ngModel)]="ficha[0].instituto_rvoe"></textarea>
+    </div>
+    <h5>Mision</h5>
+    <div class="flex">
+        <textarea class="lf4" type="string" [(ngModel)]="ficha[0].mision"></textarea>
+    </div>
+    <h5>vision</h5>
+    <div class="flex">
+        <textarea class="lf4" type="string" [(ngModel)]="ficha[0].vision"></textarea>
+    </div>
+    <h5>Objetivos estrategicos</h5>
+    <div class="flex">
+        <textarea class="lf4" type="string" [(ngModel)]="ficha[0].objetivos_estrategicos"></textarea>
+    </div>
+</div>

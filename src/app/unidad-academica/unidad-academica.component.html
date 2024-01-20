@@ -1,0 +1,56 @@
+<div class="dropdown" [class.open]="open">
+  <button
+    class="dropdown-toggle btn btn-primary"
+    type="button"
+    (click)="dropDown()"
+  >
+    Unidad academica<cds-icon shape="angle" direction="down"></cds-icon>
+  </button>
+  <ng-container *ngIf="open">
+    <div class="dropdown-menu">
+      <div
+        *ngFor="let zona of estructuraOrganizada"
+        class="dropdown right-top"
+        [class.open]="flagZona[zona.id_zona]"
+      >
+        <button
+          class="dropdown-item expandable"
+          (click)="agregarClaseZona(zona.id_zona)"
+          [class.active]="flagZona[zona.id_zona]"
+          aria-haspopup="menu"
+        >
+          {{ zona.nombre }}
+        </button>
+        <ng-container *ngIf="flagZona[zona.id_zona]">
+          <div class="dropdown-menu">
+            <div
+              *ngFor="let facultad of zona.facultades"
+              class="dropdown right-top"
+              [class.open]="facultad.agregarClaseFlag"
+            >
+              <button
+                class="dropdown-item expandable"
+                (click)="agregarClaseFacultad(facultad)"
+                [class.active]="facultad.agregarClaseFlag"
+                aria-haspopup="menu"
+              >
+                {{ facultad.nombre }}.
+              </button>
+              <ng-container *ngIf="facultad.agregarClaseFlag">
+                <div class="dropdown-menu">
+                  <button
+                    *ngFor="let carrera of facultad.carreras"
+                    class="dropdown-item"
+                    (click)="cambiarCarrera(carrera.id_carrera)"
+                  >
+                    {{ carrera.nombre }}
+                  </button>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </ng-container>
+</div>

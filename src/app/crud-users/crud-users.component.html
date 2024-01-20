@@ -1,0 +1,162 @@
+<div class="flex">
+  <h5 class="sub-tittle">usuarios:</h5>
+  <img
+    class="butt"
+    src="../../assets/mas.png"
+    alt="+"
+    (click)="agregarRecomendacion()"
+  />
+</div>
+<div class="table-space">
+  <div class="tabla">
+    <div class="Acciones cabecera">Id</div>
+    <div class="Fecha_limite cabecera">usuario</div>
+    <div class="cabecera contrasena">Contraseña</div>
+    <div class="cabecera tipo">Facultad</div>
+    <ng-container *ngIf="nueva">
+      <div class="campo flex Acciones new">
+        <img
+          src="../../assets/guardar.png"
+          alt="guardar"
+          class=""
+          (click)="nuevaRecomendacion()"
+        />
+      </div>
+      <div class="campo Fecha_limite new">
+        <input type="text" [(ngModel)]="usuario" />
+      </div>
+      <div class="campo contrasena new">
+        <input type="visi ? password : text " [(ngModel)]="contrasena" />
+        <img
+          (click)="toggleEye()"
+          [src]="visi ? '../../assets/ojo.png' : '../../assets/visible.png'"
+          class="indi"
+        />
+      </div>
+      <div class="campo tipo new">
+        <select name="options" [(ngModel)]="selectedzona[0]">
+          <ng-container *ngFor="let facultad of facultades">
+            <option [ngValue]="facultad.id_facultad">
+              {{ facultad.nombre }}
+            </option>
+          </ng-container>
+        </select>
+      </div>
+    </ng-container>
+    <ng-container *ngFor="let user of users" class="campos">
+      <div class="campo flex Acciones">
+        <textarea
+          class="txtArea"
+          [attr.data-index]="user.id_usuario"
+          [(ngModel)]="user.id_usuario"
+          name="zona"
+          id="accion"
+        ></textarea>
+        <img
+          src="../../assets/guardar.png"
+          alt="guardar"
+          class="disk"
+          (click)="actualizarRecomendacion(user)"
+          [attr.data-index]="user.id_usuario"
+        />
+
+        <img
+          class="pen"
+          src="../../assets/lapiz.png"
+          alt="editar"
+          (click)="editarRecomendacion(user.id_usuario)"
+        />
+        <img
+          class="eraser"
+          src="../../assets/borrar.png"
+          alt="borrar"
+          (click)="verificarBorradoRecomendacion(user.id_usuario)"
+        />
+      </div>
+      <div class="campo Fecha">
+        <input
+          type="mail"
+          [(ngModel)]="user.correo"
+          class="txtArea"
+          [attr.data-index]="user.id_usuario"
+        />
+      </div>
+      <div class="campo contrasena">
+        <input
+          [type]="ojito[user.id_usuario] ? 'text' : 'password'"
+          [(ngModel)]="user.clave"
+          class="txtArea"
+          [attr.data-index]="user.id_usuario"
+          style="margin: 0 !important"
+        />
+        <img
+          (click)="toggleEyes(user.id_usuario)"
+          [src]="
+            ojito[user.id_usuario]
+              ? '../../assets/ojo.png'
+              : '../../assets/visible.png'
+          "
+        />
+      </div>
+      <div class="campo tipo">
+        <ng-container *ngIf="selctFlag[user.id_usuario]; else elseBlock">
+          <select name="options" [(ngModel)]="selectedzona[user.id_usuario]">
+            <ng-container *ngFor="let facultad of facultades">
+              <option [ngValue]="facultad.id_facultad">
+                {{ facultad.nombre }}
+              </option>
+            </ng-container>
+          </select>
+        </ng-container>
+
+        <ng-template #elseBlock>
+          {{ zona(user.id_facultad) }}
+        </ng-template>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<div class="modal static bump-down" *ngIf="alert">
+  <div class="modal-dialog" role="dialog" aria-hidden="true">
+    <div class="modal-content">
+      <div class="alert alert-danger" role="alert">
+        <div class="alert-items">
+          <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+              <cds-icon
+                class="alert-icon"
+                shape="exclamation-circle"
+              ></cds-icon>
+            </div>
+            <span class="alert-text">
+              Alerta el usuario seleccionado se borrara permanentemente.
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-header">
+        <h3 class="modal-title">Esta seguro de borrar el usuario?</h3>
+      </div>
+      <div class="modal-body">
+        <p>El usuario se borrara en {{ contador }}</p>
+      </div>
+      <div class="modal-footer">
+        <button
+          class="btn btn-outline"
+          type="button"
+          (click)="cancelarBorrado()"
+        >
+          Cancelar
+        </button>
+        <button
+          class="btn btn-primary"
+          type="button"
+          (click)="aceptarBorrado()"
+        >
+          borrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

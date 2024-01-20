@@ -1,0 +1,24 @@
+@import '@clr/ui/clr-ui.css';
+
+clr-control-error {
+    display: none !important;
+}
+
+clr-control-error.clr-error {
+    display: block !important;
+}
+
+clr-control-helper.clr-error {
+    display: none;
+}
+form{
+    border-radius: .5rem;
+    width: 50%;
+    margin: 2rem 25% ;
+    height: auto;
+    padding: 1rem;
+    background-color: #fff;
+}
+#error{
+    color:var(--cds-alias-status-danger);
+}

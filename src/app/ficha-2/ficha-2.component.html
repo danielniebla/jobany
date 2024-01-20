@@ -1,0 +1,31 @@
+<div class="grid">
+    <h4>institucion</h4>
+    <h5>Mision</h5>
+    <div class="flex">
+        <textarea class="lf2" type="string" [(ngModel)]="ficha[0].mision"></textarea>
+    <img
+          class="pen"
+          src="../../assets/lapiz.png"
+          alt="editar"
+          (click)="editar()"
+        />
+        <img
+            src="../../assets/guardar.png"
+            alt="guardar"
+            class="disk2"
+            (click)="editarficha()"
+          />
+    </div>
+    <h5>Vision</h5>
+    <div class="flex">
+        <textarea class="lf2" type="string" [(ngModel)]="ficha[0].vision"></textarea>
+    </div>
+    <h5>Politicas</h5>
+    <div class="flex">
+        <textarea class="lf2" type="string" [(ngModel)]="ficha[0].politicas"></textarea>
+    </div>
+    <h5>Lineas estrategicas</h5>
+    <div class="flex">
+        <textarea class="lf2" type="string" [(ngModel)]="ficha[0].lineas_estrategicas"></textarea>
+    </div>
+</div>

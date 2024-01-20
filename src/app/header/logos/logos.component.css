@@ -1,0 +1,71 @@
+
+.gradient {
+    width: 100% ;
+    background: linear-gradient(to right,#003595,#1d71b8) !important;
+    height: 6rem;
+}
+.header {
+    height: 6rem;
+    margin: 0 auto;
+    width: 85%;
+    display: grid;
+    grid-template-areas: "left name right";
+    grid-template-columns: 1fr 3fr 1fr;
+    background-color: transparent;
+   
+}
+@media (max-width: 412px) {
+    .header{
+        grid-template-columns: 2fr 3fr 2fr;
+    }
+    .header .name h1{
+        font-size: 2.5rem;
+    }
+}
+@media (max-width: 1080px ) {
+    .header{
+        width: 100%;
+    }
+}
+#admin{
+    grid-area: right;
+    background-image: url('../../../assets/administracion.png');
+    background-repeat: no-repeat;
+    background-position: center;   
+    background-size: contain;
+    height: 6rem !important;
+    min-width: 8rem;
+}
+#logo{
+    grid-area: left;
+    background-image: url('../../../assets/uas_blue.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:contain;
+    height: 6rem !important;
+    min-width: 6rem;
+}
+.name{
+    color:#f1ebd5 !important;
+    text-transform: uppercase;
+    height: 6rem;
+}
+.aguila{
+    background-image: url('../../../assets/fondo.png');
+    background-repeat: no-repeat;
+    background-position: top left;   
+    background-size: contain !important;
+    text-align: center;
+    height: 6rem;
+}
+h1{
+    @media screen and (max-width:1080px) {
+        font-size:1.5rem ;
+    }
+    @media screen and (max-width:800px) {
+        font-size:1.2rem ;
+    }
+    @media screen and (max-width:600px) {
+        font-size:1rem ;
+    }
+}

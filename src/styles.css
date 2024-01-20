@@ -1,6 +1,9 @@
 @import '@clr/ui/clr-ui.css';
+
 body{
     background-color: var(--cds-global-color-warm-gray-200);
+    font-size: 1.6rem;
+    line-height: 2;
 }
 .btn{
     background-color: var(--cds-global-color-blue-100);
@@ -11,9 +14,71 @@ body{
     margin: 0;
 }
 .cont{
+    /*background-color: var(--cds-global-color-ice-1000); darkmode*/
     background-color: var(--cds-global-color-blue-50);
-    width: 96%;
-    margin: 2%;
+    @media screen and (min-width:600px) {
+        width: 96%;
+        margin: 2%;
+    }
+    width: 100%;
     height: min-content;
 }
-
+html{
+    box-sizing: border-box; 
+    font-size: 62.5%; 
+}
+*,*::before,*:after {
+    box-sizing: inherit; 
+}
+/* globals */
+.contenent{
+    width: 100%;
+    margin: 0 auto;
+}
+a {
+    text-decoration: none;
+}
+h1, h2, h3, h4,h5,h6{
+    line-height: 3rem;
+}
+h1{
+    font-size: 3.0rem;
+}
+h2{
+    font-size: 2.8rem;
+}
+h3{
+    font-size: 2.2rem;
+}
+h4{
+    font-size: 1.6rem;
+}
+h6{
+    font-size: .6rem !important;
+}
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+body{
+    margin: 0;
+    padding: 0;
+}
+.table, .table-noborder ,.table-compact{
+    background-color: var(--cds-global-color-green-200) !important;
+}
+thead{
+    margin: 0 !important;
+}
+tr, .left, thead{
+    @media screen and (max-width:650px) {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+}
+th{
+    @media screen and (max-width:650px) {
+        padding: .01rem !important;
+        margin: 0 !important;
+    }
+}

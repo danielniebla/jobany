@@ -1,0 +1,16 @@
+<div class="flex">
+    <h3>Lugar y fecha de elaboración del Informe de Autoevaluación</h3>
+    <input class="lf" type="string" [(ngModel)]="ficha[0].lugar_fecha">
+    <img
+          class="pen"
+          src="../../assets/lapiz.png"
+          alt="editar"
+          (click)="editar()"
+        />
+        <img
+            src="../../assets/guardar.png"
+            alt="guardar"
+            class="disk"
+            (click)="editarficha()"
+          />
+</div>

@@ -1,0 +1,36 @@
+
+.facultad{
+    background-color: #29abe2;
+    height: 2rem;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding: .5rem;
+}
+h3{
+    color: #f1ebd5 ;
+}
+@media (min-width:768px ) {
+    .facultad .name{
+        margin-left: 1.5rem;
+    }
+    .facultad .social-media{
+        margin-right: 2.5rem ;
+    }
+}
+.facultad .name h3{
+    @media (max-width: 412px) {
+    
+        font-size: 1.6rem;
+    }
+}
+.facultad h3{
+    
+    margin: 0 auto;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+img{
+    filter: invert(100%);
+}
+

@@ -1,0 +1,41 @@
+.gradient {
+    width: 100% ;
+    background-color: #cb9700 ;
+    height: 6rem;
+    padding: 0 5% 0 5%;
+}
+.header{
+    background-color: transparent;
+}
+.footer{
+    height: 6rem;
+    width: 100%;
+    display: grid;
+    grid-template-areas: "left name right";
+    grid-template-columns: 1fr 3fr 1fr;
+    background-color: transparent;
+   
+}
+#admin{
+    grid-area: right;
+    background-image: url('../../assets/administracion.png');
+    background-repeat: no-repeat;
+    background-position: center;   
+    background-size:contain;
+    height: 6rem;
+    min-width: 3rem;
+}
+#logo{
+    grid-area: left;
+    background-image: url('../../assets/uas_blue.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:contain;
+    height: 6rem;
+    min-width: 3rem;
+}
+.name{
+    color:#f1ebd5 !important;
+    text-transform: uppercase;
+    height: 6rem;
+}

@@ -1,0 +1,149 @@
+<div class="flex">
+  <h5 class="sub-tittle">Etapa de cumplimiento:</h5>
+  <img
+    class="butt"
+    src="../../assets/mas.png"
+    alt="+"
+    (click)="agregarRecomendacion()"
+  />
+</div>
+<div class="table-space">
+  <div class="tabla">
+    <div class="Acciones cabecera">Acciones</div>
+    <div class="Fecha_limite cabecera">Fecha de cumplimiento</div>
+    <div class="Metas cabecera">Meta alcanzada(%)</div>
+    <div class="cabecera documentos">Documentos</div>
+    <div class="cabecera metodos">Metodos</div>
+    <ng-container *ngIf="nueva">
+      <div class="campo flex Acciones new">
+        <textarea [(ngModel)]="accion" name="accion" id="accion"></textarea>
+        
+      </div>
+      <div class="campo Fecha_limite new">
+        <input
+          type="date"
+          [(ngModel)]="fecha"
+          [value]="fecha | date : 'yyyy-MM-dd'"
+        />
+      </div>
+      <div class="campo Metas new">
+        <input type="number" [(ngModel)]="meta" />
+      </div>
+      <div class="campo documentos new">
+      </div>
+      <div class="campo new metodos">
+        <img
+          src="../../assets/guardar.png"
+          alt="guardar"
+          class=""
+          (click)="nuevaRecomendacion()"
+        />
+      </div>
+    </ng-container>
+    <ng-container *ngFor="let accion of acciones" class="campos">
+      <div class="campo flex Acciones ">
+        <textarea
+          class="txtArea"
+          [attr.data-index]="accion.id_cumplimiento"
+          [(ngModel)]="accion.acciones_realizadas"
+          name="accion"
+          id="accion"
+        ></textarea>
+        
+      </div>
+      <div class="campo Fecha">
+        <input
+          type="date"
+          [(ngModel)]="accion.fecha"
+          class="txtArea"
+          [attr.data-index]="accion.id_cumplimiento"
+          [value]="accion.fecha | date : 'dd-mm-yyyy'"
+        />
+      </div>
+      <div class="campo Metas">
+        <input
+          type="number"
+          min="0"
+          max="100"
+          [(ngModel)]="accion.meta_alcanzada"
+          class="txtArea"
+          [attr.data-index]="accion.id_cumplimiento"
+        />
+      </div>
+      <div class="campo documentos" [ngClass]="{'list': edit[accion.id_cumplimiento]}">
+        <div *ngIf="edit[accion.id_cumplimiento]; else bloqueElse">
+          <a [href]="url[accion.id_cumplimiento]">{{accion.documentos}}</a>            
+        </div>
+        <ng-template #bloqueElse>
+          <input type="file" (change)="uploadImage($event, accion)">
+        </ng-template>
+      </div>
+      <div class="campo metodos">
+        <img
+          src="../../assets/guardar.png"
+          alt="guardar"
+          class="disk"
+          (click)="actualizarRecomendacion(accion)"
+          [attr.data-index]="accion.id_cumplimiento"
+        />
+
+        <img
+          class="pen"
+          src="../../assets/lapiz.png"
+          alt="editar"
+          (click)="editarRecomendacion(accion)"
+        />
+        <img
+          class="eraser"
+          src="../../assets/borrar.png"
+          alt="borrar"
+          (click)="verificarBorradoRecomendacion(accion.id_cumplimiento)"
+        />
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<div class="modal static bump-down" *ngIf="alert">
+  <div class="modal-dialog" role="dialog" aria-hidden="true">
+    <div class="modal-content">
+      <div class="alert alert-danger" role="alert">
+        <div class="alert-items">
+          <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+              <cds-icon
+                class="alert-icon"
+                shape="exclamation-circle"
+              ></cds-icon>
+            </div>
+            <span class="alert-text">
+              Alerta la accion seleccionada se borrara permanentemente.
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-header">
+        <h3 class="modal-title">Esta seguro de borrar la accion?</h3>
+      </div>
+      <div class="modal-body">
+        <p>La accion se borrara en {{ contador }}</p>
+      </div>
+      <div class="modal-footer">
+        <button
+          class="btn btn-outline"
+          type="button"
+          (click)="cancelarBorrado()"
+        >
+          Cancelar
+        </button>
+        <button
+          class="btn btn-primary"
+          type="button"
+          (click)="aceptarBorrado()"
+        >
+          borrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

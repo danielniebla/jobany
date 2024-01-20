@@ -1,0 +1,153 @@
+<div class="flex">
+  <form class="clr-form">
+    <div class="clr-form-control" id="indicador">
+      <label class="clr-control-label">indicador</label>
+      <div class="clr-control-container">
+        <div class="clr-input-wrapper" appClickAway>
+          <input
+            type="text"
+            name="text"
+            placeholder="Escriba aqui"
+            class="clr-input"
+            [(ngModel)]="indi"
+          />
+          <cds-icon
+            class="clr-validate-icon"
+            shape="exclamation-circle"
+          ></cds-icon>
+          <clr-control-error>El campo es requerido!</clr-control-error>
+          <clr-control-helper
+            >Escriba el nombre del indicador.</clr-control-helper
+          >
+        </div>
+      </div>
+      <br />
+      <div class="button">
+        <button class="btn boton btn-outline" (click)="agregarindicador()">
+          Registrar indicador
+        </button>
+        <span class="clr-subtext" id="error"></span>
+      </div>
+    </div>
+  </form>
+  <img class="but" src="../../assets/mas.png" alt="+" (click)="agregar()" />
+</div>
+<ng-container *ngFor="let indicador of indicadores">
+  <form clrForm>
+    <div (click)="indicadorToggle(indicador)">
+      <img
+        [src]="
+          flagIndicador[indicador.id_pregunta]
+            ? '../../assets/menos.png'
+            : '../../assets/mas+.png'
+        "
+        class="indi"
+      />
+      <h4 class="indi">{{ indicador.nombre }}</h4>
+      <img
+          class="eraser"
+          src="../../assets/borrar.png"
+          alt="borrar"
+          (click)="
+            verificarBorradoindicador(indicador.id_pregunta)
+          "/>
+
+    </div>
+    <ng-container *ngIf="flagIndicador[indicador.id_pregunta]">
+      <div class="clr-form-control">
+        <div class="title">
+          <h5> Margen de cumplimiento de acciones</h5>
+          <input
+          class="txtArea"
+          type="number"
+          [(ngModel)]="indicador.margen"
+          placeholder="margen"
+          name="margen"
+          [attr.data-index]="indicador.id_pregunta"
+          >
+          <img
+            class="pen"
+            src="../../assets/lapiz.png"
+            alt="+"
+            (click)="editarIndicador(indicador)"
+          />
+          <img
+            src="../../assets/guardar.png"
+            alt="guardar"
+            class="disk"
+            (click)="actualizarindicador(indicador)"
+            [attr.data-index]="indicador.id_pregunta"
+          />
+
+        </div>
+        <clr-textarea-container>
+          <label for="basic" class="clr-control-label"
+            >Valoracion
+          </label>
+          <textarea
+            clrTextarea
+            class="txtArea"
+            [(ngModel)]="indicador.valuacion"
+            placeholder="Explicacion"
+            name="description"
+            required
+            style="height: 100px"
+            [attr.data-index]="indicador.id_pregunta"
+            >{{ indicador.valoracion }}</textarea
+          >
+          <clr-control-error *clrIfError="'required'"
+            >El campo es requerido!</clr-control-error
+          ><br />
+        </clr-textarea-container>
+      </div>
+
+      <app-recomendacion [pregunta]="indicador.id_pregunta" [margen]=indicador.margen></app-recomendacion>
+      <app-planeacion [pregunta2]="indicador.id_pregunta"></app-planeacion>
+    </ng-container>
+  </form>
+</ng-container>
+
+<div class="modal static bump-down" *ngIf="alert">
+  <div class="modal-dialog" role="dialog" aria-hidden="true">
+    <div class="modal-content">
+      <div class="alert alert-danger" role="alert">
+        <div class="alert-items">
+          <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+              <cds-icon
+                class="alert-icon"
+                shape="exclamation-circle"
+              ></cds-icon>
+            </div>
+            <span class="alert-text">
+              Alerta el indicador seleccionado se borrara permanentemente.
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-header">
+        <h3 class="modal-title">Esta seguro de borrar el indicador?</h3>
+      </div>
+      <div class="modal-body">
+        <p>el indicador se borrara en {{ contador }}</p>
+      </div>
+      <div class="modal-footer">
+        <button
+          class="btn btn-outline"
+          type="button"
+          (click)="cancelarBorrado()"
+        >
+          Cancelar
+        </button>
+        <button
+          class="btn btn-primary"
+          type="button"
+          (click)="aceptarBorrado()"
+        >
+          borrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

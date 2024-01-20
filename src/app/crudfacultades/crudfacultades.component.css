@@ -1,0 +1,116 @@
+@import '@clr/ui/clr-ui.css';
+img {
+    height: 16px;
+    width: auto;
+    margin: 0;
+}
+.oculta{
+    visibility: hidden ;
+    pointer-events: none;
+}
+.flex {
+    display: flex;
+    -ms-flex-align: start;
+    margin: 0;
+    padding: 0;
+}
+.butt {
+    height: 20px;
+    width: auto;
+    margin: 24px auto auto 1%;
+
+}
+button{
+    border: none;
+    background-color: transparent;
+}
+.table-space {
+    @media screen and (min-width:600px) {
+        width: 98%;
+        margin: 2%;
+    }
+    width: 100%;
+    background-color: var(--cds-alias-object-container-background);
+}
+.new,.new textarea ,.new input {
+    background-color: var(--cds-global-color-blue-200) !important;
+}
+.txtArea{
+    pointer-events: none;
+}
+td,textarea,.tr{
+    margin: 0 !important;
+    padding: 0;
+    align-content: flex-start;
+    -ms-flex-align: start;
+    pointer-events: auto;
+
+}
+.disk{
+    visibility: hidden;
+    pointer-events: none;
+}
+.edit{
+    visibility: visible;
+    pointer-events: auto;
+}
+input{
+    border: none;
+    width: 100%;
+    pointer-events: auto;
+}
+textarea {
+    margin: 0 !important;
+    height: auto;
+    border: none;
+    padding: 0 !important;
+}
+clr-textarea-container {
+    width: 100%;
+}
+.clr-form-control {
+    display: flex;
+    flex-direction: column !important;
+    margin: 0;
+}
+
+.cabecera{
+    @media screen and (max-width:650px) {
+        padding: .01rem !important;
+        margin: 0 !important;
+    }
+    background-color: var(--cds-alias-object-container-background-tint);
+    width: 100%;
+    align-self: flex-start;
+    text-align: left;
+    pointer-events: none;
+}
+.campo{
+    text-align: left;
+    align-content: flex-start;
+    width: 100%;
+}
+textarea{
+    @media screen and (min-width:600px) {
+        width:  96%;
+    }
+
+}
+.tabla{
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr ;
+    gap: 0;
+    width: 100%;
+}
+.Acciones {  
+    grid-column: 1 / 2; 
+    margin: 0;
+}
+#accion{
+    width: 90% !important;
+}
+.Fecha { grid-column: 2 / 3; }
+.contrasena { grid-column: 3 / 4;}
+select{
+    width: 100%;
+}
