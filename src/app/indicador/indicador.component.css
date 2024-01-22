@@ -29,7 +29,8 @@ h5{
 img {
     height: 16px;
     width: auto;
-    margin: 0 !important;
+    margin: 0 15px;
+    margin-bottom: 8px;
 }
 h4 {
     margin: 0;
@@ -67,12 +68,7 @@ textarea {
     background-color: var(--cds-alias-status-disabled-shade) !important;
     overflow: auto;
 }
-img{
-    margin: 0 10px;
-}
-.eraser{
-    margin: 0 30px;
-}
+
 .txtArea{
     background-color: var(--cds-alias-status-disabled-shade) !important;
 

@@ -4,6 +4,7 @@ import { ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { Storage, ref, uploadBytes, listAll, getDownloadURL } from '@angular/fire/storage';
+import { StorageServiceService } from '../storage-service.service';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { Storage, ref, uploadBytes, listAll, getDownloadURL } from '@angular/fir
 })
 export class PlaneacionComponent implements OnInit {
   @Input() pregunta2: any;
-  constructor(private router: Router,private http: HttpClient, private cdRef: ChangeDetectorRef,private renderer: Renderer2, private storage: Storage) { }
+  constructor(private router: Router,private http: HttpClient, private cdRef: ChangeDetectorRef,private renderer: Renderer2, private storage: Storage, private storageservice : StorageServiceService) { }
   acciones: any[] = [];
   url: any[] = [];
   edit: Record<number, boolean> = {};
@@ -53,7 +54,7 @@ export class PlaneacionComponent implements OnInit {
     }
     const textAreas = document.querySelectorAll(`.txtArea[data-index="${accion.id_cumplimiento}"]`);
     textAreas.forEach((textarea) => {
-      this.renderer.removeClass(textarea as HTMLElement, 'txtArea');
+      this.renderer.addClass(textarea as HTMLElement, 'edit');
       (textarea as HTMLTextAreaElement).readOnly = false;
     });
     this.edit[accion.id_cumplimiento]=false;
@@ -177,7 +178,7 @@ export class PlaneacionComponent implements OnInit {
   }
   ngOnInit(): void {
 
-    this.server = localStorage.getItem('server') ?? '';
+    this.server = this.storageservice.getDataItem('server') ?? '';
     this.actualizarDatosRecomendacion();
   }
   validar(accion: any):boolean{

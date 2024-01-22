@@ -1,15 +1,13 @@
 import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
-
-
-
+import { StorageServiceService } from '../storage-service.service';
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-  constructor(private router: Router,) { }
+  constructor(private router: Router, private storage : StorageServiceService) { }
   user= '';
   recomendacion() {
     this.router.navigate(['/Sursumversus']);
@@ -21,7 +19,7 @@ export class MainComponent implements OnInit {
     this.router.navigate(['/Sursumversus/Admin']);
   }
   ngOnInit(): void {
-    this.user = localStorage.getItem('idUsuario') ?? ''; 
+    this.user = this.storage.getDataItem('idUsuario') ?? ''; 
     
   }
 }

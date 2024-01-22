@@ -1,13 +1,13 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
- 
+import { StorageServiceService } from '../storage-service.service';
 @Component({
   selector: 'app-ficha-2',
   templateUrl: './ficha-2.component.html',
   styleUrls: ['./ficha-2.component.css']
 })
 export class Ficha2Component implements OnInit {
-  constructor(private http: HttpClient,private renderer: Renderer2) { }
+  constructor(private http: HttpClient,private renderer: Renderer2, private storage : StorageServiceService) { }
   ficha: any[] = [];
   server='';
   carrera=0;
@@ -96,8 +96,8 @@ export class Ficha2Component implements OnInit {
     });
   }
   ngOnInit(): void {
-    this.server = localStorage.getItem('server') ?? '';
-    const car = localStorage.getItem('idCarrera') ?? '';
+    this.server = this.storage.getDataItem('server') ?? '';
+    const car = this.storage.getDataItem('idCarrera') ?? '';
     this.carrera = parseInt(car);
     this.getficha();
     const lugares = document.querySelectorAll('.lf2') as NodeListOf<HTMLInputElement>;

@@ -2,6 +2,7 @@ import { Component, OnInit , Renderer2, Input } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { StorageServiceService } from '../storage-service.service';
 
 @Component({
   selector: 'app-crud-users',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./crud-users.component.css']
 })
 export class CrudUsersComponent {
-  constructor(private router: Router,private http: HttpClient, private cdRef: ChangeDetectorRef,private renderer: Renderer2) { }
+  constructor(private router: Router,private http: HttpClient, private cdRef: ChangeDetectorRef,private renderer: Renderer2, private storage : StorageServiceService) { }
   users: any[] = [];
   facultades: any [] = [];
   nueva= false;
@@ -136,7 +137,7 @@ export class CrudUsersComponent {
       
   }
   ngOnInit(): void {
-    this.server = localStorage.getItem('server') ?? '';
+    this.server = this.storage.getDataItem('server') ?? '';
     this.actualizarDatosRecomendacion();
     this.actualizarDatosfacultad();
     

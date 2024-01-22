@@ -41,7 +41,7 @@
       </div>
     </ng-container>
     <ng-container *ngFor="let accion of acciones" class="campos">
-      <div class="campo flex Acciones ">
+      <div class="campo flex Acciones " [ngClass]="{'edit' : !edit[accion.id_cumplimiento]}">
         <textarea
           class="txtArea"
           [attr.data-index]="accion.id_cumplimiento"
@@ -51,7 +51,7 @@
         ></textarea>
         
       </div>
-      <div class="campo Fecha">
+      <div class="campo Fecha" [ngClass]="{'edit' : !edit[accion.id_cumplimiento]}">
         <input
           type="date"
           [(ngModel)]="accion.fecha"
@@ -60,7 +60,7 @@
           [value]="accion.fecha | date : 'dd-mm-yyyy'"
         />
       </div>
-      <div class="campo Metas">
+      <div class="campo Metas" [ngClass]="{'edit' : !edit[accion.id_cumplimiento]}" >
         <input
           type="number"
           min="0"
@@ -70,7 +70,7 @@
           [attr.data-index]="accion.id_cumplimiento"
         />
       </div>
-      <div class="campo documentos" [ngClass]="{'list': edit[accion.id_cumplimiento]}">
+      <div class="campo documentos" [ngClass]="{'list': edit[accion.id_cumplimiento]}" [ngClass]="{'edit' : !edit[accion.id_cumplimiento]}">
         <div *ngIf="edit[accion.id_cumplimiento]; else bloqueElse">
           <a [href]="url[accion.id_cumplimiento]">{{accion.documentos}}</a>            
         </div>
@@ -78,7 +78,7 @@
           <input type="file" (change)="uploadImage($event, accion)">
         </ng-template>
       </div>
-      <div class="campo metodos">
+      <div class="campo metodos" [ngClass]="{'edit' : !edit[accion.id_cumplimiento]}">
         <img
           src="../../assets/guardar.png"
           alt="guardar"

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { StorageServiceService } from '../storage-service.service';
 
 @Component({
   selector: 'app-recomendacion',
@@ -12,7 +13,7 @@ import { DatePipe } from '@angular/common';
 export class RecomendacionComponent implements OnInit {
   @Input() pregunta: any;
   @Input() margen: any;
-  constructor(private router: Router,private http: HttpClient, private cdRef: ChangeDetectorRef,private renderer: Renderer2) { }
+  constructor(private router: Router,private http: HttpClient, private cdRef: ChangeDetectorRef,private renderer: Renderer2, private storage : StorageServiceService) { }
   recomendaciones: any[] = [];
   incumplio: Record<number, boolean> = {};
   nombre='';
@@ -200,7 +201,7 @@ export class RecomendacionComponent implements OnInit {
     }
   }
   ngOnInit(): void {
-    this.server = localStorage.getItem('server') ?? '';
+    this.server = this.storage.getDataItem('server') ?? '';
     this.actualizarDatosRecomendacion();
     setTimeout(() => {
       const textAreas = document.querySelectorAll(`.txtArea`) as NodeListOf<HTMLTextAreaElement>;

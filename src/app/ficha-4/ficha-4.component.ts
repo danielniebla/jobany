@@ -1,13 +1,13 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
- 
+import { StorageServiceService } from '../storage-service.service';
 @Component({
   selector: 'app-ficha-4',
   templateUrl: './ficha-4.component.html',
   styleUrls: ['./ficha-4.component.css']
 })
 export class Ficha4Component implements OnInit {
-  constructor(private http: HttpClient,private renderer: Renderer2) { }
+  constructor(private http: HttpClient,private renderer: Renderer2, private storage : StorageServiceService) { }
   ficha: any[] = [];
   server='';
   carrera=0;
@@ -100,7 +100,7 @@ export class Ficha4Component implements OnInit {
     });
   }
   car(){
-    const facu = localStorage.getItem('idCarrera');
+    const facu = this.storage.getDataItem('idCarrera');;
     const authEndpoint = `${this.server}/api/Carreras/Consultar_Carrera?id_carrera=${facu}`;
 
     // Encabezados para la solicitud POST
@@ -120,8 +120,8 @@ export class Ficha4Component implements OnInit {
       });
   }
   ngOnInit(): void {
-    this.server = localStorage.getItem('server') ?? '';
-    const car = localStorage.getItem('idCarrera') ?? '';
+    this.server = this.storage.getDataItem('server') ?? '';
+    const car = this.storage.getDataItem('idCarrera') ?? '';
     this.carrera = parseInt(car);
     this.getficha();
     const lugares = document.querySelectorAll('.lf4') as NodeListOf<HTMLInputElement>;

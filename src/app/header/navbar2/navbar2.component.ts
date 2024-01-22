@@ -1,19 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { StorageServiceService } from 'src/app/storage-service.service';
 @Component({
   selector: 'app-navbar2',
   templateUrl: './navbar2.component.html',
   styleUrls: ['./navbar2.component.css']
 })
 export class Navbar2Component implements OnInit {
-  constructor(private router: Router,private http: HttpClient) {}
+  constructor(private router: Router,private http: HttpClient, private storage : StorageServiceService) {}
   facultad='';
   server = '';
+  facu = '';
   ngOnInit(): void {
-    this.server = localStorage.getItem('server') ?? '';
-    const facu = localStorage.getItem('idFacultad');
-    const authEndpoint = `${this.server}/api/Facultades/Consultar_Facultad?id_facultad=${facu}`;
+    this.storage.logout$.subscribe((value) => {
+      this.server = this.storage.getDataItem('server') ?? '';
+      this.facu = this.storage.getDataItem('idFacultad');
+    });
+    const authEndpoint = `${this.server}/api/Facultades/Consultar_Facultad?id_facultad=${this.facu}`;
 
     // Encabezados para la solicitud POST
     const httpOptions = {
@@ -32,7 +36,10 @@ export class Navbar2Component implements OnInit {
       });
   }
   logOut(){
+    this.storage.clearAllDataItems();
     localStorage.clear();
-    this.router.navigate(['/login']);
+    setTimeout(() => {
+      window.location.href = 'https://yobani.onrender.com/';
+    }, 300);
   }
 }

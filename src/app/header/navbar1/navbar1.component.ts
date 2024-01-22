@@ -1,27 +1,43 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { StorageServiceService } from 'src/app/storage-service.service';
+import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-navbar1',
   templateUrl: './navbar1.component.html',
   styleUrls: ['./navbar1.component.css']
 })
 export class Navbar1Component implements OnInit {
-  constructor(private http: HttpClient) {}
-  carrera='';
-  server = '';
-  ngOnInit(): void {
-    this.server = localStorage.getItem('server') ?? '';
-    const facu = localStorage.getItem('idCarrera');
-    const authEndpoint = `${this.server}/api/Carreras/Consultar_Carrera?id_carrera=${facu}`;
+  private logoutSubscription!: Subscription;
 
-    // Encabezados para la solicitud POST
+  constructor(private http: HttpClient, private storage: StorageServiceService) {}
+
+  carrera = '';
+  server = '';
+  facu = '';
+
+  ngOnInit(): void {
+    // Suscribe al observable logout$
+    this.logoutSubscription = this.storage.logout$.subscribe((value) => {
+      this.server = this.storage.getDataItem('server') ?? '';
+      this.facu = this.storage.getDataItem('idCarrera') ?? '';
+      this.updateCarrera();
+    });
+    this.updateCarrera();
+  }
+
+  private updateCarrera(): void {
+    const authEndpoint = `${this.server}/api/Carreras/Consultar_Carrera?id_carrera=${this.facu}`;
+
+    // Encabezados para la solicitud GET
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
 
-    // Realizar la solicitud POST para obtener el token
+    // Realizar la solicitud GET para obtener el nombre de la carrera
     this.http.get(authEndpoint, httpOptions)
       .subscribe((response: any) => {
         // Aquí puedes manejar la respuesta del servidor
@@ -30,7 +46,4 @@ export class Navbar1Component implements OnInit {
         console.error('Error:', error);
       });
   }
-
-
-
 }

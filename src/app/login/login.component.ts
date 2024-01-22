@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import { StorageServiceService } from '../storage-service.service';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +9,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  constructor(private router: Router,private http: HttpClient) { }
+  constructor(private router: Router,private http: HttpClient, private storage : StorageServiceService) { }
   nombre='';
   contrasena='';
   server = 'https://adminuas.uas-proy.com';
@@ -43,13 +43,14 @@ export class LoginComponent implements OnInit {
         const idu = usuario.id_usuario; // Obtener el id_carrera de la respuesta
         console.log(response);
         // Guardar id_carrera en localStorage 
-        localStorage.setItem('idCarrera', idCarrera);
-        localStorage.setItem('token',token);
-        console.log('aaaaa', token);
-        localStorage.setItem('idFacultad', idf );
-        localStorage.setItem('idUsuario', idu );
+        this.storage.setDataItem('token', token);
+        this.storage.setDataItem('idCarrera', idCarrera);
+        this.storage.setDataItem('idFacultad', idf);
+        this.storage.setDataItem('idUsuario', idu);
         if(token!=''){
-          window.location.reload()
+          setTimeout(() => {
+            window.location.href = 'https://yobani.onrender.com/';
+          }, 300);
         }else{
           spanElement.textContent = 'no se encontraron coincidencias usuario-contraseña';
           setTimeout(function() {
@@ -65,10 +66,13 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit(): void {
-      localStorage.setItem('server',this.server);
-      const user =localStorage.getItem('idUsuario');
-      if(user){
-        this.router.navigate(['/Sursumversus']);
+      this.storage.setDataItem('server', this.server);
+      const user = this.storage.getDataItem('idUsuario') ?? '';
+      if(user != ''){
+        setTimeout(() => {
+          this.router.navigate(['/Sursumversus']);
+        }, 200);
+
       }
     }
 }

@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { forkJoin } from 'rxjs';
-
+import { StorageServiceService } from '../storage-service.service';
 @Component({
   selector: 'app-unidad-academica',
   templateUrl: './unidad-academica.component.html',
   styleUrls: ['./unidad-academica.component.css']
 })
 export class UnidadAcademicaComponent implements OnInit{
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private storage : StorageServiceService) { }
   flagZona:{[key:number]:boolean}={};
   open = false;
   zonas: any[] = [];
@@ -20,7 +20,7 @@ export class UnidadAcademicaComponent implements OnInit{
     facultad.agregarClaseFlag = !facultad.agregarClaseFlag;
   }
   ngOnInit(): void {
-    this.server = localStorage.getItem('server') ?? '';
+    this.server = this.storage.getDataItem('server') ?? '';
     forkJoin({
       zonas: this.http.get(`${this.server}/api/Zona/Consultar_Zona`),
       facultades: this.http.get(`${this.server}/api/Facultades/Consultar_Facultad`),

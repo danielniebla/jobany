@@ -2,6 +2,7 @@ import { Component, OnInit , Renderer2, Input } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { StorageServiceService } from '../storage-service.service';
 
 @Component({
   selector: 'app-crudzonas',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./crudzonas.component.css']
 })
 export class CrudzonasComponent {
-  constructor(private router: Router,private http: HttpClient, private cdRef: ChangeDetectorRef,private renderer: Renderer2) { }
+  constructor(private router: Router,private http: HttpClient, private cdRef: ChangeDetectorRef,private renderer: Renderer2, private storage : StorageServiceService) { }
   zonas: any[] = [];
   nueva= false;
   zona='';
@@ -119,7 +120,7 @@ export class CrudzonasComponent {
       }
   ngOnInit(): void {
     
-    this.server = localStorage.getItem('server') ?? '';
+    this.server = this.storage.getDataItem('server') ?? '';
     this.actualizarDatosRecomendacion();
   }
   actualizarRecomendacion(zona: any) {

@@ -1,5 +1,6 @@
 import { Component, OnInit, Renderer2  } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { StorageServiceService } from '../storage-service.service';
 
 @Component({
   selector: 'app-indicador',
@@ -7,7 +8,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   styleUrls: ['./indicador.component.css']
 })
 export class IndicadorComponent implements OnInit {
-  constructor(private http: HttpClient,private renderer: Renderer2) { }
+  constructor(private http: HttpClient,private renderer: Renderer2, private storage : StorageServiceService) { }
   indicadores: any[] = [];
   flagIndicador: { [key: number]: boolean } = {};
   indi='';
@@ -99,7 +100,7 @@ export class IndicadorComponent implements OnInit {
     setTimeout(() => {
       this.actualizarDatosIndicador();
     }, 500);
-    this.server = localStorage.getItem('server') ?? '';
+    this.server = this.storage.getDataItem('server') ?? '';
 
   }
   actualizarindicador(indicador: any){
@@ -136,7 +137,7 @@ export class IndicadorComponent implements OnInit {
       
   }
   Carrera(){
-    const idCarreraString = localStorage.getItem('idCarrera');
+    const idCarreraString = this.storage.getDataItem('idCarrera');;
 
     if (idCarreraString !== null) {
       const idCarrera: number = parseInt(idCarreraString, 10);

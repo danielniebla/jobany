@@ -1,5 +1,6 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { StorageServiceService } from '../storage-service.service';
 
 @Component({
   selector: 'app-ficha-3',
@@ -7,7 +8,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   styleUrls: ['./ficha-3.component.css']
 })
 export class Ficha3Component implements OnInit {
-  constructor(private http: HttpClient,private renderer: Renderer2) { }
+  constructor(private http: HttpClient,private renderer: Renderer2, private storage : StorageServiceService) { }
   ficha: any[] = [];
   server='';
   carrera=0;
@@ -99,7 +100,7 @@ export class Ficha3Component implements OnInit {
     });
   }
   facultad(){
-    const facu = localStorage.getItem('idFacultad');
+    const facu = this.storage.getDataItem('idFacultad');
     const authEndpoint = `${this.server}/api/Facultades/Consultar_Facultad?id_facultad=${facu}`;
 
     // Encabezados para la solicitud POST
@@ -119,8 +120,8 @@ export class Ficha3Component implements OnInit {
       });
   }
   ngOnInit(): void {
-    this.server = localStorage.getItem('server') ?? '';
-    const car = localStorage.getItem('idFacultad') ?? '';
+    this.server = this.storage.getDataItem('server') ?? '';
+    const car = this.storage.getDataItem('idFacultad') ?? '';
     this.carrera = parseInt(car);
     this.getficha();
     const lugares = document.querySelectorAll('.lf3') as NodeListOf<HTMLInputElement>;
