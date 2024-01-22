@@ -55,6 +55,26 @@
     </div>
     <ng-container *ngIf="flagIndicador[indicador.id_pregunta]">
       <div class="clr-form-control">
+        
+        <clr-textarea-container>
+          <label for="basic" class="clr-control-label"
+            >Valoracion
+          </label>
+          <textarea
+            clrTextarea
+            class="txtArea"
+            [(ngModel)]="indicador.valuacion"
+            placeholder="Explicacion"
+            name="description"
+            required
+            style="height: 100px"
+            [attr.data-index]="indicador.id_pregunta"
+            >{{ indicador.valoracion }}</textarea
+          >
+          <clr-control-error *clrIfError="'required'"
+            >El campo es requerido!</clr-control-error
+          ><br />
+        </clr-textarea-container>
         <div class="title">
           <h5> Margen de cumplimiento de acciones</h5>
           <input
@@ -80,25 +100,6 @@
           />
 
         </div>
-        <clr-textarea-container>
-          <label for="basic" class="clr-control-label"
-            >Valoracion
-          </label>
-          <textarea
-            clrTextarea
-            class="txtArea"
-            [(ngModel)]="indicador.valuacion"
-            placeholder="Explicacion"
-            name="description"
-            required
-            style="height: 100px"
-            [attr.data-index]="indicador.id_pregunta"
-            >{{ indicador.valoracion }}</textarea
-          >
-          <clr-control-error *clrIfError="'required'"
-            >El campo es requerido!</clr-control-error
-          ><br />
-        </clr-textarea-container>
       </div>
 
       <app-recomendacion [pregunta]="indicador.id_pregunta" [margen]=indicador.margen></app-recomendacion>

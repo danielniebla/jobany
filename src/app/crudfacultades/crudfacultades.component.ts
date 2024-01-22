@@ -38,6 +38,10 @@ export class CrudfacultadesComponent {
     textAreas.forEach((textarea) => {
       this.renderer.removeClass(textarea as HTMLElement, 'txtArea');
     });
+    const camps = document.querySelectorAll(`.campo[data-index="${idRecomendacion}"]`);
+    camps.forEach((camp) => {
+      this.renderer.addClass(camp as HTMLElement, 'new');
+    });
   }
   agregarRecomendacion() {
     this.nueva=true;

@@ -38,6 +38,10 @@ export class CrudfacarrerasComponent {
     textAreas.forEach((textarea) => {
       this.renderer.removeClass(textarea as HTMLElement, 'txtArea');
     });
+    const camps = document.querySelectorAll(`.campo[data-index="${idRecomendacion}"]`);
+    camps.forEach((camp) => {
+      this.renderer.addClass(camp as HTMLElement, 'new');
+    });
   }
   agregarRecomendacion() {
     this.nueva=true;
@@ -134,6 +138,7 @@ export class CrudfacarrerasComponent {
    
   }
   actualizarRecomendacion(carrer: any) {
+    if(carrer.nombre != '' && this.selectedfacultad[carrer.id_carrera] != 0){
     const authEndpoint = `${this.server}/api/Carreras/Actualizar_Carrera`;
     const authData = 
     {
@@ -157,9 +162,12 @@ export class CrudfacarrerasComponent {
       }, (error) => {
         console.error('Error:', error);
       });
-
+    }else{
+      window.alert('favor de llenar todos los campos antes de guardar');
+    }
   }
   nuevaRecomendacion(){
+    if(this.carrera != '' && this.selectedfacultad[0] != 0){
     const authEndpoint = `${this.server}/api/Carreras/Agregar_Carrera`;
     const authData = 
     {
@@ -183,6 +191,9 @@ export class CrudfacarrerasComponent {
       }, (error) => {
         console.error('Error:', error);
       });
+    }else{
+      window.alert('favor de llenar todos los campos antes de guardar');
+    }
   }
   actualizarDatosfacultad(){
     const authEndpoint = `${this.server}/api/Facultades/Consultar_Facultad`;

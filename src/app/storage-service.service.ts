@@ -26,12 +26,10 @@ export class StorageServiceService {
     localStorage.setItem(key, JSON.stringify(value));
     // Emite en el observable solo si el valor cambia a 'true'
     localStorage.setItem('logoutEvent', 'true');
-    console.log('dato:', key, ' valor:', value);
   }
 
   getDataItem(key: string): any | undefined {
     const item = localStorage.getItem(key);
-    console.log('llamando al dato: ', key);
     return item ? JSON.parse(item) : null;
   }
 

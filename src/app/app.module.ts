@@ -30,6 +30,11 @@ import { Ficha5Component } from './ficha-5/ficha-5.component';
 
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getStorage, provideStorage } from '@angular/fire/storage';
+import { Ficha6Component } from './ficha-6/ficha-6.component';
+import { Ficha7Component } from './ficha-7/ficha-7.component';
+import { Ficha8Component } from './ficha-8/ficha-8.component';
+import { Ficha9Component } from './ficha-9/ficha-9.component';
+import { Ficha10Component } from './ficha-10/ficha-10.component';
 
 
 
@@ -54,7 +59,12 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
     Ficha2Component,
     Ficha3Component,
     Ficha4Component,
-    Ficha5Component
+    Ficha5Component,
+    Ficha6Component,
+    Ficha7Component,
+    Ficha8Component,
+    Ficha9Component,
+    Ficha10Component
   ],
   imports: [
     BrowserModule,

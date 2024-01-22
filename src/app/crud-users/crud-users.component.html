@@ -13,6 +13,7 @@
     <div class="Fecha_limite cabecera">usuario</div>
     <div class="cabecera contrasena">Contraseña</div>
     <div class="cabecera tipo">Facultad</div>
+    <div class="cabecera carrera">Carrera</div>
     <ng-container *ngIf="nueva">
       <div class="campo flex Acciones new">
         <img
@@ -42,9 +43,18 @@
           </ng-container>
         </select>
       </div>
+      <div class="campo carrera new">
+        <select name="options" [(ngModel)]="selectedzona2[0]">
+          <ng-container *ngFor="let carrera of carreras">
+            <option [ngValue]="carrera.id_carrera">
+              {{ carrera.nombre }}
+            </option>
+          </ng-container>
+        </select>
+      </div>
     </ng-container>
     <ng-container *ngFor="let user of users" class="campos">
-      <div class="campo flex Acciones">
+      <div class="campo flex Acciones" [attr.data-index]="user.id_usuario">
         <textarea
           class="txtArea"
           [attr.data-index]="user.id_usuario"
@@ -73,7 +83,7 @@
           (click)="verificarBorradoRecomendacion(user.id_usuario)"
         />
       </div>
-      <div class="campo Fecha">
+      <div class="campo Fecha" [attr.data-index]="user.id_usuario">
         <input
           type="mail"
           [(ngModel)]="user.correo"
@@ -81,7 +91,7 @@
           [attr.data-index]="user.id_usuario"
         />
       </div>
-      <div class="campo contrasena">
+      <div class="campo contrasena" [attr.data-index]="user.id_usuario">
         <input
           [type]="ojito[user.id_usuario] ? 'text' : 'password'"
           [(ngModel)]="user.clave"
@@ -98,7 +108,7 @@
           "
         />
       </div>
-      <div class="campo tipo">
+      <div class="campo tipo" [attr.data-index]="user.id_usuario">
         <ng-container *ngIf="selctFlag[user.id_usuario]; else elseBlock">
           <select name="options" [(ngModel)]="selectedzona[user.id_usuario]">
             <ng-container *ngFor="let facultad of facultades">
@@ -111,6 +121,21 @@
 
         <ng-template #elseBlock>
           {{ zona(user.id_facultad) }}
+        </ng-template>
+      </div>
+      <div class="campo carrera" [attr.data-index]="user.id_usuario">
+        <ng-container *ngIf="selctFlag[user.id_usuario]; else elseBlock2">
+          <select name="options" [(ngModel)]="selectedzona2[user.id_usuario]">
+            <ng-container *ngFor="let carrera of carreras">
+              <option [ngValue]="carrera.id_carrera">
+                {{ carrera.nombre }}
+              </option>
+            </ng-container>
+          </select>
+        </ng-container>
+
+        <ng-template #elseBlock2>
+          {{ carrera(user.id_carrera) }}
         </ng-template>
       </div>
     </ng-container>

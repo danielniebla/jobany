@@ -35,7 +35,7 @@
       </div>
     </ng-container>
     <ng-container *ngFor="let facultad of facultades" class="campos">
-      <div class="campo flex Acciones">
+      <div class="campo flex Acciones" [attr.data-index]="facultad.id_facultad">
         <textarea
           class="txtArea"
           [attr.data-index]="facultad.id_facultad"
@@ -64,7 +64,7 @@
           (click)="verificarBorradoRecomendacion(facultad.id_facultad)"
         />
       </div>
-      <div class="campo Fecha">
+      <div class="campo Fecha" [attr.data-index]="facultad.id_facultad">
         <ng-container *ngIf="selctFlag[facultad.id_facultad]; else elseBlock">
           <select
             name="options"
@@ -80,7 +80,7 @@
           {{ zona(facultad.id_facultad) }}
         </ng-template>
       </div>
-      <div class="campo contrasena">
+      <div class="campo contrasena" [attr.data-index]="facultad.id_facultad">
         <input
           type="text"
           [(ngModel)]="facultad.nombre"

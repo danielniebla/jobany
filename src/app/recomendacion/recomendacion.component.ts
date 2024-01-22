@@ -41,7 +41,6 @@ export class RecomendacionComponent implements OnInit {
     }
     const cumplido = document.querySelector(`.cumplido[data-index="${idRecomendacion}"]`) as HTMLImageElement;
 
-    // Verifica si se encontró la imagen 'disk'
     if (cumplido) {
       // Agrega la clase deseada
       this.renderer.addClass(cumplido, 'edit');

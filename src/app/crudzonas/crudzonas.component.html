@@ -25,7 +25,7 @@
       </div>
     </ng-container>
     <ng-container *ngFor="let zona of zonas" class="campos">
-      <div class="campo flex Acciones">
+      <div class="campo flex Acciones" [attr.data-index]="zona.id_zona">
         <textarea
           class="txtArea"
           [(ngModel)]="zona.id_zona"
@@ -53,7 +53,7 @@
           (click)="verificarBorradoRecomendacion(zona.id_zona)"
         />
       </div>
-      <div class="campo Fecha">
+      <div class="campo Fecha" [attr.data-index]="zona.id_zona">
         <input
           type="text"
           [(ngModel)]="zona.nombre"

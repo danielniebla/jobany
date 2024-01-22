@@ -31,6 +31,10 @@ export class CrudzonasComponent {
     textAreas.forEach((textarea) => {
       this.renderer.removeClass(textarea as HTMLElement, 'txtArea');
     });
+    const camps = document.querySelectorAll(`.campo[data-index="${idRecomendacion}"]`);
+    camps.forEach((camp) => {
+      this.renderer.addClass(camp as HTMLElement, 'new');
+    });
   }
   agregarRecomendacion() {
     this.nueva=true;
@@ -124,6 +128,7 @@ export class CrudzonasComponent {
     this.actualizarDatosRecomendacion();
   }
   actualizarRecomendacion(zona: any) {
+    if(zona.nombre != ''){
     const authEndpoint = `${this.server}/api/Zona/Actualizar_Zona`;
     const authData = {
       "id_zona": zona.id_zona,
@@ -145,9 +150,12 @@ export class CrudzonasComponent {
       }, (error) => {
         console.error('Error:', error);
       });
-
+    }else{
+      window.alert('favor de llenar todos los campos antes de guardar');
+    }
   }
   nuevaRecomendacion(){
+    if(this.zona != ''){
     const authEndpoint = `${this.server}/api/Zona/Agregar_Zona`;
     const authData = {
       "id_zona": 0,
@@ -170,6 +178,9 @@ export class CrudzonasComponent {
       }, (error) => {
         console.error('Error:', error);
       });
+    }else{
+      window.alert('favor de llenar todos los campos antes de guardar');
+    }
   }
 
 }
