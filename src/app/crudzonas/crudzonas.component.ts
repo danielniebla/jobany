@@ -71,7 +71,7 @@ export class CrudzonasComponent {
         body: recomendacionAEliminar // Agregar el cuerpo de la solicitud con los datos a eliminar
       };
       
-      this.http.delete(`${this.server}api/Zona/Eliminar_Zona`, httpOptions)
+      this.http.delete(`${this.server}/api/Zona/Eliminar_Zona`, httpOptions)
         .subscribe(
           (response: any) => {
             // Manejar la respuesta aquí si es necesario
@@ -96,7 +96,6 @@ export class CrudzonasComponent {
         this.borrarRecomendacion(idRecomendacion);
         clearInterval(intervalo);
       }else{
-        this.contador--;
         this.eleccion();
       }
     }, 1000);

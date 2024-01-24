@@ -124,7 +124,6 @@ export class CrudUsersComponent {
         this.borrarRecomendacion(idRecomendacion);
         clearInterval(intervalo);
       }else{
-        this.contador--;
         this.eleccion();
       }
     }, 1000);

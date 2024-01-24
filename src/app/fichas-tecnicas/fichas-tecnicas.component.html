@@ -1,10 +1,13 @@
+<div *ngIf="user == '1'">
+  <app-unidad-academica></app-unidad-academica>
+</div>
 <div class="cont">
   <nav>
     <button class="boton btn" (click)="recomendacion()">Recomendaciones</button
     ><button class="boton btn" (click)="fichasTecnicas()">
       Fichas tecnicas
     </button>
-    <button class="boton btn" (click)="cruds()">Administrador</button>
+    <button class="boton btn" (click)="cruds()" *ngIf="user == '1'">Administrador</button>
   </nav>
   <app-ficha-1></app-ficha-1>
   <app-ficha-2></app-ficha-2>

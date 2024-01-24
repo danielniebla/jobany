@@ -41,7 +41,6 @@ export class LoginComponent implements OnInit {
         const idCarrera = usuario.id_carrera; 
         const idf =usuario.id_facultad;
         const idu = usuario.id_usuario; // Obtener el id_carrera de la respuesta
-        console.log(response);
         // Guardar id_carrera en localStorage 
         this.storage.setDataItem('token', token);
         this.storage.setDataItem('idCarrera', idCarrera);
@@ -69,7 +68,6 @@ export class LoginComponent implements OnInit {
       this.storage.setDataItem('server', this.server);
       const user = this.storage.getDataItem('idUsuario') ?? '';
       if(user != '' && user != null){
-        window.alert(user);
         setTimeout(() => {
           this.router.navigate(['/Sursumversus']);
         }, 200);

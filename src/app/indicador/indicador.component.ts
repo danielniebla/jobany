@@ -230,7 +230,6 @@ export class IndicadorComponent implements OnInit {
           this.borrarRecomendacion(idIndicador);
           clearInterval(intervalo);
         }else{
-          this.contador--;
           this.eleccion();
         }
       }, 1000);

@@ -40,6 +40,7 @@ export class Navbar2Component implements OnInit {
     localStorage.clear();
     setTimeout(() => {
       window.location.href = 'https://yobani.onrender.com/';
+      // this.router.navigate(['/login']);
     }, 300);
   }
 }

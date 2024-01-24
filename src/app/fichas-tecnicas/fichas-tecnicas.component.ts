@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { StorageServiceService } from '../storage-service.service';
 
 @Component({
   selector: 'app-fichas-tecnicas',
@@ -7,8 +8,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./fichas-tecnicas.component.css']
 })
 export class FichasTecnicasComponent {
-  constructor(private router: Router) { }  
-
+  constructor(private router: Router, private storage : StorageServiceService) { }  
+  user= '';
   fichasTecnicas() {
     this.router.navigate(['/Sursumversus/Fichas-Tecnicas']);
   }
@@ -17,5 +18,9 @@ export class FichasTecnicasComponent {
   }
   cruds(){
     this.router.navigate(['/Sursumversus/Admin']);
+  }
+  ngOnInit(): void {
+    this.user = this.storage.getDataItem('idUsuario') ?? ''; 
+    
   }
 }

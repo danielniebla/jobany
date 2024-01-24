@@ -104,7 +104,6 @@ export class CrudfacarrerasComponent {
         this.borrarRecomendacion(idRecomendacion);
         clearInterval(intervalo);
       }else{
-        this.contador--;
         this.eleccion();
       }
     }, 1000);
@@ -216,14 +215,10 @@ export class CrudfacarrerasComponent {
       });
       
   }
-  facultad(idcarrera: number) {
-    const carrera = this.carreras.find(carrera => carrera.id_carrera === idcarrera);
-  
-    if (carrera) {
+  facultad(carrera: any) {
+
       const facultadCorrespondiente = this.facultades.find(facultad => facultad.id_facultad === carrera.id_facultad);
       return facultadCorrespondiente ? facultadCorrespondiente.nombre : 'No encontrado';
-    }
-  
-    return 'No encontrado';
+
   }
 }

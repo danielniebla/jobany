@@ -104,7 +104,6 @@ export class CrudfacultadesComponent {
         this.borrarRecomendacion(idRecomendacion);
         clearInterval(intervalo);
       }else{
-        this.contador--;
         this.eleccion();
       }
     }, 1000);
@@ -216,14 +215,9 @@ export class CrudfacultadesComponent {
       });
       
   }
-  zona(idFacultad: number) {
-    const facultad = this.facultades.find(facultad => facultad.id_facultad === idFacultad);
-  
-    if (facultad) {
+  zona(facultad: any) {
+
       const zonaCorrespondiente = this.zonas.find(zona => zona.id_zona === facultad.id_zona);
       return zonaCorrespondiente ? zonaCorrespondiente.nombre : 'No encontrado';
-    }
-  
-    return 'No encontrado';
   }
 }

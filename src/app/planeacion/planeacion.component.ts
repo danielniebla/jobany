@@ -33,10 +33,8 @@ export class PlaneacionComponent implements OnInit {
   }  
   uploadImage($event: any,accion: any){
     const file = $event.target.files[0];
-    console.log(file);//de file se rescata name
 
     const ruta_fire = ref(this.storage, `${accion.id_cumplimiento}/${file.name.slice(0, file.name.lastIndexOf('.'))}/${file.name}`);// como aqui
-    console.log(file.name);
 
     uploadBytes(ruta_fire, file)
     .then(response=> console.log(response),
@@ -124,7 +122,6 @@ export class PlaneacionComponent implements OnInit {
         this.borrarRecomendacion(idRecomendacion);
         clearInterval(intervalo);
       }else{
-        this.contador--;
         this.eleccion();
       }
     }, 1000);

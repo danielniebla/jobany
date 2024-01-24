@@ -79,7 +79,7 @@
         </ng-container>
 
         <ng-template #elseBlock>
-          {{ facultad(carrera.id_carrera) }}
+          {{ facultad(carrera) }}
         </ng-template>
       </div>
       <div class="campo contrasena" [attr.data-index]="carrera.id_carrera">
@@ -116,7 +116,7 @@
         <h3 class="modal-title">Esta seguro de borrar la carrera?</h3>
       </div>
       <div class="modal-body">
-        <p>La carrera se borrara en {{ contador }}</p>
+        <p>La carrera se borrara </p>
       </div>
       <div class="modal-footer">
         <button

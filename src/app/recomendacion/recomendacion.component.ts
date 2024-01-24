@@ -121,7 +121,6 @@ export class RecomendacionComponent implements OnInit {
         this.borrarRecomendacion(idRecomendacion);
         clearInterval(intervalo);
       }else{
-        this.contador--;
         this.eleccion();
       }
     }, 1000);
