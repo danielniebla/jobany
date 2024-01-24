@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
     ngOnInit(): void {
       this.storage.setDataItem('server', this.server);
       const user = this.storage.getDataItem('idUsuario') ?? '';
-      if(user != ''){
+      if(user != '' && user != null){
         setTimeout(() => {
           this.router.navigate(['/Sursumversus']);
         }, 200);

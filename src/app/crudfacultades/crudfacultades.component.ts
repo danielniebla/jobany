@@ -139,6 +139,7 @@ export class CrudfacultadesComponent {
    
   }
   actualizarRecomendacion(facultad: any) {
+    if(this.selectedzona[facultad.id_facultad] != 0 && facultad.nombre !=''){
     const authEndpoint = `${this.server}/api/Facultades/Actualizar_Facultad`;
     const authData = {
       "id_facultad": facultad.id_facultad,
@@ -162,9 +163,12 @@ export class CrudfacultadesComponent {
       }, (error) => {
         console.error('Error:', error);
       });
-
+    }else{
+      window.alert('favor de llenar todos los campos antes de guardar');
+    }
   }
   nuevaRecomendacion(){
+    if(this.selectedzona[0] != 0 && this.facultad !=''){
     const authEndpoint = `${this.server}/api/Facultades/Agregar_Facultad`;
     const authData = {
       "id_facultad": 0,
@@ -187,6 +191,9 @@ export class CrudfacultadesComponent {
       }, (error) => {
         console.error('Error:', error);
       });
+    }else{
+      window.alert('favor de llenar todos los campos antes de guardar');
+    }
   }
   actualizarDatosZona(){
     const authEndpoint = `${this.server}/api/Zona/Consultar_Zona`;
