@@ -69,6 +69,7 @@ export class LoginComponent implements OnInit {
       this.storage.setDataItem('server', this.server);
       const user = this.storage.getDataItem('idUsuario') ?? '';
       if(user != '' && user != null){
+        window.alert(user);
         setTimeout(() => {
           this.router.navigate(['/Sursumversus']);
         }, 200);
