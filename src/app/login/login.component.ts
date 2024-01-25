@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { StorageServiceService } from '../storage-service.service';
+import { id } from '@cds/core/internal';
 
 @Component({
   selector: 'app-login',
@@ -41,14 +42,26 @@ export class LoginComponent implements OnInit {
         const idCarrera = usuario.id_carrera; 
         const idf =usuario.id_facultad;
         const idu = usuario.id_usuario; // Obtener el id_carrera de la respuesta
+        let ut = '';
         // Guardar id_carrera en localStorage 
         this.storage.setDataItem('token', token);
         this.storage.setDataItem('idCarrera', idCarrera);
         this.storage.setDataItem('idFacultad', idf);
         this.storage.setDataItem('idUsuario', idu);
+        if(idu=='1'){
+          ut = '1';
+        }else if(idf =='1'){
+          ut = '2';
+        }else if (idCarrera == '1'){
+          ut='3';
+        }else{
+          ut='4';
+        }
+        this.storage.setDataItem('userTipe',ut);
         if(token!=''){
           setTimeout(() => {
             window.location.href = 'https://yobani.onrender.com/';
+            // window.location.reload();
           }, 300);
         }else{
           spanElement.textContent = 'no se encontraron coincidencias usuario-contraseña';

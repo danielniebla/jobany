@@ -9,7 +9,7 @@ import { StorageServiceService } from '../storage-service.service';
 })
 export class FichasTecnicasComponent {
   constructor(private router: Router, private storage : StorageServiceService) { }  
-  user= '';
+  user = '';
   fichasTecnicas() {
     this.router.navigate(['/Sursumversus/Fichas-Tecnicas']);
   }
@@ -20,7 +20,6 @@ export class FichasTecnicasComponent {
     this.router.navigate(['/Sursumversus/Admin']);
   }
   ngOnInit(): void {
-    this.user = this.storage.getDataItem('idUsuario') ?? ''; 
-    
+    this.user = this.storage.getDataItem('userTipe') ?? ''; 
   }
 }

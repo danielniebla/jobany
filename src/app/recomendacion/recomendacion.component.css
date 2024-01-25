@@ -52,7 +52,7 @@ td,textarea,.tr{
 .incumplio .txtArea, .incumplio{
     background-color: var(--cds-global-color-red-300) !important;
 }
-.disk{
+.disk1{
     visibility: hidden;
     pointer-events: none;
 }
@@ -60,7 +60,7 @@ td,textarea,.tr{
     pointer-events: none;
 }
 .edit{
-    visibility: visible;
+    visibility: visible !important;
     pointer-events: all !important;
     background-color: var(--cds-global-color-blue-100);
 }

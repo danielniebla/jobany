@@ -30,7 +30,7 @@
       </div>
     </div>
   </form>
-  <img class="but" src="../../assets/mas.png" alt="+" (click)="agregar()" />
+  <img class="but" [src]="flag ? '../../assets/boton-menos.png'  : '../../assets/mas.png' " alt="+" (click)="agregar()" />
 </div>
 <ng-container *ngFor="let indicador of indicadores">
   <form clrForm>

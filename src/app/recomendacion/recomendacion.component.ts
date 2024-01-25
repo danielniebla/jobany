@@ -32,7 +32,7 @@ export class RecomendacionComponent implements OnInit {
   cumplido=0;
   server = '';
   editarRecomendacion(idRecomendacion: number) {
-    const imagenDisk = document.querySelector(`.disk[data-index="${idRecomendacion}"]`) as HTMLImageElement;
+    const imagenDisk = document.querySelector(`.disk1[data-index="${idRecomendacion}"]`) as HTMLImageElement;
 
     // Verifica si se encontró la imagen 'disk'
     if (imagenDisk) {

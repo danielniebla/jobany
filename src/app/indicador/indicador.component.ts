@@ -17,13 +17,15 @@ export class IndicadorComponent implements OnInit {
   alert = false;
   contador=0;
   option: boolean | null | undefined;
+  flag : boolean = false;
   agregar() {
     var elemento = document.getElementById("indicador");
-
     if (elemento) {
       if (elemento.style.display === "none") {
+        this.flag = true;
         elemento.style.display = "block";
       } else {
+        this.flag = false;
         elemento.style.display = "none";
       }
     } else {

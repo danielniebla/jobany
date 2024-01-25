@@ -16,26 +16,61 @@ export class UnidadAcademicaComponent implements OnInit{
   carreras: any[] = [];
   estructuraOrganizada: any[] = [];
   server = '';
+  facultad='';
+  carrera='';
+  user='';
   agregarClaseFacultad(facultad: any) {
     facultad.agregarClaseFlag = !facultad.agregarClaseFlag;
   }
   ngOnInit(): void {
+    this.facultad = this.storage.getDataItem('idCarrera') ?? '';
+    this.carrera = this.storage.getDataItem('idFacultad') ?? '';
     this.server = this.storage.getDataItem('server') ?? '';
+    this.user = this.storage.getDataItem('userTipe') ?? '';
+  
     forkJoin({
       zonas: this.http.get(`${this.server}/api/Zona/Consultar_Zona`),
       facultades: this.http.get(`${this.server}/api/Facultades/Consultar_Facultad`),
       carreras: this.http.get(`${this.server}/api/Carreras/Consultar_Carrera`)
-    }).subscribe((responses: any) => {
+    }).subscribe({
+      next: (responses: any) => {
       this.zonas = responses.zonas;
       this.facultades = responses.facultades;
       this.carreras = responses.carreras;
-      
+  
+      // Aplicar lógica según el tipo de usuario
+      if (this.user === '2') {
+        // Encontrar la zona a la que pertenece la carrera del usuario
+        const zonaUsuario = this.zonas.find(zona => zona.facultades.some((facultad: any) => facultad.carreras.some((carrera: any) => carrera.id_carrera === this.carrera)));
+        
+        // Filtrar las zonas y facultades para mostrar solo los datos de esa zona
+        this.zonas = [zonaUsuario];
+        zonaUsuario.facultades = zonaUsuario.facultades.filter((facultad: any) => facultad.carreras.some((carrera: any) => carrera.id_carrera === this.carrera));
+      } else if (this.user === '3') {
+        // Filtrar las facultades para mostrar solo datos de la facultad del usuario
+        this.facultades = this.facultades.filter((facultad: any) => facultad.id_facultad === this.facultad);
+        
+        // Encontrar la zona a la que pertenece la facultad del usuario
+        this.zonas = this.zonas.find(zona => zona.id_zona === this.facultades[0].id_zona);
+        
+        // Filtrar las zonas para mostrar solo datos de esa zona
+      } else if(this.user == '4') {
+        // No habrá datos
+        this.zonas = [];
+        this.facultades = [];
+        this.carreras = [];
+      }
+      console.log('carrera', this.carrera);
+      console.log('usertipe',this.user);
+      console.log(this.zonas,this.facultades,this.carreras);
+  
       // Estructurar la información una vez que todas las respuestas han sido recibidas
       this.estructuraOrganizada = this.organizarInformacion();
-    }, (error) => {
-      console.error('Error:', error);
-    });
-    
+    },
+    error: (err) => {
+      console.error('Error:', err);
+    }
+  });
   }
   organizarInformacion() {
     // Lógica para estructurar la información
@@ -57,7 +92,7 @@ export class UnidadAcademicaComponent implements OnInit{
   }
   cambiarCarrera(id: number){
     localStorage.setItem('idCarrera', id.toString());
-    window.location.reload();
+    window.location.href = 'https://yobani.onrender.com/';
   }
   dropDown() {
     this.open = !this.open;

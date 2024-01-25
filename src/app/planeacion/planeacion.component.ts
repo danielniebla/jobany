@@ -43,7 +43,7 @@ export class PlaneacionComponent implements OnInit {
 
   }
   editarRecomendacion(accion: any) {
-    const imagenDisk = document.querySelector(`.disk[data-index="${accion.id_cumplimiento}"]`) as HTMLImageElement;
+    const imagenDisk = document.querySelector(`.disk2[data-index="${accion.id_cumplimiento}"]`) as HTMLImageElement;
 
     // Verifica si se encontró la imagen 'disk'
     if (imagenDisk) {
@@ -154,6 +154,14 @@ export class PlaneacionComponent implements OnInit {
         // Aquí puedes manejar la respuesta del servidor
         this.acciones= response;
         this.setearFecha()
+        const textAreas = document.querySelectorAll(`.txtArea`) as NodeListOf<HTMLTextAreaElement>;
+  
+        if (textAreas) {
+          textAreas.forEach((textarea: HTMLTextAreaElement) => {
+            // Establece la propiedad readOnly para cada textarea
+            textarea.readOnly = true;
+          });
+        }
 
       }, (error) => {
         console.error('Error:', error);
@@ -170,6 +178,10 @@ export class PlaneacionComponent implements OnInit {
           this.url[accion.id_cumplimiento] = await getDownloadURL(item);
         }
       }).catch(error => console.log(error))
+      if(accion.documentos =='string'){
+        accion.documentos='';
+      }
+
     });
      
   }

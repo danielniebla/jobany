@@ -19,8 +19,10 @@ export class MainComponent implements OnInit {
     this.router.navigate(['/Sursumversus/Admin']);
   }
   ngOnInit(): void {
-    this.user = this.storage.getDataItem('idUsuario') ?? ''; 
-    
+    this.user = this.storage.getDataItem('userTipe') ?? ''; 
+    const carrera = this.storage.getDataItem('userTipe') ?? '';
+    console.log('carrera', carrera);
+    console.log('usertipe',this.user);
   }
 }
   
