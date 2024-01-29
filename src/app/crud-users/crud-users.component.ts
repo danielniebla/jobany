@@ -14,6 +14,7 @@ export class CrudUsersComponent {
   users: any[] = [];
   facultades: any [] = [];
   carreras: any [] = [];
+  zonas: any [] = [];
   nueva= false;
   usuario='';
   contrasena= '';
@@ -25,8 +26,10 @@ export class CrudUsersComponent {
   visi=false;
   ojito: { [key: number]: boolean } = {}
   selectedzona:{[key:number]:number}={};
-  selectedzona2:{[key:number]:number}={};
+  selectedfacultad:{[key:number]:number}={};
+  selectedcarrera:{[key:number]:number}={};
   selctFlag:{[key:number]:boolean}={};
+  selectedOption: string = "general";
   server= '';
   toggleEye(){
     this.visi=!this.visi
@@ -84,6 +87,7 @@ export class CrudUsersComponent {
         "id_usuario": idRecomendacion,
         "id_carrera": 0,
         "id_facultad": 0,
+        "id_zona": 0,
         "correo": "string",
         "clave": "string",
         "nombre": "string",
@@ -140,6 +144,7 @@ export class CrudUsersComponent {
         this.users = response;
         this.actualizarDatoscarrera();
         this.actualizarDatosfacultad();
+        this.actualizarDatoszona();
       }, (error) => {
         console.error('Error:', error);
       });
@@ -149,18 +154,21 @@ export class CrudUsersComponent {
     this.server = this.storage.getDataItem('server') ?? '';
     this.actualizarDatosRecomendacion();    
   }
+  ////////////////////////////////////////////////////////////////////
+ 
   actualizarRecomendacion(user: any) {
-    if(this.selectedzona2[user.id_usuario] != 0 && this.selectedzona2[user.id_usuario] != null && this.selectedzona2[user.id_usuario] != 0 && this.selectedzona2[user.id_usuario] != null && user.correo != '' && user.clave != ''){
+    if( user.correo != '' && user.clave != ''){
     const authEndpoint = `${this.server}/api/Usuarios/Actualizar_Usuario`;
   
     const authData = {
       id_usuario: user.id_usuario,
-      id_carrera: this.selectedzona2[user.id_usuario],
-      id_facultad: this.selectedzona[user.id_usuario],
+      id_carrera: this.selectedcarrera[user.id_usuario]?? 0,
+      id_facultad: this.selectedfacultad[user.id_usuario]?? 0,
+      id_zona: this.selectedzona[user.id_usuario]?? 0,
       correo: user.correo,
       clave: user.clave,
       nombre: 'string',
-      puesto: 'string',
+      puesto: user.puesto,
       fecha_alta: '2024-01-22T08:05:04.096Z'
     };
     console.log(authData);
@@ -176,6 +184,7 @@ export class CrudUsersComponent {
       .subscribe(
         (response: any) => {
           // Manejar respuesta exitosa
+          this.selctFlag[user.id_usuario] = false;
           this.rebote();
         },
         (error) => {
@@ -193,17 +202,18 @@ export class CrudUsersComponent {
     
   }
   nuevaRecomendacion(){
-    if(this.selectedzona2[0] != 0 && this.selectedzona2[0] != null && this.selectedzona2[0] != 0 && this.selectedzona2[0] != null && this.usuario != '' && this.contrasena != ''){
+    if( this.usuario != '' && this.contrasena != ''){
     const authEndpoint = `${this.server}/api/Usuarios/Agregar_Usuarios`;
     const authData = 
     {
-      "id_usuario": 0,
-      "id_carrera": this.selectedzona2[0],
-      "id_facultad": this.selectedzona[0],
+      "id_usuario":  0,
+      "id_carrera": this.selectedcarrera[0]?? 0,
+      "id_facultad": this.selectedfacultad[0]?? 0,
+      "id_zona": this.selectedzona[0]?? 0,
       "correo": this.usuario,
       "clave": this.contrasena,
       "nombre": "string",
-      "puesto": "string",
+      "puesto": this.selectedOption,
       "fecha_alta": "2023-12-01T06:46:57.562Z"
     };
     console.log(authData);
@@ -267,24 +277,41 @@ export class CrudUsersComponent {
       });
       
   }
-  zona(idUsuario: number) {
-    const usuario = this.users.find(usuario => usuario.id_usuario === idUsuario);
+  actualizarDatoszona(){
+    const authEndpoint = `${this.server}/api/Zona/Consultar_Zona`;
 
-    if (usuario) {
+    // Encabezados para la solicitud POST
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    // Realizar la solicitud POST para obtener el token
+    this.http.get(authEndpoint, httpOptions)
+      .subscribe((response: any) => {
+        // Aquí puedes manejar la respuesta del servidor
+        this.zonas= response;
+      }, (error) => {
+        console.error('Error:', error);
+      });
+      
+  }
+
+  facultad(usuario: any) {
       const facultadCorrespondiente = this.facultades.find(facultad => facultad.id_facultad === usuario.id_facultad);
       return facultadCorrespondiente ? facultadCorrespondiente.nombre : 'No encontrado';
-    }
-  
-    return 'No encontrado';
   }
-  carrera(idUsuario: number) {
-    const usuario = this.users.find(usuario => usuario.id_usuario === idUsuario);
+  carrera(usuario: any) {
 
-    if (usuario) {
       const carreraCorrespondiente = this.carreras.find(carrera => carrera.id_carrera === usuario.id_carrera);
       return carreraCorrespondiente ? carreraCorrespondiente.nombre : 'No encontrado';
-    }
-  
-    return 'No encontrado';
+
+  }
+  zona(usuario: any) {
+
+      const carreraCorrespondiente = this.zonas.find(zona => zona.id_zona === usuario.id_zona);
+      return carreraCorrespondiente ? carreraCorrespondiente.nombre : 'No encontrado';
+
   }
 }

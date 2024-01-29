@@ -40,22 +40,26 @@ export class LoginComponent implements OnInit {
         const token = response.token; // Suponiendo que el token se devuelve como parte de la respuesta
         const usuario = response.usuario[0]; // Acceder al primer usuario de la respuesta (puede haber más)
         const idCarrera = usuario.id_carrera; 
-        const idf =usuario.id_facultad;
+        const idp =usuario.puesto;
         const idu = usuario.id_usuario; // Obtener el id_carrera de la respuesta
         let ut = '';
         // Guardar id_carrera en localStorage 
         this.storage.setDataItem('token', token);
-        this.storage.setDataItem('idCarrera', idCarrera);
-        this.storage.setDataItem('idFacultad', idf);
         this.storage.setDataItem('idUsuario', idu);
+
         if(idu=='1'){
           ut = '1';
-        }else if(idf =='1'){
+        }else if(idp=='general'){
           ut = '2';
-        }else if (idCarrera == '1'){
-          ut='3';
-        }else{
+        }else if(idp =='zona'){
+          this.storage.setDataItem('idDinamico', usuario.id_zona);
+          ut = '3';
+        }else if (idp == 'facultad'){
+          this.storage.setDataItem('idDinamico', usuario.id_facultad);
           ut='4';
+        }else{
+          this.storage.setDataItem('idCarrera', idCarrera);
+          ut='5';
         }
         this.storage.setDataItem('userTipe',ut);
         if(token!=''){

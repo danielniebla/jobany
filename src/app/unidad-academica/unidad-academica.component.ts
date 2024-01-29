@@ -16,15 +16,15 @@ export class UnidadAcademicaComponent implements OnInit{
   carreras: any[] = [];
   estructuraOrganizada: any[] = [];
   server = '';
-  facultad='';
+  dinamica='';
   carrera='';
   user='';
   agregarClaseFacultad(facultad: any) {
     facultad.agregarClaseFlag = !facultad.agregarClaseFlag;
   }
   ngOnInit(): void {
-    this.facultad = this.storage.getDataItem('idCarrera') ?? '';
-    this.carrera = this.storage.getDataItem('idFacultad') ?? '';
+    this.dinamica = this.storage.getDataItem('idDinamico') ?? '';
+    this.carrera = this.storage.getDataItem('idCarrera') ?? '';
     this.server = this.storage.getDataItem('server') ?? '';
     this.user = this.storage.getDataItem('userTipe') ?? '';
   
@@ -37,40 +37,42 @@ export class UnidadAcademicaComponent implements OnInit{
       this.zonas = responses.zonas;
       this.facultades = responses.facultades;
       this.carreras = responses.carreras;
-  
-      // Aplicar lógica según el tipo de usuario
-      if (this.user === '2') {
-        // Encontrar la zona a la que pertenece la carrera del usuario
-        const zonaUsuario = this.zonas.find(zona => zona.facultades.some((facultad: any) => facultad.carreras.some((carrera: any) => carrera.id_carrera === this.carrera)));
-        
-        // Filtrar las zonas y facultades para mostrar solo los datos de esa zona
-        this.zonas = [zonaUsuario];
-        zonaUsuario.facultades = zonaUsuario.facultades.filter((facultad: any) => facultad.carreras.some((carrera: any) => carrera.id_carrera === this.carrera));
-      } else if (this.user === '3') {
-        // Filtrar las facultades para mostrar solo datos de la facultad del usuario
-        this.facultades = this.facultades.filter((facultad: any) => facultad.id_facultad === this.facultad);
-        
-        // Encontrar la zona a la que pertenece la facultad del usuario
-        this.zonas = this.zonas.find(zona => zona.id_zona === this.facultades[0].id_zona);
-        
-        // Filtrar las zonas para mostrar solo datos de esa zona
-      } else if(this.user == '4') {
-        // No habrá datos
-        this.zonas = [];
-        this.facultades = [];
-        this.carreras = [];
-      }
-      console.log('carrera', this.carrera);
-      console.log('usertipe',this.user);
-      console.log(this.zonas,this.facultades,this.carreras);
-  
-      // Estructurar la información una vez que todas las respuestas han sido recibidas
-      this.estructuraOrganizada = this.organizarInformacion();
+      this.revisarDatos();
     },
     error: (err) => {
       console.error('Error:', err);
     }
   });
+  
+  }
+  revisarDatos(){
+    
+      // Aplicar lógica según el tipo de usuario
+      if (this.user === '3') {
+        this.zonas = this.zonas.filter((zona: any) => zona.id_zona === this.dinamica);
+
+    
+      } else if (this.user === '4') {
+        // Filtrar las facultades para mostrar solo datos de la facultad del usuario
+        this.facultades = this.facultades.filter((facultad: any) => facultad.id_facultad === this.dinamica);
+
+        // Encontrar la zona a la que pertenece la facultad del usuario
+        const zonaUsuario = this.zonas.find(zona =>
+          zona.id_zona === this.facultades[0]?.id_zona // Utiliza la primera facultad encontrada (si existe)
+        );
+
+        // Filtrar las zonas para mostrar solo datos de esa zona
+        this.zonas = zonaUsuario ? [zonaUsuario] : [];
+
+
+      } else if(this.user == '5') {
+        // No habrá datos
+        this.zonas = [];
+        this.facultades = [];
+        this.carreras = [];
+      }  
+      // Estructurar la información una vez que todas las respuestas han sido recibidas
+      this.estructuraOrganizada = this.organizarInformacion();
   }
   organizarInformacion() {
     // Lógica para estructurar la información

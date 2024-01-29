@@ -12,8 +12,8 @@
     <div class="Acciones cabecera">Id</div>
     <div class="Fecha_limite cabecera">usuario</div>
     <div class="cabecera contrasena">Contraseña</div>
-    <div class="cabecera tipo">Facultad</div>
-    <div class="cabecera carrera">Carrera</div>
+    <div class="cabecera tipo">Nivel administrativo</div>
+    <div class="cabecera carrera">Asignacion</div>
     <ng-container *ngIf="nueva">
       <div class="campo flex Acciones new">
         <img
@@ -35,22 +35,38 @@
         />
       </div>
       <div class="campo tipo new">
-        <select name="options" [(ngModel)]="selectedzona[0]">
+        <select name="options" [(ngModel)]="selectedOption">
+          <option value="general">General</option>
+          <option value="zona">Zona</option>
+          <option value="facultad">Facultad</option>
+          <option value="carrera">Carrera</option>
+        </select>        
+      </div>
+      <div [ngSwitch]="selectedOption" class="campo carrera new">
+        <select *ngSwitchCase="'zona'" name="options" [(ngModel)]="selectedzona[0]">
+          <ng-container *ngFor="let zona of zonas">
+            <option [ngValue]="zona.id_zona">
+              {{ zona.nombre }}
+            </option>
+          </ng-container>
+        </select>         
+        <select *ngSwitchCase="'facultad'" name="options" [(ngModel)]="selectedfacultad[0]">
           <ng-container *ngFor="let facultad of facultades">
             <option [ngValue]="facultad.id_facultad">
               {{ facultad.nombre }}
             </option>
           </ng-container>
         </select>
-      </div>
-      <div class="campo carrera new">
-        <select name="options" [(ngModel)]="selectedzona2[0]">
+        <select *ngSwitchCase="'carrera'" name="options" [(ngModel)]="selectedcarrera[0]">
           <ng-container *ngFor="let carrera of carreras">
             <option [ngValue]="carrera.id_carrera">
               {{ carrera.nombre }}
             </option>
           </ng-container>
         </select>
+        <div *ngSwitchCase="'general'">
+          Administrador general
+        </div>
       </div>
     </ng-container>
     <ng-container *ngFor="let user of users" class="campos">
@@ -108,35 +124,72 @@
           "
         />
       </div>
-      <div class="campo tipo" [attr.data-index]="user.id_usuario">
-        <ng-container *ngIf="selctFlag[user.id_usuario]; else elseBlock">
-          <select name="options" [(ngModel)]="selectedzona[user.id_usuario]">
-            <ng-container *ngFor="let facultad of facultades">
-              <option [ngValue]="facultad.id_facultad">
-                {{ facultad.nombre }}
-              </option>
-            </ng-container>
-          </select>
-        </ng-container>
+      <div  class="campo tipo" [attr.data-index]="user.id_usuario">
+        <select name="options" [(ngModel)]="user.puesto" *ngIf="selctFlag[user.id_usuario]; else elseBlock4">
+          <option value="general">General</option>
+          <option value="zona">Zona</option>
+          <option value="facultad">Facultad</option>
+          <option value="carrera">Carrera</option>
+        </select>  
 
-        <ng-template #elseBlock>
-          {{ zona(user.id_facultad) }}
+        <ng-template #elseBlock4>
+          {{ user.puesto }}
         </ng-template>
       </div>
-      <div class="campo carrera" [attr.data-index]="user.id_usuario">
-        <ng-container *ngIf="selctFlag[user.id_usuario]; else elseBlock2">
-          <select name="options" [(ngModel)]="selectedzona2[user.id_usuario]">
-            <ng-container *ngFor="let carrera of carreras">
-              <option [ngValue]="carrera.id_carrera">
-                {{ carrera.nombre }}
-              </option>
-            </ng-container>
-          </select>
+      <div [ngSwitch]="user.puesto" class="campo carrera" [attr.data-index]="user.id_usuario">
+        <ng-container *ngSwitchCase="'zona'">
+          <ng-container  *ngIf="selctFlag[user.id_usuario]; else elseBlock3">
+            <select name="options" [(ngModel)]="selectedzona[user.id_usuario]">
+              <ng-container *ngFor="let zona of zonas">
+                <option [ngValue]="zona.id_zona">
+                  {{ zona.nombre }}
+                </option>
+              </ng-container>
+            </select>
+          </ng-container>
+  
+          <ng-template #elseBlock3>
+            {{ zona(user) }}
+          </ng-template>
         </ng-container>
 
-        <ng-template #elseBlock2>
-          {{ carrera(user.id_carrera) }}
-        </ng-template>
+        <ng-container *ngSwitchCase="'facultad'">
+          <ng-container  *ngIf="selctFlag[user.id_usuario]; else elseBlock">
+            <select name="options" [(ngModel)]="selectedfacultad[user.id_usuario]">
+              <ng-container *ngFor="let facultad of facultades">
+                <option [ngValue]="facultad.id_facultad">
+                  {{ facultad.nombre }}
+                </option>
+              </ng-container>
+            </select>
+          </ng-container>
+  
+          <ng-template #elseBlock>
+            {{ facultad(user) }}
+          </ng-template>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'carrera'">
+          <ng-container *ngIf="selctFlag[user.id_usuario]; else elseBlock2">
+            <select name="options" [(ngModel)]="selectedcarrera[user.id_usuario]">
+              <ng-container *ngFor="let carrera of carreras">
+                <option [ngValue]="carrera.id_carrera">
+                  {{ carrera.nombre }}
+                </option>
+              </ng-container>
+            </select>
+          </ng-container>
+  
+          <ng-template #elseBlock2>
+            {{ carrera(user) }}
+          </ng-template>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'general'">
+          <div>
+            Administrador general
+          </div>
+        </ng-container>
       </div>
     </ng-container>
   </div>
