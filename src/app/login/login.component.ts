@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router,private http: HttpClient, private storage : StorageServiceService) { }
   nombre='';
   contrasena='';
-  server = 'https://adminuas.uas-proy.com';
+  server = 'https://adminuas-001-site3.gtempurl.com';
   autenticarUsuario() {
     const spanElement: HTMLElement | null = document.getElementById('error')!;
     const authEndpoint = `${this.server}/api/Usuarios/autenticacion`;
