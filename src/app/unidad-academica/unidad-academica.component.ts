@@ -95,7 +95,7 @@ export class UnidadAcademicaComponent implements OnInit{
   cambiarCarrera(id: number){
     // localStorage.setItem('idCarrera', id.toString());
     window.location.href = 'https://yobani.onrender.com/';
-    window.location.reload();
+    // window.location.reload();
   }
   dropDown() {
     this.open = !this.open;
