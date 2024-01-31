@@ -86,6 +86,7 @@ clr-textarea-container {
     align-self: flex-start;
     text-align: left;
     pointer-events: none;
+    height: auto;
 }
 .campo{
     text-align: left;

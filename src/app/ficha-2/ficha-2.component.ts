@@ -12,7 +12,7 @@ export class Ficha2Component implements OnInit {
   server='';
   carrera=0;
   getficha(){
-    const authEndpoint = `${this.server}/api/Informe2/Consultar_Informe2?id_carrera=${this.carrera}`;
+    const authEndpoint = `${this.server}/api/Informe2/Consultar_Informe2?id_informe=1`;
       /*const authData = {
         "id_cumplimiento": accion.id_cumplimiento,
         "id_pregunta": accion.id_pregunta,
@@ -56,10 +56,11 @@ export class Ficha2Component implements OnInit {
 
   }
   editarficha(){
-    const authEndpoint = `${this.server}/api/Informe/Actualizar_Informe2`;
+    const authEndpoint = `${this.server}/api/Informe2/Actualizar_Informe2`;
       const authData = {
         "id_informe": this.ficha[0].id_informe,
-        "id_carrera": this.carrera,
+        "nombre": "UNIVERSIDAD AUTONOMA DE SINALOA",
+        "id_carrera": 1,
         "mision": this.ficha[0].mision,
         "vision": this.ficha[0].vision,
         "politicas": this.ficha[0].politicas,

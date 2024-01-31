@@ -48,6 +48,7 @@ export class LoginComponent implements OnInit {
         this.storage.setDataItem('idUsuario', idu);
 
         if(idu=='1'){
+          this.storage.setDataItem('idCarrera', idCarrera);
           ut = '1';
         }else if(idp=='general'){
           ut = '2';
@@ -59,13 +60,14 @@ export class LoginComponent implements OnInit {
           ut='4';
         }else{
           this.storage.setDataItem('idCarrera', idCarrera);
+          this.storage.setDataItem('idDinamico',idCarrera);
           ut='5';
         }
         this.storage.setDataItem('userTipe',ut);
         if(token!=''){
           setTimeout(() => {
-            window.location.href = 'https://yobani.onrender.com/';
-            // window.location.reload();
+            // window.location.href = 'https://yobani.onrender.com/';
+            window.location.reload();
           }, 300);
         }else{
           spanElement.textContent = 'no se encontraron coincidencias usuario-contraseña';

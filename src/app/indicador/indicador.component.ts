@@ -67,34 +67,38 @@ export class IndicadorComponent implements OnInit {
 
   }
   actualizarDatosIndicador(){
-    const authEndpoint = `${this.server}/api/Respuestas/Consultar_Pregunta`;
+    console.log('carrera?',this.carrera);
+    if(this.carrera!=null){
+      const authEndpoint = `${this.server}/api/Respuestas/Consultar_Pregunta`;
 
-    // Datos para enviar
-    const authData = {
-      "id_pregunta": 0,
-      "id_carrera": this.carrera,
-      "eje": 0,
-      "categoria": 0,
-      "indicador": 0,
-      "nombre": "string",
-      "valuacion": "string"
+      // Datos para enviar
+      const authData = {
+        "id_pregunta": 0,
+        "id_carrera": this.carrera,
+        "eje": 0,
+        "categoria": 0,
+        "indicador": 0,
+        "nombre": "string",
+        "valuacion": "string"
+      }
+
+      
+      // Encabezados para la solicitud POST
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      };
+
+      // Realizar la solicitud POST para obtener el token
+      this.http.post(authEndpoint, authData, httpOptions)
+        .subscribe((response: any) => {
+          // Aquí puedes manejar la respuesta del servidor
+          this.indicadores = response;
+        }, (error) => {
+          console.error('Error:', error);
+        });
     }
-    
-    // Encabezados para la solicitud POST
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
-
-    // Realizar la solicitud POST para obtener el token
-    this.http.post(authEndpoint, authData, httpOptions)
-      .subscribe((response: any) => {
-        // Aquí puedes manejar la respuesta del servidor
-        this.indicadores = response;
-      }, (error) => {
-        console.error('Error:', error);
-      });
       
   }
   ngOnInit(): void {
@@ -139,7 +143,7 @@ export class IndicadorComponent implements OnInit {
       
   }
   Carrera(){
-    const idCarreraString = this.storage.getDataItem('idCarrera');;
+    const idCarreraString = this.storage.getDataItem('idCarrera');
 
     if (idCarreraString !== null) {
       const idCarrera: number = parseInt(idCarreraString, 10);

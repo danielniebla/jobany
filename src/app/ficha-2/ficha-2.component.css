@@ -1,6 +1,6 @@
 .grid{
     display: grid;
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: 1fr 4fr;
     width: 100%;
     border: 2px solid #000;
     margin-top: 20px;
@@ -30,7 +30,7 @@ img {
     margin: 0;
 }
 textarea{
-    width: 300px;
+    width: 97%;
     border: none;
 }
 

@@ -38,7 +38,7 @@ export class PlaneacionComponent implements OnInit {
 
     uploadBytes(ruta_fire, file)
     .then(response=> console.log(response),
-    accion.documentos= file.name)
+    accion.documentos= file.name.slice(0, file.name.lastIndexOf('.')))
     .catch(error=> console.log(error));
 
   }
@@ -174,10 +174,13 @@ export class PlaneacionComponent implements OnInit {
       this.edit[accion.id_cumplimiento]=true;
       const images = ref(this.storage, `${accion.id_cumplimiento}/${accion.documentos}`);
       listAll(images).then(async response=>{
+        console.log('pos no se 1', response);
         for(let item of response.items){
           this.url[accion.id_cumplimiento] = await getDownloadURL(item);
+          console.log('aaa',await getDownloadURL(item));
         }
       }).catch(error => console.log(error))
+      console.log('pos no se 2');
       if(accion.documentos =='string'){
         accion.documentos='';
       }
