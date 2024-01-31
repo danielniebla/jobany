@@ -35,6 +35,7 @@ import { Ficha7Component } from './ficha-7/ficha-7.component';
 import { Ficha8Component } from './ficha-8/ficha-8.component';
 import { Ficha9Component } from './ficha-9/ficha-9.component';
 import { Ficha10Component } from './ficha-10/ficha-10.component';
+import { PhoneComponent } from './phone/phone.component';
 
 
 
@@ -64,7 +65,8 @@ import { Ficha10Component } from './ficha-10/ficha-10.component';
     Ficha7Component,
     Ficha8Component,
     Ficha9Component,
-    Ficha10Component
+    Ficha10Component,
+    PhoneComponent
   ],
   imports: [
     BrowserModule,
