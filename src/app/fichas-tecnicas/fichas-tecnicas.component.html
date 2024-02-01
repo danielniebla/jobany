@@ -1,5 +1,6 @@
-<div *ngIf="user == '1'|| user == '2' || user == '3'|| user=='4'">
+<div class="flex" *ngIf="user == '1'|| user == '2' || user == '3'|| user=='4'">
   <app-unidad-academica></app-unidad-academica>
+  <button class="boton btn" (click)="cruds()" *ngIf="user == '1'">Administrador</button>
 </div>
 <div class="cont">
   <nav>
@@ -7,7 +8,7 @@
     ><button class="boton btn" (click)="fichasTecnicas()">
       Fichas tecnicas
     </button>
-    <button class="boton btn" (click)="cruds()" *ngIf="user == '1'">Administrador</button>
+    
   </nav>
   <!-- <app-ficha-1></app-ficha-1> -->
   <app-ficha-2></app-ficha-2>

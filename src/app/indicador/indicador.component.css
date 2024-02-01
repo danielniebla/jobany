@@ -94,3 +94,6 @@ clr-textarea-container {
     visibility: visible !important;
     pointer-events: auto;
 }
+h3{
+    margin: 5px 20px;
+}

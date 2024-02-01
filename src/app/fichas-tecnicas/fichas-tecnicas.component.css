@@ -18,3 +18,8 @@ td,
     height: 15px;
     width: auto;
 }
+.flex{
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+}

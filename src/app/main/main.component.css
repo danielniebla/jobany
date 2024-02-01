@@ -8,3 +8,8 @@ img {
 .cont{
     min-height: 50vh;
 }
+.flex{
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+}

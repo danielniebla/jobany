@@ -18,6 +18,7 @@ export class IndicadorComponent implements OnInit {
   contador=0;
   option: boolean | null | undefined;
   flag : boolean = false;
+  title= '';
   agregar() {
     var elemento = document.getElementById("indicador");
     if (elemento) {
@@ -102,11 +103,11 @@ export class IndicadorComponent implements OnInit {
       
   }
   ngOnInit(): void {
+    this.server = this.storage.getDataItem('server') ?? '';
     this.Carrera();
     setTimeout(() => {
       this.actualizarDatosIndicador();
     }, 500);
-    this.server = this.storage.getDataItem('server') ?? '';
 
   }
   actualizarindicador(indicador: any){
@@ -150,6 +151,22 @@ export class IndicadorComponent implements OnInit {
 
       if (!isNaN(idCarrera)) {
         this.carrera = idCarrera;
+        const authEndpointc = `${this.server}/api/Carreras/Consultar_Carrera_Id?id_carrera=${this.carrera}`;
+        // Encabezados para la solicitud POST
+        const httpOptionsc = {
+          headers: new HttpHeaders({
+            'Content-Type': 'application/json'
+          })
+        };
+
+        // Realizar la solicitud POST para obtener el token
+        this.http.get(authEndpointc, httpOptionsc)
+          .subscribe((response: any) => {
+            // Aquí puedes manejar la respuesta del servidor
+            this.title = response[0].nombre;
+          }, (error) => {
+            console.error('Error:', error);
+          });
       } else {
         console.error('El valor en localStorage de carrera no es un número válido.');
       }

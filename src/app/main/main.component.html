@@ -1,5 +1,8 @@
-<div *ngIf="user == '1'|| user == '2' || user == '3'|| user == '4'">
+<div class="flex" *ngIf="user == '1'|| user == '2' || user == '3'|| user == '4'">
   <app-unidad-academica></app-unidad-academica>
+  <ng-container *ngIf="user == '1'" >
+    <button class="boton btn" (click)="cruds()">Administrador</button>
+  </ng-container>
 </div>
 
 <div class="cont">
@@ -8,9 +11,7 @@
     <button class="boton btn" (click)="fichasTecnicas()">
       Fichas tecnicas
     </button>
-    <ng-container *ngIf="user == '1'" >
-      <button class="boton btn" (click)="cruds()">Administrador</button>
-    </ng-container>
+    
     
   </nav>
   <app-indicador></app-indicador>
