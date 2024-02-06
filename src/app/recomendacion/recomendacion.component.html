@@ -5,6 +5,7 @@
     src="../../assets/mas.png"
     alt="+"
     (click)="agregarRecomendacion()"
+    *ngIf="userType != '2'"
   />
 </div>
 <div class="table-space">
@@ -15,7 +16,7 @@
     <div class="Responsable cabecera">Responsable</div>
     <div class="Fecha_limite cabecera">Fecha limite</div>
     <div class="Metas cabecera">Metas(%)</div>
-    <div class="cum cabecera">Acciones/cumplido</div>
+    <div class="cum cabecera"     *ngIf="userType != '2'">Acciones/cumplido</div>
     <ng-container *ngIf="nueva">
       <div class="campo flex Acciones new">
         <textarea [(ngModel)]="accion" name="accion" id="accion"></textarea>
@@ -35,10 +36,11 @@
         <input
           type="date"
           [(ngModel)]="fecha_l"
+          [min]="fechaMinimaPermitida()"
         />
       </div>
       <div class="campo Metas new">
-        <input type="number" [(ngModel)]="meta" />
+        <input type="number" [(ngModel)]="meta" [max]="100" [min]="1" (change)="minMax(meta)"/>
       </div>
       <div class="campo cum new">
         <img
@@ -49,7 +51,7 @@
         />
       </div>
     </ng-container>
-    <ng-container *ngFor="let recomendacion of recomendaciones" class="campos">
+    <ng-container *ngFor="let recomendacion of recomendaciones.slice((page - 1) * paged, page * paged)" class="campos">
       
       <div class="campo flex Acciones" [attr.data-index]="recomendacion.id_recomendacion" [ngClass]="determinarClase(recomendacion)">
         <textarea
@@ -93,20 +95,21 @@
           [(ngModel)]="recomendacion.fecha_limite"
           class="txtArea"
           [attr.data-index]="recomendacion.id_recomendacion"
+          [min]="fechaMinimaPermitida()"
         />
       </div>
       <div class="campo Metas" [attr.data-index]="recomendacion.id_recomendacion" [ngClass]="determinarClase(recomendacion)">
         <input
-          type="text"
-          pattern="[0-9]{1,3}"
-          inputmode="numeric"
-          maxlength="3"
+          type="number"
           [(ngModel)]="recomendacion.porcentaje_metas"
           class="txtArea"
           [attr.data-index]="recomendacion.id_recomendacion"
+          (change)="minMax(recomendacion)"
+          [max]="100"
+          [min]="1"
         />
       </div>
-      <div class="campo cum" [attr.data-index]="recomendacion.id_recomendacion" [ngClass]="determinarClase(recomendacion)">
+      <div class="campo cum" *ngIf="userType != '2'" [attr.data-index]="recomendacion.id_recomendacion" [ngClass]="determinarClase(recomendacion)">
         <img
           src="../../assets/guardar.png"
           alt="guardar"
@@ -141,7 +144,11 @@
     </ng-container>
   </div>
 </div>
-
+<div class="pages">
+  <img src="../../assets/anterior.png" (click)="paginador(-1)">
+  <input type="number" id="pageNumber" class="page" [(ngModel)]="page" (change)="paginador(0)"> de {{ pages }}
+  <img src="../../assets/flecha-correcta.png" class="right" (click)="paginador(1)">
+</div>
 <div class="modal static bump-down" *ngIf="alert">
   <div class="modal-dialog" role="dialog" aria-hidden="true">
     <div class="modal-content">

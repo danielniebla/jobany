@@ -36,6 +36,7 @@
       </div>
       <div class="campo tipo new">
         <select name="options" [(ngModel)]="selectedOption">
+          <option value="administrador">Administrador</option>
           <option value="general">General</option>
           <option value="zona">Zona</option>
           <option value="facultad">Facultad</option>
@@ -65,11 +66,14 @@
           </ng-container>
         </select>
         <div *ngSwitchCase="'general'">
+          Analizador general
+        </div>
+        <div *ngSwitchCase="'administrador'">
           Administrador general
         </div>
       </div>
     </ng-container>
-    <ng-container *ngFor="let user of users" class="campos">
+    <ng-container *ngFor="let user of users.slice((page - 1) * paged, page * paged)" class="campos">
       <div class="campo flex Acciones" [attr.data-index]="user.id_usuario">
         <textarea
           class="txtArea"
@@ -126,6 +130,7 @@
       </div>
       <div  class="campo tipo" [attr.data-index]="user.id_usuario">
         <select name="options" [(ngModel)]="user.puesto" *ngIf="selctFlag[user.id_usuario]; else elseBlock4">
+          <option value="administrador">Administrador</option>
           <option value="general">General</option>
           <option value="zona">Zona</option>
           <option value="facultad">Facultad</option>
@@ -187,12 +192,25 @@
 
         <ng-container *ngSwitchCase="'general'">
           <div>
+            Analizador general
+          </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="'administrador'">
+          <div>
             Administrador general
           </div>
         </ng-container>
       </div>
     </ng-container>
   </div>
+</div>
+<div class="pages">
+  <img src="../../assets/anterior.png" (click)="paginador(-1)">
+  <input type="number" id="pageNumber" class="page" [(ngModel)]="page" (change)="paginador(0)"> de {{ pages }}
+  <img src="../../assets/flecha-correcta.png" class="right" (click)="paginador(1)">
+</div>
+<div class="pages">
+  Numero de elementos  <input type="number" id="pageNumber" class="page" [(ngModel)]="paged" (change)="paginas()" >
 </div>
 
 <div class="modal static bump-down" *ngIf="alert">

@@ -23,6 +23,22 @@ export class CrudfacarrerasComponent {
   time=10000;
   visi=false;
   server='';
+  page=1;
+  pages=1;
+  paged=5;
+  paginador(i:number){
+    this.page=this.page+i;
+    this.page = Math.round(this.page);
+    if(this.page<1){
+      this.page=1;
+    }
+    if(this.page>this.pages){
+      this.page=this.pages;
+    }
+  }
+  paginas(){
+    this.pages=Math.ceil(this.carreras.length/this.paged); 
+  }
   editarRecomendacion(idRecomendacion: number) {
     if(this.selctFlag[idRecomendacion]==null ||this.selctFlag[idRecomendacion]== false){
       this.selctFlag[idRecomendacion] = true;
@@ -125,6 +141,7 @@ export class CrudfacarrerasComponent {
       .subscribe((response: any) => {
         // Aquí puedes manejar la respuesta del servidor
         this.carreras= response;
+        this.pages=Math.ceil(this.carreras.length/this.paged); 
       }, (error) => {
         console.error('Error:', error);
       });

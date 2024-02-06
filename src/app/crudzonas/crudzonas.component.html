@@ -64,6 +64,14 @@
     </ng-container>
   </div>
 </div>
+<div class="pages">
+  <img src="../../assets/anterior.png" (click)="paginador(-1)">
+  <input type="number" id="pageNumber" class="page" [(ngModel)]="page" (change)="paginador(0)"> de {{ pages }}
+  <img src="../../assets/flecha-correcta.png" class="right" (click)="paginador(1)">
+</div>
+<div class="pages">
+  Numero de elementos  <input type="number" id="pageNumber" class="page" [(ngModel)]="paged" (change)="paginas()" >
+</div>
 <div class="modal static bump-down" *ngIf="alert">
   <div class="modal-dialog" role="dialog" aria-hidden="true">
     <div class="modal-content">

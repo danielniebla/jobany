@@ -13,6 +13,7 @@ import { StorageServiceService } from '../storage-service.service';
 export class RecomendacionComponent implements OnInit {
   @Input() pregunta: any;
   @Input() margen: any;
+  @Input() paged: any;
   constructor(private router: Router,private http: HttpClient, private cdRef: ChangeDetectorRef,private renderer: Renderer2, private storage : StorageServiceService) { }
   recomendaciones: any[] = [];
   incumplio: Record<number, boolean> = {};
@@ -31,6 +32,39 @@ export class RecomendacionComponent implements OnInit {
   time=10000;
   cumplido=0;
   server = '';
+  page=1;
+  pages=1;
+  userType='';
+  paginador(i:number){
+    this.page=this.page+i;
+    this.page = Math.round(this.page);
+    if(this.page<1){
+      this.page=1;
+    }
+    if(this.page>this.pages){
+      this.page=this.pages;
+    }
+  }
+  minMax(recomendacion:any){
+    if(recomendacion.porcentaje_metas>100){
+      recomendacion.porcentaje_metas =100;
+    }else if(recomendacion.porcentaje_metas<1){
+      recomendacion.porcentaje_metas =1;
+    }
+  }
+  fechaMinimaPermitida(): string {
+    // Obtén la fecha actual
+    const fechaActual = new Date();
+
+    // Incrementa la fecha actual en un día (puedes ajustar según tus necesidades)
+    fechaActual.setDate(fechaActual.getDate() + 1);
+
+    // Formatea la fecha mínima permitida al formato de input date (YYYY-MM-DD)
+    const fechaMinima = fechaActual.toISOString().substring(0, 10);
+
+    return fechaMinima;
+}
+
   editarRecomendacion(idRecomendacion: number) {
     const imagenDisk = document.querySelector(`.disk1[data-index="${idRecomendacion}"]`) as HTMLImageElement;
 
@@ -158,6 +192,8 @@ export class RecomendacionComponent implements OnInit {
       .subscribe((response: any) => {
         // Aquí puedes manejar la respuesta del servidor
         this.recomendaciones = response;
+        this.pages=Math.ceil(this.recomendaciones.length/this.paged);
+
       }, (error) => {
         console.error('Error:', error);
       });
@@ -199,6 +235,7 @@ export class RecomendacionComponent implements OnInit {
     }
   }
   ngOnInit(): void {
+    this.userType =this.storage.getDataItem('userTipe')?? '';
     this.server = this.storage.getDataItem('server') ?? '';
     this.actualizarDatosRecomendacion();
     setTimeout(() => {
@@ -214,6 +251,27 @@ export class RecomendacionComponent implements OnInit {
 
   }
   actualizarRecomendacion(recomendacion: any) {
+    var notificacion='';
+    if(recomendacion.nombre == ''){
+      notificacion+=', recomendacion';
+    }
+    if(recomendacion.accion==''){
+      notificacion+=', accion';
+    }
+    if(recomendacion.responsable==''){
+      notificacion+=', responsable';
+    }
+    if(recomendacion.objetivos==''){
+      notificacion+=', objetivos';
+    }
+    if(recomendacion.porcentaje_metas==''){
+      notificacion+=', metas';
+    }
+    if(recomendacion.fecha_limite==''){
+      notificacion+=', fecha limite';
+    }
+
+    if(notificacion==''){
     const authEndpoint = `${this.server}/api/Recomendaciones/Actualizar_Recomendacion`;
     const authData = 
     {
@@ -245,41 +303,68 @@ export class RecomendacionComponent implements OnInit {
       }, (error) => {
         console.error('Error:', error);
       });
-
+    }else{
+      window.alert(`Favor de llenar todos los campos, falto por llenar: ${notificacion}`);
+    }
   }
   nuevaRecomendacion(){
-    const authEndpoint = `${this.server}/api/Recomendaciones/Agregar_Recomendacion`;
-    const authData = 
-    {
-      "id_recomendacion": 0,
-      "id_pregunta": this.pregunta,
-      "nombre": this.nombre,
-      "accion": this.accion,
-      "responsable": this.responsable,
-      "objetivos": this.objetivos,
-      "porcentaje_metas": this.meta,
-      "fecha_limite": this.fecha_l+"T07:40:32.558Z",
-      "semaforo_ama": "2023-11-27T08:00:06.530Z",
-      "semaforo_rojo": "2023-11-27T08:00:06.530Z",
-      "cumplido": false
-    };
+    var notificacion ='';
+    if(this.nombre==''){
+      notificacion +=', recomendacion';
+    }
+    if(this.accion==''){
+      notificacion +=', accion';
+    }
+    if(this.responsable==''){
+      notificacion +=', responsable';
+    }
+    if(this.objetivos==''){
+      notificacion+=', objetivo'
+    }
+    if(this.meta==0){
+      notificacion +=', meta';
+    }
+    if(this.fecha_l==''){
+      notificacion +=', fechalimite';
+    }
 
-    // Encabezados para la solicitud POST
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
+    if(notificacion==''){
+      const authEndpoint = `${this.server}/api/Recomendaciones/Agregar_Recomendacion`;
+      const authData = 
+      {
+        "id_recomendacion": 0,
+        "id_pregunta": this.pregunta,
+        "nombre": this.nombre,
+        "accion": this.accion,
+        "responsable": this.responsable,
+        "objetivos": this.objetivos,
+        "porcentaje_metas": this.meta,
+        "fecha_limite": this.fecha_l+"T07:40:32.558Z",
+        "semaforo_ama": "2023-11-27T08:00:06.530Z",
+        "semaforo_rojo": "2023-11-27T08:00:06.530Z",
+        "cumplido": false
+      };
 
-    // Realizar la solicitud POST para obtener el token
-    this.http.post(authEndpoint, authData, httpOptions)
-      .subscribe((response: any) => {
-        // Aquí puedes manejar la respuesta del servidor
-        this.actualizarDatosRecomendacion();
-        this.nueva=false;
-      }, (error) => {
-        console.error('Error:', error);
-      });
+      // Encabezados para la solicitud POST
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      };
+
+      // Realizar la solicitud POST para obtener el token
+      this.http.post(authEndpoint, authData, httpOptions)
+        .subscribe((response: any) => {
+          // Aquí puedes manejar la respuesta del servidor
+          this.actualizarDatosRecomendacion();
+          this.nueva=false;
+        }, (error) => {
+          console.error('Error:', error);
+        });
+    }else{
+      window.alert(`Favor de llenar todos los campos, falto por llenar: ${notificacion}`);
+    }
+
   }
   cumplioToggle(recomendacion: any) {
     recomendacion.cumplido = !recomendacion.cumplido;

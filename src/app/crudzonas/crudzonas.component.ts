@@ -19,6 +19,22 @@ export class CrudzonasComponent {
   contador=0;
   time=10000;
   server = '';
+  page=1;
+  pages=1;
+  paged=5;
+  paginador(i:number){
+    this.page=this.page+i;
+    this.page = Math.round(this.page);
+    if(this.page<1){
+      this.page=1;
+    }
+    if(this.page>this.pages){
+      this.page=this.pages;
+    }
+  }
+  paginas(){
+    this.pages=Math.ceil(this.zonas.length/this.paged); 
+  }
   editarRecomendacion(idRecomendacion: number) {
     const imagenDisk = document.querySelector(`.disk[data-index="${idRecomendacion}"]`) as HTMLImageElement;
 
@@ -116,6 +132,7 @@ export class CrudzonasComponent {
       .subscribe((response: any) => {
         // Aquí puedes manejar la respuesta del servidor
         this.zonas = response;
+        this.pages=Math.ceil(this.zonas.length/this.paged); 
       }, (error) => {
         console.error('Error:', error);
       });

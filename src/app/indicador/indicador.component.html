@@ -1,5 +1,5 @@
 <h3>Carrera: {{title}}</h3>
-<div class="flex">
+<div class="flex"  *ngIf="userType != '2'">
   <form class="clr-form">
     <div class="clr-form-control" id="indicador">
       <label class="clr-control-label">indicador</label>
@@ -33,7 +33,7 @@
   </form>
   <img class="but" [src]="flag ? '../../assets/boton-menos.png'  : '../../assets/mas.png' " alt="+" (click)="agregar()" />
 </div>
-<ng-container *ngFor="let indicador of indicadores">
+<ng-container *ngFor="let indicador of indicadores.slice((page - 1) * paged, page * paged)">
   <form clrForm>
     <div (click)="indicadorToggle(indicador)">
       <img
@@ -51,7 +51,9 @@
           alt="borrar"
           (click)="
             verificarBorradoindicador(indicador.id_pregunta)
-          "/>
+          "
+          *ngIf="userType != '2'"
+          />
 
     </div>
     <ng-container *ngIf="flagIndicador[indicador.id_pregunta]">
@@ -76,7 +78,7 @@
             >El campo es requerido!</clr-control-error
           ><br />
         </clr-textarea-container>
-        <div class="title">
+        <div class="title"         *ngIf="userType != '2'">
           <h5> Margen de cumplimiento de acciones</h5>
           <input
           class="txtArea"
@@ -102,13 +104,22 @@
 
         </div>
       </div>
+      
 
-      <app-recomendacion [pregunta]="indicador.id_pregunta" [margen]=indicador.margen></app-recomendacion>
-      <app-planeacion [pregunta2]="indicador.id_pregunta"></app-planeacion>
+      <app-recomendacion [pregunta]="indicador.id_pregunta" [paged]="paged" [margen]=indicador.margen></app-recomendacion>
+      <app-planeacion [pregunta2]="indicador.id_pregunta" [paged]="paged"></app-planeacion>
     </ng-container>
   </form>
-</ng-container>
 
+</ng-container>
+<div class="pages">
+  <img src="../../assets/anterior.png" (click)="paginador(-1)">
+  <input type="number" id="pageNumber" class="page" [(ngModel)]="page" (change)="paginador(0)"> de {{ pages }}
+  <img src="../../assets/flecha-correcta.png" class="right" (click)="paginador(1)">
+</div>
+<div class="pages">
+  Numero de elementos  <input type="number" id="pageNumber" class="page" [(ngModel)]="paged" (change)="paginas()" >
+</div>
 <div class="modal static bump-down" *ngIf="alert">
   <div class="modal-dialog" role="dialog" aria-hidden="true">
     <div class="modal-content">

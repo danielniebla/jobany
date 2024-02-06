@@ -18,11 +18,14 @@ export class MainComponent implements OnInit {
   cruds(){
     this.router.navigate(['/Sursumversus/Admin']);
   }
+  admin(){
+    this.storage.setDataItem('idCarrera','0');
+    window.location.href = 'https://yobani.onrender.com/';
+    // window.location.reload();
+
+  }
   ngOnInit(): void {
     this.user = this.storage.getDataItem('userTipe') ?? ''; 
-    const carrera = this.storage.getDataItem('userTipe') ?? '';
-    console.log('carrera', carrera);
-    console.log('usertipe',this.user);
   }
 }
   

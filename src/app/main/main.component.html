@@ -1,7 +1,10 @@
 <div class="flex" *ngIf="user == '1'|| user == '2' || user == '3'|| user == '4'">
   <app-unidad-academica></app-unidad-academica>
   <ng-container *ngIf="user == '1'" >
-    <button class="boton btn" (click)="cruds()">Administrador</button>
+    <button class="boton btn" (click)="cruds()">Administrar credenciales</button>
+  </ng-container>
+  <ng-container *ngIf="user == '1'||user == '2'" >
+    <button class="boton btn" (click)="admin()">Zona administrativa</button>
   </ng-container>
 </div>
 

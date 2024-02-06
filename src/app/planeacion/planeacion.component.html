@@ -5,6 +5,7 @@
     src="../../assets/mas.png"
     alt="+"
     (click)="agregarRecomendacion()"
+    *ngIf="userType != '2'"
   />
 </div>
 <div class="table-space">
@@ -13,7 +14,7 @@
     <div class="Fecha_limite cabecera">Fecha de cumplimiento</div>
     <div class="Metas cabecera">Meta alcanzada(%)</div>
     <div class="cabecera documentos">Documentos</div>
-    <div class="cabecera metodos">Metodos</div>
+    <div class="cabecera metodos"     *ngIf="userType != '2'">Metodos</div>
     <ng-container *ngIf="nueva">
       <div class="campo flex Acciones new">
         <textarea [(ngModel)]="accion" name="accion" id="accion"></textarea>
@@ -24,10 +25,11 @@
           type="date"
           [(ngModel)]="fecha"
           [value]="fecha | date : 'yyyy-MM-dd'"
+          [max]="fechaMaximaPermitida()"
         />
       </div>
       <div class="campo Metas new">
-        <input type="number" [(ngModel)]="meta" />
+        <input type="number" [(ngModel)]="meta" [min]="1" [max]="100" />
       </div>
       <div class="campo documentos new">
       </div>
@@ -40,7 +42,7 @@
         />
       </div>
     </ng-container>
-    <ng-container *ngFor="let accion of acciones" class="campos">
+    <ng-container *ngFor="let accion of acciones.slice((page - 1) * paged, page * paged)" class="campos">
       <div class="campo flex Acciones " [ngClass]="{'edit' : !edit[accion.id_cumplimiento]}">
         <textarea
           class="txtArea"
@@ -58,6 +60,7 @@
           class="txtArea"
           [attr.data-index]="accion.id_cumplimiento"
           [value]="accion.fecha | date : 'dd-mm-yyyy'"
+          [max]="fechaMaximaPermitida()"
         />
       </div>
       <div class="campo Metas" [ngClass]="{'edit' : !edit[accion.id_cumplimiento]}" >
@@ -68,9 +71,12 @@
           [(ngModel)]="accion.meta_alcanzada"
           class="txtArea"
           [attr.data-index]="accion.id_cumplimiento"
+          (change)="minMax(accion)"
+          [min]="1"
+          [max]="100"
         />
       </div>
-      <div class="campo documentos" [ngClass]="{'list': edit[accion.id_cumplimiento]}" [ngClass]="{'edit' : !edit[accion.id_cumplimiento]}">
+      <div class="campo documentos" *ngIf="userType != '2'" [ngClass]="{'list': edit[accion.id_cumplimiento]}" [ngClass]="{'edit' : !edit[accion.id_cumplimiento]}">
         <div *ngIf="edit[accion.id_cumplimiento]; else bloqueElse">
           <a [href]="url[accion.id_cumplimiento]">{{accion.documentos}}</a>            
         </div>
@@ -78,7 +84,7 @@
           <input type="file" (change)="uploadImage($event, accion)">
         </ng-template>
       </div>
-      <div class="campo metodos" [ngClass]="{'edit' : !edit[accion.id_cumplimiento]}">
+      <div class="campo metodos" *ngIf="userType != '2'" [ngClass]="{'edit' : !edit[accion.id_cumplimiento]}">
         <img
           src="../../assets/guardar.png"
           alt="guardar"
@@ -102,6 +108,11 @@
       </div>
     </ng-container>
   </div>
+</div>
+<div class="pages">
+  <img src="../../assets/anterior.png" (click)="paginador(-1)">
+  <input type="number" id="pageNumber" class="page" [(ngModel)]="page" (change)="paginador(0)"> de {{ pages }}
+  <img src="../../assets/flecha-correcta.png" class="right" (click)="paginador(1)">
 </div>
 
 <div class="modal static bump-down" *ngIf="alert">

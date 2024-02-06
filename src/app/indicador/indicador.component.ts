@@ -19,6 +19,23 @@ export class IndicadorComponent implements OnInit {
   option: boolean | null | undefined;
   flag : boolean = false;
   title= '';
+  page=1;
+  pages=1;
+  paged=7;
+  userType='';
+  paginador(i:number){
+    this.page=this.page+i;
+    this.page = Math.round(this.page);
+    if(this.page<1){
+      this.page=1;
+    }
+    if(this.page>this.pages){
+      this.page=this.pages;
+    }
+  }
+  paginas(){
+    this.pages=Math.ceil(this.indicadores.length/this.paged); 
+  }
   agregar() {
     var elemento = document.getElementById("indicador");
     if (elemento) {
@@ -68,7 +85,6 @@ export class IndicadorComponent implements OnInit {
 
   }
   actualizarDatosIndicador(){
-    console.log('carrera?',this.carrera);
     if(this.carrera!=null){
       const authEndpoint = `${this.server}/api/Respuestas/Consultar_Pregunta`;
 
@@ -96,6 +112,7 @@ export class IndicadorComponent implements OnInit {
         .subscribe((response: any) => {
           // Aquí puedes manejar la respuesta del servidor
           this.indicadores = response;
+          this.pages=Math.ceil(this.indicadores.length/this.paged);
         }, (error) => {
           console.error('Error:', error);
         });
@@ -104,6 +121,7 @@ export class IndicadorComponent implements OnInit {
   }
   ngOnInit(): void {
     this.server = this.storage.getDataItem('server') ?? '';
+    this.userType =this.storage.getDataItem('userTipe')?? '';
     this.Carrera();
     setTimeout(() => {
       this.actualizarDatosIndicador();

@@ -97,3 +97,14 @@ clr-textarea-container {
 h3{
     margin: 5px 20px;
 }
+.page{
+    width: 40px;
+    margin: 0 10px;
+}
+.pages{
+    display: flex;
+    justify-content: center;
+}
+.right{
+    margin-left: 10px;
+}

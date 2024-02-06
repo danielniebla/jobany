@@ -31,6 +31,22 @@ export class CrudUsersComponent {
   selctFlag:{[key:number]:boolean}={};
   selectedOption: string = "general";
   server= '';
+  page=1;
+  pages=1;
+  paged=5;
+  paginador(i:number){
+    this.page=this.page+i;
+    this.page = Math.round(this.page);
+    if(this.page<1){
+      this.page=1;
+    }
+    if(this.page>this.pages){
+      this.page=this.pages;
+    }
+  }
+  paginas(){
+    this.pages=Math.ceil(this.users.length/this.paged); 
+  }
   toggleEye(){
     this.visi=!this.visi
   }
@@ -142,6 +158,7 @@ export class CrudUsersComponent {
       .subscribe((response: any) => {
         // Manejar la respuesta del servidor aquí
         this.users = response;
+        this.pages=Math.ceil(this.users.length/this.paged); 
         this.actualizarDatoscarrera();
         this.actualizarDatosfacultad();
         this.actualizarDatoszona();
@@ -171,7 +188,6 @@ export class CrudUsersComponent {
       puesto: user.puesto,
       fecha_alta: '2024-01-22T08:05:04.096Z'
     };
-    console.log(authData);
   
     const httpOptions = {
       headers: new HttpHeaders({
@@ -216,7 +232,6 @@ export class CrudUsersComponent {
       "puesto": this.selectedOption,
       "fecha_alta": "2023-12-01T06:46:57.562Z"
     };
-    console.log(authData);
     // Encabezados para la solicitud POST
     const httpOptions = {
       headers: new HttpHeaders({

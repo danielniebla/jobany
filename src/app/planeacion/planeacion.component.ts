@@ -14,6 +14,7 @@ import { StorageServiceService } from '../storage-service.service';
 })
 export class PlaneacionComponent implements OnInit {
   @Input() pregunta2: any;
+  @Input() paged: any;
   constructor(private router: Router,private http: HttpClient, private cdRef: ChangeDetectorRef,private renderer: Renderer2, private storage: Storage, private storageservice : StorageServiceService) { }
   acciones: any[] = [];
   url: any[] = [];
@@ -27,6 +28,38 @@ export class PlaneacionComponent implements OnInit {
   contador=0;
   time=10000;
   server = '';
+  page=1;
+  pages=1;
+  userType='';
+  paginador(i:number){
+    this.page=this.page+i;
+    this.page = Math.round(this.page);
+    if(this.page<1){
+      this.page=1;
+    }
+    if(this.page>this.pages){
+      this.page=this.pages;
+    }
+  }
+  minMax(accion:any){
+    if(accion.meta_alcanzada>100){
+      accion.meta_alcanzada =100;
+    }else if(accion.meta_alcanzada<1){
+      accion.meta_alcanzada =1;
+    }
+  }
+  fechaMaximaPermitida(): string {
+    // Obtén la fecha actual
+    const fechaActual = new Date();
+
+    // Incrementa la fecha actual en un día (puedes ajustar según tus necesidades)
+    fechaActual.setDate(fechaActual.getDate() );
+
+    // Formatea la fecha mínima permitida al formato de input date (YYYY-MM-DD)
+    const fechaMinima = fechaActual.toISOString().substring(0, 10);
+
+    return fechaMinima;
+}
   redireccionar(accion: any) {
     window.open(this.url[accion.id_cumplimiento], '_blank');
     window.alert('entonces que pedo');
@@ -174,13 +207,10 @@ export class PlaneacionComponent implements OnInit {
       this.edit[accion.id_cumplimiento]=true;
       const images = ref(this.storage, `${accion.id_cumplimiento}/${accion.documentos}`);
       listAll(images).then(async response=>{
-        console.log('pos no se 1', response);
         for(let item of response.items){
           this.url[accion.id_cumplimiento] = await getDownloadURL(item);
-          console.log('aaa',await getDownloadURL(item));
         }
       }).catch(error => console.log(error))
-      console.log('pos no se 2');
       if(accion.documentos =='string'){
         accion.documentos='';
       }
@@ -189,7 +219,7 @@ export class PlaneacionComponent implements OnInit {
      
   }
   ngOnInit(): void {
-
+    this.userType =this.storageservice.getDataItem('userTipe')?? '';
     this.server = this.storageservice.getDataItem('server') ?? '';
     this.actualizarDatosRecomendacion();
   }

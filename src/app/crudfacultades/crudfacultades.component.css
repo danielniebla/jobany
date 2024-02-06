@@ -114,3 +114,15 @@ textarea{
 select{
     width: 100%;
 }
+.page{
+    width: 40px;
+    margin: auto 10px;
+    height: 10px;
+}
+.pages{
+    display: flex;
+    justify-content: center;
+}
+.right{
+    margin-left: 10px;
+}

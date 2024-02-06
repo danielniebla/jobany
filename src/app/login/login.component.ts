@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
         this.storage.setDataItem('token', token);
         this.storage.setDataItem('idUsuario', idu);
 
-        if(idu=='1'){
+        if(idu=='1'||idp == 'administrador'){
           this.storage.setDataItem('idCarrera', idCarrera);
           ut = '1';
         }else if(idp=='general'){
@@ -71,16 +71,15 @@ export class LoginComponent implements OnInit {
           }, 300);
         }else{
           spanElement.textContent = 'no se encontraron coincidencias usuario-contraseña';
-          setTimeout(function() {
-            spanElement.textContent = '';
-          }, 6000);
         }
 
       }, (error) => {
         console.error('Error:', error);
         spanElement.textContent = 'es necesario llenar todos los campos';
       });
-      
+      setTimeout(function() {
+        spanElement.textContent = '';
+      }, 6000);
     }
 
     ngOnInit(): void {
