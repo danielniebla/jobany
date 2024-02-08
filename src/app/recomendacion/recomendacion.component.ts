@@ -35,6 +35,7 @@ export class RecomendacionComponent implements OnInit {
   page=1;
   pages=1;
   userType='';
+  typeTable=false;
   paginador(i:number){
     this.page=this.page+i;
     this.page = Math.round(this.page);
@@ -236,6 +237,9 @@ export class RecomendacionComponent implements OnInit {
   }
   ngOnInit(): void {
     this.userType =this.storage.getDataItem('userTipe')?? '';
+    if(this.userType=='2'){
+      this.typeTable = true;
+    }
     this.server = this.storage.getDataItem('server') ?? '';
     this.actualizarDatosRecomendacion();
     setTimeout(() => {

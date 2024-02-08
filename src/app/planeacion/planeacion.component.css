@@ -95,7 +95,13 @@ clr-textarea-container {
 }
 .tabla{
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 2fr repeat(4,1fr);
+    gap: 0;
+    width: 100%;
+}
+.tabla2{
+    display: grid;
+    grid-template-columns: 2fr repeat(3,1fr) ;
     gap: 0;
     width: 100%;
 }

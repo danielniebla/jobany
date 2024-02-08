@@ -85,3 +85,6 @@ th{
 .cabecera{
     height: auto;
 }
+.campo{
+    border-bottom: 1px solid var(--cds-alias-status-neutral-tint);
+}

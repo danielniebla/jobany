@@ -31,6 +31,7 @@ export class PlaneacionComponent implements OnInit {
   page=1;
   pages=1;
   userType='';
+  typeTable=false;
   paginador(i:number){
     this.page=this.page+i;
     this.page = Math.round(this.page);
@@ -220,6 +221,9 @@ export class PlaneacionComponent implements OnInit {
   }
   ngOnInit(): void {
     this.userType =this.storageservice.getDataItem('userTipe')?? '';
+    if(this.userType=='2'){
+      this.typeTable = true;
+    }
     this.server = this.storageservice.getDataItem('server') ?? '';
     this.actualizarDatosRecomendacion();
   }

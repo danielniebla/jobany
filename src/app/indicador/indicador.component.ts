@@ -57,11 +57,17 @@ export class IndicadorComponent implements OnInit {
     setTimeout(() => {
       const textAreas = document.querySelector(`.txtArea[data-index="${indicador.id_pregunta}"]`) as HTMLTextAreaElement;
 
-    if (textAreas) {    
-      // Agrega la propiedad readonly
-      textAreas.readOnly = true;
-    }
-    }, 1000);
+      if (textAreas) {    
+        // Agrega la propiedad readonly
+        textAreas.readOnly = true;
+      }
+      if(this.userType=='2'){
+  
+
+          textAreas.classList.add('edit');
+;
+      }
+    }, 10);
     
   }
   editarIndicador(indicador: any) {

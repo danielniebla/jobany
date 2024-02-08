@@ -106,7 +106,13 @@ clr-textarea-container {
 }
 .tabla{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr ;
+    grid-template-columns: repeat(7,1fr) ;
+    gap: 0;
+    width: 100%;
+}
+.tabla2{
+    display: grid;
+    grid-template-columns: repeat(6,1fr) ;
     gap: 0;
     width: 100%;
 }

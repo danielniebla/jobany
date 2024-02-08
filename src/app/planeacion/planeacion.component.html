@@ -9,7 +9,7 @@
   />
 </div>
 <div class="table-space">
-  <div class="tabla">
+  <div [ngClass]="{'tabla2': typeTable, 'tabla': !typeTable}">
     <div class="Acciones cabecera">Acciones</div>
     <div class="Fecha_limite cabecera">Fecha de cumplimiento</div>
     <div class="Metas cabecera">Meta alcanzada(%)</div>
@@ -76,7 +76,7 @@
           [max]="100"
         />
       </div>
-      <div class="campo documentos" *ngIf="userType != '2'" [ngClass]="{'list': edit[accion.id_cumplimiento]}" [ngClass]="{'edit' : !edit[accion.id_cumplimiento]}">
+      <div class="campo documentos"  [ngClass]="{'list': edit[accion.id_cumplimiento]}" [ngClass]="{'edit' : !edit[accion.id_cumplimiento]}">
         <div *ngIf="edit[accion.id_cumplimiento]; else bloqueElse">
           <a [href]="url[accion.id_cumplimiento]">{{accion.documentos}}</a>            
         </div>

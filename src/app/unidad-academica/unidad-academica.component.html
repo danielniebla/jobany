@@ -26,17 +26,17 @@
             <div
               *ngFor="let facultad of zona.facultades"
               class="dropdown right-top"
-              [class.open]="facultad.agregarClaseFlag"
+              [class.open]="flagFacultades[facultad.id_facultad]"
             >
               <button
                 class="dropdown-item expandable"
-                (click)="agregarClaseFacultad(facultad)"
-                [class.active]="facultad.agregarClaseFlag"
+                (click)="agregarClaseFacultad(facultad.id_facultad)"
+                [class.active]="flagFacultades[facultad.id_facultad]"
                 aria-haspopup="menu"
               >
                 {{ facultad.nombre }}.
               </button>
-              <ng-container *ngIf="facultad.agregarClaseFlag">
+              <ng-container *ngIf="flagFacultades[facultad.id_facultad]">
                 <div class="dropdown-menu">
                   <button
                     *ngFor="let carrera of facultad.carreras"

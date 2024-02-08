@@ -10,17 +10,24 @@ import { StorageServiceService } from '../storage-service.service';
 export class UnidadAcademicaComponent implements OnInit{
   constructor(private http: HttpClient, private storage : StorageServiceService) { }
   flagZona:{[key:number]:boolean}={};
+  flagFacultades:{[key:number]:boolean}={};
   open = false;
   zonas: any[] = [];
   facultades: any[] = [];
   carreras: any[] = [];
+  lastFId=0;
+  lastZId=0;
   estructuraOrganizada: any[] = [];
   server = '';
   dinamica='';
   carrera='';
   user='';
-  agregarClaseFacultad(facultad: any) {
-    facultad.agregarClaseFlag = !facultad.agregarClaseFlag;
+  agregarClaseFacultad(id: any) {
+    this.flagFacultades[this.lastFId?? 0] = false;
+    setTimeout(() => {
+      this.flagFacultades[id] = true;
+    }, 10);
+    this.lastFId=id;
   }
   ngOnInit(): void {
     this.dinamica = this.storage.getDataItem('idDinamico') ?? '';
@@ -86,11 +93,9 @@ export class UnidadAcademicaComponent implements OnInit{
     return estructura;
   }
   agregarClaseZona(id: number) {
-    if (this.flagZona[id] == null || this.flagZona[id] == false) {
-      this.flagZona[id] = true;
-    } else {
-      this.flagZona[id] = false;
-    }
+    this.flagZona[id] = true;
+    this.flagZona[this.lastZId?? 0] = false;
+    this.lastZId=id;
   }
   cambiarCarrera(id: number){
     localStorage.setItem('idCarrera', id.toString());

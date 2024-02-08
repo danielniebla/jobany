@@ -9,7 +9,7 @@
   />
 </div>
 <div class="table-space">
-  <div class="tabla">
+  <div [ngClass]="{'tabla2': typeTable, 'tabla': !typeTable}">
     <div class="Acciones cabecera">Acciones</div>
     <div class="Recomendacion cabecera">Recomendacion</div>
     <div class="Objetivos cabecera">Objetivos</div>
