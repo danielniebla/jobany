@@ -1,0 +1,93 @@
+.grid{
+    display: grid;
+    grid-template-columns: repeat(13,1fr);
+    width: 100%;
+    border: 2px solid #000;
+    margin-top: 20px;
+}
+.head{
+    background-color: var(--cds-alias-status-info);
+    border-left: 1px solid #000;
+    font-weight: 600;
+    text-align: center;
+}
+.concepto{ 
+    grid-column: 1 / 2;
+}
+.tCompleto{
+    grid-column: 2 / 3;
+}
+.tCTiempo{
+    grid-column: 3 / 4;
+}
+.mTiempo{
+    grid-column: 4 / 5;
+}
+.asignatura{
+    grid-column: 5 / 6;
+}
+.total{
+    grid-column: 6 / 7;
+}
+.grado{
+    grid-column: 7 / 13;
+    border-bottom: 1px solid #000;
+}
+.tsu{
+    grid-column: 7 / 8;
+}
+.pa{
+    grid-column: 8 / 9;
+}
+.l{
+    grid-column: 9 / 10;
+}
+.e{
+    grid-column: 10 / 11;
+}
+.m{
+    grid-column: 11 / 12;
+}
+.d{
+    grid-column: 12 / 13;
+}
+.totalf{
+    grid-column: 13 / 14;
+}
+.height{
+    grid-row: 1 / 3;
+    background-color: var(--cds-alias-status-info);
+    border-bottom: 1px solid #000;
+}
+.he{
+    border-left: 1px solid #000;
+    border-bottom: 1px solid #000;
+}
+.bod{
+    border-bottom: 1px solid #000;
+    border-left: 1px solid #000;
+}
+input{
+    width: 100%;
+    border: none;
+}
+.lf5{
+    background-color: var(--cds-alias-status-disabled-shade) !important;
+}
+img {
+    height: 16px;
+    width: auto;
+    margin: 0;
+}
+.disk5{
+    visibility: hidden;
+    pointer-events: none;
+}
+.editing{
+    visibility: visible !important;
+    pointer-events: auto;
+}
+.edit {
+    pointer-events: auto;
+    background-color: var(--cds-alias-status-neutral-tint) !important;
+}

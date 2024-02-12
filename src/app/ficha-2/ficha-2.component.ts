@@ -13,15 +13,7 @@ export class Ficha2Component implements OnInit {
   carrera=0;
   getficha(){
     const authEndpoint = `${this.server}/api/Informe2/Consultar_Informe2?id_informe=1`;
-      /*const authData = {
-        "id_cumplimiento": accion.id_cumplimiento,
-        "id_pregunta": accion.id_pregunta,
-        "id_recomendacion": accion.id_recomendacion,
-        "acciones_realizadas": accion.acciones_realizadas,
-        "fecha": accion.fecha,
-        "meta_alcanzada": accion.meta,
-        "documentos": accion.documentos
-      };*/
+
   
       // Encabezados para la solicitud POST
       const httpOptions = {
@@ -58,7 +50,7 @@ export class Ficha2Component implements OnInit {
   editarficha(){
     const authEndpoint = `${this.server}/api/Informe2/Actualizar_Informe2`;
       const authData = {
-        "id_informe": this.ficha[0].id_informe,
+        "id_informe": 1,
         "nombre": "UNIVERSIDAD AUTONOMA DE SINALOA",
         "id_carrera": 1,
         "mision": this.ficha[0].mision,
@@ -79,6 +71,7 @@ export class Ficha2Component implements OnInit {
         .subscribe((response: any) => {
           // Aquí puedes manejar la respuesta del servidor
           this.ficha = response
+          this.getficha();
         }, (error) => {
           console.error('Error:', error);
         });
@@ -98,8 +91,6 @@ export class Ficha2Component implements OnInit {
   }
   ngOnInit(): void {
     this.server = this.storage.getDataItem('server') ?? '';
-    const car = this.storage.getDataItem('idCarrera') ?? '';
-    this.carrera = parseInt(car);
     this.getficha();
     const lugares = document.querySelectorAll('.lf2') as NodeListOf<HTMLInputElement>;
 

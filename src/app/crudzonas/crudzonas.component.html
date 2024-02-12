@@ -24,7 +24,7 @@
         <input type="text" [(ngModel)]="zona" />
       </div>
     </ng-container>
-    <ng-container *ngFor="let zona of zonas" class="campos">
+    <ng-container *ngFor="let zona of zonas.slice((page - 1) * paged, page * paged)" class="campos">
       <div class="campo flex Acciones" [attr.data-index]="zona.id_zona">
         <textarea
           class="txtArea"

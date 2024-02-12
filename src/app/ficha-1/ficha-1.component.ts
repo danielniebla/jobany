@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit, Renderer2, Input } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { StorageServiceService } from '../storage-service.service';
 @Component({
@@ -7,22 +7,16 @@ import { StorageServiceService } from '../storage-service.service';
   styleUrls: ['./ficha-1.component.css']
 })
 export class Ficha1Component implements OnInit {
-  constructor(private http: HttpClient,private renderer: Renderer2, private storage : StorageServiceService) { }
+  constructor(private http: HttpClient,private renderer: Renderer2, private storage : StorageServiceService) { 
+    this.carrera = '';
+  }
+  @Input() carrera: string;
   ficha: any[] = [];
   server='';
-  carrera=0;
   getficha(){
+    this.ficha=[];
     const authEndpoint = `${this.server}/api/Informe/Consultar_Informe1?id_carrera=${this.carrera}`;
-      /*const authData = {
-        "id_cumplimiento": accion.id_cumplimiento,
-        "id_pregunta": accion.id_pregunta,
-        "id_recomendacion": accion.id_recomendacion,
-        "acciones_realizadas": accion.acciones_realizadas,
-        "fecha": accion.fecha,
-        "meta_alcanzada": accion.meta,
-        "documentos": accion.documentos
-      };*/
-  
+
       // Encabezados para la solicitud POST
       const httpOptions = {
         headers: new HttpHeaders({
@@ -34,7 +28,7 @@ export class Ficha1Component implements OnInit {
       this.http.get(authEndpoint, httpOptions)
         .subscribe((response: any) => {
           // Aquí puedes manejar la respuesta del servidor
-          this.ficha = response
+          this.ficha = response;
         }, (error) => {
           console.error('Error:', error);
         });
@@ -59,7 +53,7 @@ export class Ficha1Component implements OnInit {
   editarficha(){
     const authEndpoint = `${this.server}/api/Informe/Actualizar_Informe1`;
       const authData = {
-        "id_informe": 0,
+        "id_informe": this.ficha[0].id_informe,
         "id_carrera": this.carrera,
         "lugar_fecha": this.ficha[0].lugar_fecha
       };
@@ -76,30 +70,29 @@ export class Ficha1Component implements OnInit {
         .subscribe((response: any) => {
           // Aquí puedes manejar la respuesta del servidor
           this.ficha = response
+          this.getficha();
         }, (error) => {
           console.error('Error:', error);
         });
       const imagenDisk = document.querySelector(`.disk`) as HTMLImageElement;
 
-    // Verifica si se encontró la imagen 'disk'
-    if (imagenDisk) {
-      // Agrega la clase deseada
-      this.renderer.removeClass(imagenDisk, 'editing');
-    }
-    const lugarf = document.querySelector(`.lf`) as HTMLInputElement;
+      // Verifica si se encontró la imagen 'disk'
+      if (imagenDisk) {
+        // Agrega la clase deseada
+        this.renderer.removeClass(imagenDisk, 'editing');
+      }
+      const lugarf = document.querySelector(`.lf`) as HTMLInputElement;
 
-    // Verifica si se encontró la imagen 'disk'
-    if (lugarf) {
-      // Agrega la clase deseada
-      this.renderer.removeClass(lugarf, 'edit');
-      lugarf.readOnly = true;
-    }
+      // Verifica si se encontró la imagen 'disk'
+      if (lugarf) {
+        // Agrega la clase deseada
+        this.renderer.removeClass(lugarf, 'edit');
+        lugarf.readOnly = true;
+      }
   }
   ngOnInit(): void {
     this.server = this.storage.getDataItem('server') ?? '';
-    const car = this.storage.getDataItem('idCarera') ?? '';
-    this.carrera = parseInt(car);
-    this.getficha();
+    this.getficha(); 
     const lugarf = document.querySelector(`.lf`) as HTMLInputElement;
     if (lugarf) {
       lugarf.readOnly = true;

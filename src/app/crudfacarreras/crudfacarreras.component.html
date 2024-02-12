@@ -34,7 +34,7 @@
         <input type="text" [(ngModel)]="carrera" />
       </div>
     </ng-container>
-    <ng-container *ngFor="let carrera of carreras" class="campos">
+    <ng-container *ngFor="let carrera of carreras.slice((page - 1) * paged, page * paged)" class="campos">
       <div class="campo flex Acciones" [attr.data-index]="carrera.id_carrera">
         <textarea
           class="txtArea"

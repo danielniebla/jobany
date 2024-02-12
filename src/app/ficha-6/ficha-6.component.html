@@ -1,1 +1,198 @@
-<p>ficha-6 works!</p>
+<div class="grid">
+    <div class="head generacion ge">Generacion</div>
+    <div class="head nuevoIn">Nuevo Ingreso</div>
+    <div class="head menN">Hombres</div>
+    <div class="head womN">Mujeres</div>
+    <div class="head subN">Subtotal</div>
+    <div class="head reIn">Reingreso</div>
+    <div class="head menRe">Hombres</div>
+    <div class="head womRe">Mujeres</div>
+    <div class="head subRe">Subtotal</div>
+    <div class="head total">Total</div>
+    <div class="head menTo">Hombres</div>
+    <div class="head womTo">Mujeres</div>
+    <div class="head sumTo">Sumas</div>
+    <div class="bod generacion">Ultima</div>
+    <div class="bod menN">
+        <input class="lf6" type="number" [(ngModel)]="ficha[0].ultima_hombres_nuevo">
+    </div>
+    <div class="bod womN">
+        <input class="lf6" type="number" [(ngModel)]="ficha[0].ultima_mujeres_nuevo">
+    </div>
+    <div class="bod subN">
+        <input class="por" type="number" [(ngModel)]="ficha[0].ultima_subtotal_nuevo">
+    </div>
+    <div class="bod menRe">
+        <input class="lf6" type="number" [(ngModel)]="ficha[0].ultima_hombres_reingreso">
+    </div>
+    <div class="bod womRe">
+        <input class="lf6" type="number" [(ngModel)]="ficha[0].ultima_mujeres_reingreso">
+    </div>
+    <div class="bod subRe">
+        <input class="por" type="number" [(ngModel)]="ficha[0].ultima_subtotal_reingreso">
+    </div>
+    <div class="bod menTo">
+        <input class="lf6" type="number" [(ngModel)]="ficha[0].hombres_ultima">
+    </div>
+    <div class="bod womTo">
+        <input class="lf6" type="number" [(ngModel)]="ficha[0].mujeres_ultima">
+    </div>
+    <div class="bod sumTo">
+        <input class="por" type="number" [(ngModel)]="ficha[0].suma_ultima">
+    </div>
+
+    <div class="bod generacion">100%</div>
+    <div class="bod menN">
+        <input class="por" type="number" [(ngModel)]="ficha[0].ultima_hombres_nuevo_por">
+    </div>
+    <div class="bod womN">
+        <input class="por" type="number" [(ngModel)]="ficha[0].ultima_mujeres_nuevo_por">
+    </div>
+    <div class="bod subN">
+        <input class="por" type="number" [(ngModel)]="ficha[0].ultima_subtotal_nuevo_por">
+    </div>
+    <div class="bod menRe">
+        <input class="por" type="number" [(ngModel)]="ficha[0].ultima_hombres_reingreso_por">
+    </div>
+    <div class="bod womRe">
+        <input class="por" type="number" [(ngModel)]="ficha[0].ultima_mujeres_reingreso_por">
+    </div>
+    <div class="bod subRe">
+        <input class="por" type="number" [(ngModel)]="ficha[0].ultima_subtotal_reingreso_por">
+    </div>
+    <div class="bod menTo">
+        <input class="por" type="number" [(ngModel)]="ficha[0].hombres_ultima_por">
+    </div>
+    <div class="bod womTo">
+        <input class="por" type="number" [(ngModel)]="ficha[0].mujeres_ultima_por">
+    </div>
+    <div class="bod sumTo">
+        100%
+    </div>
+
+    <div class="bod generacion">Penultima</div>
+    <div class="bod menN">
+        <input class="lf6" type="number" [(ngModel)]="ficha[0].penul_hombres_nuevo">
+    </div>
+    <div class="bod womN">
+        <input class="lf6" type="number" [(ngModel)]="ficha[0].penul_mujeres_nuevo">
+    </div>
+    <div class="bod subN">
+        <input class="por" type="number" [(ngModel)]="ficha[0].penul_subtotal_nuevo">
+    </div>
+    <div class="bod menRe">
+        <input class="lf6" type="number" [(ngModel)]="ficha[0].penul_hombres_reingreso">
+    </div>
+    <div class="bod womRe">
+        <input class="lf6" type="number" [(ngModel)]="ficha[0].penul_mujeres_reingreso">
+    </div>
+    <div class="bod subRe">
+        <input class="por" type="number" [(ngModel)]="ficha[0].penul_subtotal_reingreso">
+    </div>
+    <div class="bod menTo">
+        <input class="lf6" type="number" [(ngModel)]="ficha[0].hombres_penul">
+    </div>
+    <div class="bod womTo">
+        <input class="lf6" type="number" [(ngModel)]="ficha[0].mujeres_penul">
+    </div>
+    <div class="bod sumTo">
+        <input class="por" type="number" [(ngModel)]="ficha[0].suma_penul">
+    </div>
+    <div class="bod generacion">100%</div>
+    <div class="bod menN">
+        <input class="por" type="number" [(ngModel)]="ficha[0].penul_hombres_nuevo_por">
+    </div>
+    <div class="bod womN">
+        <input class="por" type="number" [(ngModel)]="ficha[0].penul_mujeres_nuevo_por">
+    </div>
+    <div class="bod subN">
+        <input class="por" type="number" [(ngModel)]="ficha[0].penul_subtotal_nuevo_por">
+    </div>
+    <div class="bod menRe">
+        <input class="por" type="number" [(ngModel)]="ficha[0].penul_hombres_reingreso_por">
+    </div>
+    <div class="bod womRe">
+        <input class="por" type="number" [(ngModel)]="ficha[0].penul_mujeres_reingreso_por">
+    </div>
+    <div class="bod subRe">
+        <input class="por" type="number" [(ngModel)]="ficha[0].penul_subtotal_reingreso_por">
+    </div>
+    <div class="bod menTo">
+        <input class="por" type="number" [(ngModel)]="ficha[0].hombres_penul_por">
+    </div>
+    <div class="bod womTo">
+        <input class="por" type="number" [(ngModel)]="ficha[0].mujeres_penul_por">
+    </div>
+    <div class="bod sumTo">
+        100%
+    </div>
+
+    <div class="bod generacion">Penultima</div>
+    <div class="bod menN">
+        <input class="lf6" type="number" [(ngModel)]="ficha[0].ante_hombres_nuevo">
+    </div>
+    <div class="bod womN">
+        <input class="lf6" type="number" [(ngModel)]="ficha[0].ante_mujeres_nuevo">
+    </div>
+    <div class="bod subN">
+        <input class="por" type="number" [(ngModel)]="ficha[0].ante_subtotal_nuevo">
+    </div>
+    <div class="bod menRe">
+        <input class="lf6" type="number" [(ngModel)]="ficha[0].ante_hombres_reingreso">
+    </div>
+    <div class="bod womRe">
+        <input class="lf6" type="number" [(ngModel)]="ficha[0].ante_mujeres_reingreso">
+    </div>
+    <div class="bod subRe">
+        <input class="por" type="number" [(ngModel)]="ficha[0].ante_subtotal_reingreso">
+    </div>
+    <div class="bod menTo">
+        <input class="lf6" type="number" [(ngModel)]="ficha[0].hombres_ante">
+    </div>
+    <div class="bod womTo">
+        <input class="lf6" type="number" [(ngModel)]="ficha[0].mujeres_ante">
+    </div>
+    <div class="bod sumTo">
+        <input class="por" type="number" [(ngModel)]="ficha[0].suma_ante">
+    </div>
+    <div class="bod generacion">100%</div>
+    <div class="bod menN">
+        <input class="por" type="number" [(ngModel)]="ficha[0].ante_hombres_nuevo_por">
+    </div>
+    <div class="bod womN">
+        <input class="por" type="number" [(ngModel)]="ficha[0].ante_mujeres_nuevo_por">
+    </div>
+    <div class="bod subN">
+        <input class="por" type="number" [(ngModel)]="ficha[0].ante_subtotal_nuevo_por">
+    </div>
+    <div class="bod menRe">
+        <input class="por" type="number" [(ngModel)]="ficha[0].ante_hombres_reingreso_por">
+    </div>
+    <div class="bod womRe">
+        <input class="por" type="number" [(ngModel)]="ficha[0].ante_mujeres_reingreso_por">
+    </div>
+    <div class="bod subRe">
+        <input class="por" type="number" [(ngModel)]="ficha[0].ante_subtotal_reingreso_por">
+    </div>
+    <div class="bod menTo">
+        <input class="por" type="number" [(ngModel)]="ficha[0].hombres_ante_por">
+    </div>
+    <div class="bod womTo">
+        <input class="por" type="number" [(ngModel)]="ficha[0].mujeres_ante_por">
+    </div>
+    <div class="bod sumTo">
+        100%
+        <img
+          class="pen"
+          src="../../assets/lapiz.png"
+          alt="editar"
+          (click)="editar()"
+        />
+        <img
+            src="../../assets/guardar.png"
+            alt="guardar"
+            class="disk6"
+            (click)="editarficha()"
+          />
+    </div>
+</div>

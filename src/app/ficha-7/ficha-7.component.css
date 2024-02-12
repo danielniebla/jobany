@@ -1,0 +1,75 @@
+.grid{
+    display: grid;
+    grid-template-columns: repeat(1fr, 11);
+    width: 100%;
+    border: 2px solid #000;
+    margin-top: 20px;
+}
+.head{
+    background-color: var(--cds-alias-status-info);
+    border-left: 1px solid #000;
+    border-bottom: 1px solid #000;
+    font-weight: 600;
+    text-align: center;
+}
+.gene{
+    grid-column: 1 / 2;
+}
+.num{
+    grid-column: 2 / 3;    
+}
+.des{
+    grid-column: 3 / 4;
+}
+.iDes{
+    grid-column: 4 / 5;
+}
+.rep{
+    grid-column: 5 / 6;
+}
+.iRep{
+    grid-column: 6 / 7;
+}
+.egre{
+    grid-column: 7 / 8;
+}
+.IET{
+    grid-column: 8 / 9;
+}
+.titu{
+    grid-column: 9 / 10;
+}
+.iTitu{
+    grid-column: 10 / 11;
+}
+.ITN{
+    grid-column: 11 / 12;
+}
+.bod{
+    border-bottom: 1px solid #000;
+    border-left: 1px solid #000;
+}
+input{
+    width: 100%;
+    border: none;
+}
+img {
+    height: 16px;
+    width: auto;
+    margin: 0;
+}
+.disk7{
+    visibility: hidden;
+    pointer-events: none;
+}
+.editing{
+    visibility: visible !important;
+    pointer-events: auto;
+}
+.edit {
+    pointer-events: auto;
+    background-color: var(--cds-alias-status-neutral-tint) !important;
+}
+.lf7{
+    background-color: var(--cds-alias-status-disabled-shade) ;
+}

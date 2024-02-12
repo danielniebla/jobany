@@ -78,12 +78,10 @@ export class Navbar2Component implements OnInit {
           }, (error) => {
             console.error('Error:', error);
           });
-          console.log('a',this.dinamic);
           break;
       case '5'://///////carreras/////
       this.tittle='Carrera:';
         const authEndpointc = `${this.server}/api/Carreras/Consultar_Carrera_Id?id_carrera=${this.dinamic}`;
-          console.log('b',this.dinamic);
         // Encabezados para la solicitud POST
         const httpOptionsc = {
           headers: new HttpHeaders({
@@ -96,7 +94,6 @@ export class Navbar2Component implements OnInit {
           .subscribe((response: any) => {
             // Aquí puedes manejar la respuesta del servidor
             this.facultad = response[0].nombre;
-            console.log('a',response[0].nombre);
           }, (error) => {
             console.error('Error:', error);
           });
@@ -114,8 +111,8 @@ export class Navbar2Component implements OnInit {
     localStorage.clear();
     this.storage.setDataItem('reload','1');
     setTimeout(() => {
-      // window.location.reload();
-      window.location.href = 'https://yobani.onrender.com/';
+      window.location.reload();
+      // window.location.href = 'https://yobani.onrender.com/';
 
     }, 100);
   }
