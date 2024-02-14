@@ -111,8 +111,8 @@ export class Navbar2Component implements OnInit {
     localStorage.clear();
     this.storage.setDataItem('reload','1');
     setTimeout(() => {
-      window.location.reload();
-      // window.location.href = 'https://yobani.onrender.com/';
+      // window.location.reload();
+      window.location.href = 'https://yobani.onrender.com/';
 
     }, 100);
   }

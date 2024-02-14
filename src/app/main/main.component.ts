@@ -20,8 +20,8 @@ export class MainComponent implements OnInit {
   }
   admin(){
     this.storage.setDataItem('idCarrera','0');
-    // window.location.href = 'https://yobani.onrender.com/';
-    window.location.reload();
+    window.location.href = 'https://yobani.onrender.com/';
+    // window.location.reload();
 
   }
   ngOnInit(): void {
