@@ -2,6 +2,16 @@ import { Component, OnInit, Renderer2, Input } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { StorageServiceService } from '../storage-service.service';
 
+interface Ficha3 {
+  id_informe: number;
+  id_facultad: number;
+  nombre: string;
+  campus: string;
+  fecha_inicio: string;
+  mision: string;
+  vision: string;
+  objetivos_estrategicos: string;
+}
 @Component({
   selector: 'app-ficha-3',
   templateUrl: './ficha-3.component.html',
@@ -11,7 +21,16 @@ export class Ficha3Component implements OnInit {
   constructor(private http: HttpClient,private renderer: Renderer2, private storage : StorageServiceService) {
     this.carrera = '';
    }
-  ficha: any[] = [];
+  ficha: Ficha3[] = [{
+    id_informe: 0,
+    id_facultad: 0,
+    nombre: "",
+    campus: "",
+    fecha_inicio: "",
+    mision: "",
+    vision: "",
+    objetivos_estrategicos: ""
+  }];
   server='';
   @Input() carrera: string;
   faculta='';
@@ -95,7 +114,7 @@ export class Ficha3Component implements OnInit {
     });
   }
   getFacultad(){
-    const authEndpoint = `${this.server}/api/Carreras/Consultar_Carrera_Id?id_carrera=${this.carrera}`;
+      const authEndpoint = `${this.server}/api/Carreras/Consultar_Carrera_Id?id_carrera=${this.carrera}`;
 
     // Encabezados para la solicitud POST
     const httpOptions = {
@@ -109,6 +128,7 @@ export class Ficha3Component implements OnInit {
       .subscribe((response: any) => {
         // Aquí puedes manejar la respuesta del servidor
         this.facultad = response[0].id_facultad;
+        this.getficha();
         const authEndpoint2 = `${this.server}/api/Facultades/Consultar_Facultad_Id?id_facultad=${this.facultad}`;
             this.http.get(authEndpoint2, httpOptions)
             .subscribe((response: any) => {

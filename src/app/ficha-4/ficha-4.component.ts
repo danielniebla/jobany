@@ -31,6 +31,22 @@ export class Ficha4Component implements OnInit {
       }, (error) => {
         console.error('Error:', error);
       });
+      const authEndpointc = `${this.server}/api/Carreras/Consultar_Carrera_Id?id_carrera=${this.carrera}`;
+        // Encabezados para la solicitud POST
+        const httpOptionsc = {
+          headers: new HttpHeaders({
+            'Content-Type': 'application/json'
+          })
+        };
+
+        // Realizar la solicitud POST para obtener el token
+        this.http.get(authEndpointc, httpOptionsc)
+          .subscribe((response: any) => {
+            // Aquí puedes manejar la respuesta del servidor
+            this.carre = response[0].nombre;
+          }, (error) => {
+            console.error('Error:', error);
+          });
   }
   editar() {
     const imagenDisk = document.querySelector(`.disk4`) as HTMLImageElement;

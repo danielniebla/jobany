@@ -16,7 +16,6 @@ export class Ficha5Component {
   server='';
   getficha(){
     const authEndpoint = `${this.server}/api/Informe5/Consultar_Informe5?id_carrera=${this.carrera}`;
-
   
       // Encabezados para la solicitud POST
       const httpOptions = {
@@ -30,6 +29,8 @@ export class Ficha5Component {
         .subscribe((response: any) => {
           // Aquí puedes manejar la respuesta del servidor
           this.ficha = response
+          console.log('ok',response);
+
         }, (error) => {
           console.error('Error:', error);
         });

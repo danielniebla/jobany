@@ -6,7 +6,7 @@
     margin-top: 20px;
 }
 .head{
-    background-color: var(--cds-alias-status-info);
+    background-color: var(--cds-global-color-azure-500);
     border-left: 1px solid #000;
     border-bottom: 1px solid #000;
     font-weight: 600;
@@ -81,7 +81,7 @@ img {
 }
 .edit {
     pointer-events: auto;
-    background-color: var(--cds-alias-status-neutral-tint) !important;
+    background-color: var(--cds-global-color-blue-200) !important;
 }
 .lf6{
     background-color: var(--cds-alias-status-disabled-shade) ;

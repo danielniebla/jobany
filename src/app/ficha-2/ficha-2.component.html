@@ -1,20 +1,19 @@
 <div class="grid">
     <h3>{{ficha[0].nombre}}</h3>
-    <h5>Mision</h5>
+    <h5>Mision <img
+        class="pen"
+        src="../../assets/lapiz.png"
+        alt="editar"
+        (click)="editar()"
+      />
+      <img
+          src="../../assets/guardar.png"
+          alt="guardar"
+          class="disk2"
+          (click)="editarficha()"
+        /></h5>
     <div class="flex">
         <textarea class="lf2" type="string" [(ngModel)]="ficha[0].mision"></textarea>
-    <img
-          class="pen"
-          src="../../assets/lapiz.png"
-          alt="editar"
-          (click)="editar()"
-        />
-        <img
-            src="../../assets/guardar.png"
-            alt="guardar"
-            class="disk2"
-            (click)="editarficha()"
-          />
     </div>
     <h5>Vision</h5>
     <div class="flex">

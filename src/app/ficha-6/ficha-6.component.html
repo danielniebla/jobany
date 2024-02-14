@@ -12,7 +12,18 @@
     <div class="head menTo">Hombres</div>
     <div class="head womTo">Mujeres</div>
     <div class="head sumTo">Sumas</div>
-    <div class="bod generacion">Ultima</div>
+    <div class="bod generacion">Ultima <img
+        class="pen"
+        src="../../assets/lapiz.png"
+        alt="editar"
+        (click)="editar()"
+      />
+      <img
+          src="../../assets/guardar.png"
+          alt="guardar"
+          class="disk6"
+          (click)="editarficha()"
+        /></div>
     <div class="bod menN">
         <input class="lf6" type="number" [(ngModel)]="ficha[0].ultima_hombres_nuevo">
     </div>
@@ -32,10 +43,10 @@
         <input class="por" type="number" [(ngModel)]="ficha[0].ultima_subtotal_reingreso">
     </div>
     <div class="bod menTo">
-        <input class="lf6" type="number" [(ngModel)]="ficha[0].hombres_ultima">
+        <input class="por" type="number" [(ngModel)]="ficha[0].hombres_ultima">
     </div>
     <div class="bod womTo">
-        <input class="lf6" type="number" [(ngModel)]="ficha[0].mujeres_ultima">
+        <input class="por" type="number" [(ngModel)]="ficha[0].mujeres_ultima">
     </div>
     <div class="bod sumTo">
         <input class="por" type="number" [(ngModel)]="ficha[0].suma_ultima">
@@ -90,10 +101,10 @@
         <input class="por" type="number" [(ngModel)]="ficha[0].penul_subtotal_reingreso">
     </div>
     <div class="bod menTo">
-        <input class="lf6" type="number" [(ngModel)]="ficha[0].hombres_penul">
+        <input class="por" type="number" [(ngModel)]="ficha[0].hombres_penul">
     </div>
     <div class="bod womTo">
-        <input class="lf6" type="number" [(ngModel)]="ficha[0].mujeres_penul">
+        <input class="por" type="number" [(ngModel)]="ficha[0].mujeres_penul">
     </div>
     <div class="bod sumTo">
         <input class="por" type="number" [(ngModel)]="ficha[0].suma_penul">
@@ -147,10 +158,10 @@
         <input class="por" type="number" [(ngModel)]="ficha[0].ante_subtotal_reingreso">
     </div>
     <div class="bod menTo">
-        <input class="lf6" type="number" [(ngModel)]="ficha[0].hombres_ante">
+        <input class="por" type="number" [(ngModel)]="ficha[0].hombres_ante">
     </div>
     <div class="bod womTo">
-        <input class="lf6" type="number" [(ngModel)]="ficha[0].mujeres_ante">
+        <input class="por" type="number" [(ngModel)]="ficha[0].mujeres_ante">
     </div>
     <div class="bod sumTo">
         <input class="por" type="number" [(ngModel)]="ficha[0].suma_ante">
@@ -182,17 +193,6 @@
     </div>
     <div class="bod sumTo">
         100%
-        <img
-          class="pen"
-          src="../../assets/lapiz.png"
-          alt="editar"
-          (click)="editar()"
-        />
-        <img
-            src="../../assets/guardar.png"
-            alt="guardar"
-            class="disk6"
-            (click)="editarficha()"
-          />
+        
     </div>
 </div>

@@ -13,7 +13,18 @@
     <div class="he m">M</div>
     <div class="he d">D</div>
     <div class="head height totalf">Total</div>
-    <div class="bod concepto">Numero</div>
+    <div class="bod concepto">Numero <img
+        class="pen"
+        src="../../assets/lapiz.png"
+        alt="editar"
+        (click)="editar()"
+      />
+      <img
+          src="../../assets/guardar.png"
+          alt="guardar"
+          class="disk5"
+          (click)="editarficha()"
+        /></div>
     <div class="bod tCompleto">
         <input class="lf5" type="number" [(ngModel)]="ficha[0].tiempo_completo">
     </div>
@@ -27,7 +38,7 @@
         <input class="lf5" type="number" [(ngModel)]="ficha[0].asignatura">
     </div>
     <div class="bod total">
-        <input class="lf5" type="number"  [(ngModel)]="ficha[0].total_1" >
+        <input class="por" type="number"  [(ngModel)]="ficha[0].total_1" >
     </div>
     <div class="bod tsu">
         <input class="lf5" type="number" [(ngModel)]="ficha[0].tsu">
@@ -48,7 +59,7 @@
         <input class="lf5" type="number" [(ngModel)]="ficha[0].d">
     </div>
     <div class="bod totalf">
-        <input class="lf5" type="number" [(ngModel)]="ficha[0].total_2">
+        <input class="por" type="number" [(ngModel)]="ficha[0].total_2">
     </div>
     <div class="bod concepto">porcentaje</div>
     <div class="bod tCompleto">
@@ -86,18 +97,7 @@
     </div>
     <div class="bod totalf">
         100%
-        <img
-          class="pen"
-          src="../../assets/lapiz.png"
-          alt="editar"
-          (click)="editar()"
-        />
-        <img
-            src="../../assets/guardar.png"
-            alt="guardar"
-            class="disk5"
-            (click)="editarficha()"
-          />
+        
     </div>
 
 

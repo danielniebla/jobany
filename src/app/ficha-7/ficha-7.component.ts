@@ -51,29 +51,41 @@ export class Ficha7Component {
 
   }
   editarficha(){
-    const authEndpoint = `${this.server}/api/Informe5/Actualizar_Informe5`;
+    const authEndpoint = `${this.server}/api/Informe7/Actualizar_Informe7`;
     const car = parseInt(this.carrera);
     let authData = {
       "id_informe": this.ficha[0].id_informe,
       "id_carrera": car,
-      "ultima_hombres_nuevo": this.ficha[0].ultima_hombres_nuevo,
-      "ultima_mujeres_nuevo": this.ficha[0].ultima_mujeres_nuevo,
-      "ultima_hombres_reingreso": this.ficha[0].ultima_hombres_reingreso,
-      "ultima_mujeres_reingreso": this.ficha[0].ultima_mujeres_reingreso,
-      "penul_hombres_nuevo": this.ficha[0].penul_hombres_nuevo,
-      "penul_mujeres_nuevo": this.ficha[0].penul_mujeres_nuevo,
-      "penul_hombres_reingreso": this.ficha[0].penul_hombres_reingreso,
-      "penul_mujeres_reingreso": this.ficha[0].penul_mujeres_reingreso,
-      "ante_hombres_nuevo": this.ficha[0].ante_hombres_nuevo,
-      "ante_mujeres_nuevo": this.ficha[0].ante_mujeres_nuevo,
-      "ante_hombres_reingreso": this.ficha[0].ante_hombres_reingreso,
-      "ante_mujeres_reingreso": this.ficha[0].ante_mujeres_reingreso,
-      "hombres_ultima": this.ficha[0].hombres_ultima,
-      "mujeres_ultima": this.ficha[0].mujeres_ultima,
-      "hombres_penul": this.ficha[0].hombres_penul,
-      "mujeres_penul": this.ficha[0].mujeres_penul,
-      "hombres_ante": this.ficha[0].hombres_ante,
-      "mujeres_ante": this.ficha[0].mujeres_ante,
+      "ultima_estudiantes_ingresados": this.ficha[0].ultima_estudiantes_ingresados,
+      "ultima_decersion": this.ficha[0].ultima_decersion,
+      "ultima_indice_decersion": 0,
+      "ultima_reprobacion": this.ficha[0].ultima_reprobacion,
+      "ultima_indice_reprobacion": 0,
+      "ultima_egresados": 0,
+      "ultima_indice_eficiencia": 0,
+      "ultima_titulados": this.ficha[0].ultima_titulados,
+      "ultima_indice_titulacion": 0,
+      "ultima_indice_neto": 0,
+      "penul_estudiantes_ingresados": this.ficha[0].penul_estudiantes_ingresados,
+      "penul_decersion": this.ficha[0].penul_decersion,
+      "penul_indice_decersion": 0,
+      "penul_reprobacion": this.ficha[0].penul_reprobacion,
+      "penul_indice_reprobacion": 0,
+      "penul_egresados": 0,
+      "penul_indice_eficiencia": 0,
+      "penul_titulados": this.ficha[0].penul_titulados,
+      "penul_indice_titulacion": 0,
+      "penul_indice_neto": 0,
+      "ante_estudiantes_ingresados": this.ficha[0].ante_estudiantes_ingresados,
+      "ante_decersion": this.ficha[0].ante_decersion,
+      "ante_indice_decersion": 0,
+      "ante_reprobacion": this.ficha[0].ante_reprobacion,
+      "ante_indice_reprobacion": 0,
+      "ante_egresados": 0,
+      "ante_indice_eficiencia": 0,
+      "ante_titulados": this.ficha[0].ante_titulados,
+      "ante_indice_titulacion": 0,
+      "ante_indice_neto": 0
     };
   
     // Encabezados para la solicitud POST

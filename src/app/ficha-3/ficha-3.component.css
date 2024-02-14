@@ -47,5 +47,5 @@ input, textarea{
 }
 .edit {
     pointer-events: auto;
-    background-color: var(--cds-alias-status-neutral-tint) !important;
+    background-color: var(--cds-global-color-blue-200) !important;
 }

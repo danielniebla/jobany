@@ -1,19 +1,19 @@
 <div class="grid">
-    <h5>Documento oficial</h5>
+    <h4>{{carre}}</h4>
+    <h5>Documento oficial <img
+        class="pen"
+        src="../../assets/lapiz.png"
+        alt="editar"
+        (click)="editar()"
+      />
+      <img
+          src="../../assets/guardar.png"
+          alt="guardar"
+          class="disk4"
+          (click)="editarficha()"
+        /></h5>
     <div class="flex">
         <textarea class="lf4" type="string" [(ngModel)]="ficha[0].documento_oficial"></textarea>
-    <img
-          class="pen"
-          src="../../assets/lapiz.png"
-          alt="editar"
-          (click)="editar()"
-        />
-        <img
-            src="../../assets/guardar.png"
-            alt="guardar"
-            class="disk4"
-            (click)="editarficha()"
-          />
     </div>
     <h5>Numero rvoe</h5>
     <div class="flex">

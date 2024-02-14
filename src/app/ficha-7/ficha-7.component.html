@@ -11,7 +11,18 @@
     <div class="head iTitu">Indice de titulacion</div>
     <div class="head ITN">Indice de titulacion Neto</div>
 
-    <div class="gene bod">Ultima</div>
+    <div class="gene bod">Ultima <img
+        class="pen"
+        src="../../assets/lapiz.png"
+        alt="editar"
+        (click)="editar()"
+      />
+      <img
+          src="../../assets/guardar.png"
+          alt="guardar"
+          class="disk7"
+          (click)="editarficha()"
+        /></div>
     <div class="bod num">
         <input class="lf7" type="number" [(ngModel)]="ficha[0].ultima_estudiantes_ingresados">
     </div>
@@ -31,10 +42,10 @@
         <input class="por" type="number" [(ngModel)]="ficha[0].ultima_egresados">
     </div>
     <div class="bod IET">
-        <input class="lf7" type="number" [(ngModel)]="ficha[0].ultima_indice_eficiencia">
+        <input class="por" type="number" [(ngModel)]="ficha[0].ultima_indice_eficiencia">
     </div>
     <div class="bod titu">
-        <input class="por" type="number" [(ngModel)]="ficha[0].ultima_titulados">
+        <input class="lf7" type="number" [(ngModel)]="ficha[0].ultima_titulados">
     </div>
     <div class="bod iTitu">
         <input class="por" type="number" [(ngModel)]="ficha[0].ultima_indice_titulacion">
