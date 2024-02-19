@@ -9,9 +9,9 @@ import { PhoneComponent } from './phone/phone.component';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' }, // Ruta predeterminada
   { path: 'login', component:LoginComponent },
-  { path: 'Sursumversus', component:MainComponent },
-  { path: 'Sursumversus/Admin', component:AdmincrudsComponent },
-  { path: 'Sursumversus/FichaTecnica', component:FichasTecnicasComponent },
+  { path: 'Evaluaciones', component:MainComponent },
+  { path: 'Evaluaciones/Admin', component:AdmincrudsComponent },
+  { path: 'Evaluaciones/FichaTecnica', component:FichasTecnicasComponent },
   { path: 'telefono_ver_mejor', component:PhoneComponent},
 
   
