@@ -1,1 +1,25 @@
-<p>ficha-9 works!</p>
+<div class="grid">
+    <h5>Nombre</h5>
+    <div class="flex">
+        <textarea class="lf9" type="string" [(ngModel)]="ficha[0].nombre"></textarea><img
+        class="pen"
+        src="../../assets/lapiz.png"
+        alt="editar"
+        (click)="editar()"
+      />
+      <img
+          src="../../assets/guardar.png"
+          alt="guardar"
+          class="disk9"
+          (click)="editarficha()"
+        />
+    </div>
+    <h5>Correo</h5>
+    <div class="flex">
+        <textarea class="lf9" type="string" [(ngModel)]="ficha[0].correo"></textarea>
+    </div>
+    <h5>Telefonos</h5>
+    <div class="flex">
+        <textarea class="lf9" type="string" [(ngModel)]="ficha[0].telefonos"></textarea>
+    </div>
+</div>

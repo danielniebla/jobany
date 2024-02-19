@@ -147,8 +147,11 @@ export class CrudfacarrerasComponent {
       });
       
   }
+  private async loadData() {
+    this.server = this.storage.getDataItem('server') || '';
+  }
   ngOnInit(): void {
-    this.server = this.storage.getDataItem('server') ?? '';
+    this.loadData();
     this.actualizarDatosRecomendacion();
     this.actualizarDatosfacultad();
    

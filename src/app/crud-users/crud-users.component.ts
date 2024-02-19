@@ -167,8 +167,11 @@ export class CrudUsersComponent {
       });
       
   }
+  private async loadData() {
+    this.server = this.storage.getDataItem('server') || '';
+  }
   ngOnInit(): void {
-    this.server = this.storage.getDataItem('server') ?? '';
+    this.loadData();
     this.actualizarDatosRecomendacion();    
   }
   ////////////////////////////////////////////////////////////////////

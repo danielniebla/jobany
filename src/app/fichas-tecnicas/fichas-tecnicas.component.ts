@@ -21,10 +21,13 @@ export class FichasTecnicasComponent {
   cruds(){
     this.router.navigate(['/Sursumversus/Admin']);
   }
+  private async loadData() {
+    this.carrera = this.storage.getDataItem('idCarrera') || '';
+    console.log('a',this.carrera);
+    this.user = this.storage.getDataItem('userTipe') || '';
+  }
   ngOnInit(): void {
-    this.user = this.storage.getDataItem('userTipe') ?? ''; 
-    this.carrera = this.storage.getDataItem('idCarrera')?? '';
-    console.log(this.carrera);
+    this.loadData();
     for (let i = 1; i <= 10; i++) {
       this.salidaFichas[i] = false;
     }

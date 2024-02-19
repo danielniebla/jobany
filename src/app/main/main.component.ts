@@ -24,8 +24,13 @@ export class MainComponent implements OnInit {
     // window.location.reload();
 
   }
+  async initializeUserData() {
+    // Usa la función 'getDataItem' del servicio 'StorageServiceService'
+    this.user = this.storage.getDataItem('userTipe') || '';
+  }
+
   ngOnInit(): void {
-    this.user = this.storage.getDataItem('userTipe') ?? ''; 
+    this.initializeUserData();
   }
 }
   

@@ -29,12 +29,16 @@ export class UnidadAcademicaComponent implements OnInit{
     }, 10);
     this.lastFId=id;
   }
-  ngOnInit(): void {
-    this.dinamica = this.storage.getDataItem('idDinamico') ?? '';
-    this.carrera = this.storage.getDataItem('idCarrera') ?? '';
-    this.server = this.storage.getDataItem('server') ?? '';
-    this.user = this.storage.getDataItem('userTipe') ?? '';
+  async initializeData() {
+    this.dinamica = this.storage.getDataItem('idDinamico') || '';
+    this.carrera = this.storage.getDataItem('idCarrera') || '';
+    this.server = this.storage.getDataItem('server') || '';
+    this.user = this.storage.getDataItem('userTipe') || '';
+  }
   
+  ngOnInit(): void {
+    this.initializeData();
+
     forkJoin({
       zonas: this.http.get(`${this.server}/api/Zona/Consultar_Zona`),
       facultades: this.http.get(`${this.server}/api/Facultades/Consultar_Facultad`),

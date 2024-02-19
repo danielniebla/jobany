@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router,private http: HttpClient, private storage : StorageServiceService) { }
   nombre='';
   contrasena='';
+  user = '';
   server = 'https://adminuas-001-site3.gtempurl.com';
   autenticarUsuario() {
     const spanElement: HTMLElement | null = document.getElementById('error')!;
@@ -81,11 +82,15 @@ export class LoginComponent implements OnInit {
         spanElement.textContent = '';
       }, 6000);
     }
-
+    async initializeUserData() {
+      // Usa la función 'getDataItem' del servicio 'StorageServiceService'
+      this.user = this.storage.getDataItem('idUsuario') || '';
+    }
+  
     ngOnInit(): void {
+      this.initializeUserData();
       this.storage.setDataItem('server', this.server);
-      const user = this.storage.getDataItem('idUsuario') ?? '';
-      if(user != '' && user != null){
+      if(this.user != '' && this.user != null){
         setTimeout(() => {
           this.router.navigate(['/Sursumversus']);
         }, 200);

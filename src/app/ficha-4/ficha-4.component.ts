@@ -107,9 +107,11 @@ export class Ficha4Component implements OnInit {
       lugar.readOnly = true;
     });
   }
-
+  private async loadData() {
+    this.server = this.storage.getDataItem('server') || '';
+  }
   ngOnInit(): void {
-    this.server = this.storage.getDataItem('server') ?? '';
+    this.loadData();
     this.getficha();
     const lugares = document.querySelectorAll('.lf4') as NodeListOf<HTMLInputElement>;
 

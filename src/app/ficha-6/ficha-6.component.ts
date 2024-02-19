@@ -16,7 +16,6 @@ export class Ficha6Component {
   server='';
   getficha(){
     const authEndpoint = `${this.server}/api/Informe6/Consultar_Informe6?id_carrera=${this.carrera}`;
-    console.log('aa',authEndpoint);
   
       // Encabezados para la solicitud POST
       const httpOptions = {
@@ -148,8 +147,11 @@ export class Ficha6Component {
       accion.meta_alcanzada =1;
     }
   }
+  private async loadData() {
+    this.server = this.storage.getDataItem('server') || '';
+  }
   ngOnInit(): void {
-    this.server = this.storage.getDataItem('server') ?? '';
+    this.loadData();
     this.getficha();
     const lugares = document.querySelectorAll('.lf6') as NodeListOf<HTMLInputElement>;
     const porcentajes = document.querySelectorAll('.por') as NodeListOf<HTMLInputElement>;

@@ -1,1 +1,71 @@
-<p>ficha-10 works!</p>
+<div class="grid">
+    <div class="head gene">Generacion</div>
+    <div class="head des">No. de alumnos que egresaron</div>
+    <div class="head iDes">No. de alumnos que presentaron el examen</div>
+    <div class="head rep">Indice de aplicacion</div>
+    <div class="head iRep">No. de alumnos aprovados</div>
+    <div class="head egre">Indice de aprobacion</div>
+
+    <div class="gene bod">Ultima <img
+        class="pen"
+        src="../../assets/lapiz.png"
+        alt="editar"
+        (click)="editar()"
+      />
+      <img
+          src="../../assets/guardar.png"
+          alt="guardar"
+          class="disk10"
+          (click)="editarficha()"
+        /></div>
+    <div class="bod des">
+        <input class="lf10" type="number" [(ngModel)]="ficha[0].ultima_estudiantes_egresados">
+    </div>
+    <div class="bod iDes">
+        <input class="lf10" type="number" [(ngModel)]="ficha[0].ultima_alumnos_examen">
+    </div>
+    <div class="bod rep">
+        <input class="poe" type="number" [(ngModel)]="ficha[0].ultima_indice_aplicacion">
+    </div>
+    <div class="bod iRep">
+        <input class="lf10" type="number" [(ngModel)]="ficha[0].ultima_alumnos_aprobados">
+    </div>
+    <div class="bod egre">
+        <input class="por" type="number" [(ngModel)]="ficha[0].ultima_indice_aprobacion">
+    </div>
+    
+    <div class="gene bod">Penultima</div>
+    <div class="bod des">
+        <input class="lf10" type="number" [(ngModel)]="ficha[0].penul_estudiantes_egresados">
+    </div>
+    <div class="bod iDes">
+        <input class="lf10" type="number" [(ngModel)]="ficha[0].penul_alumnos_examen">
+    </div>
+    <div class="bod rep">
+        <input class="por" type="number" [(ngModel)]="ficha[0].penul_indice_aplicacion">
+    </div>
+    <div class="bod iRep">
+        <input class="lf10" type="number" [(ngModel)]="ficha[0].penul_alumnos_aprobados">
+    </div>
+    <div class="bod egre">
+        <input class="por" type="number" [(ngModel)]="ficha[0].penul_indice_aprobacion">
+    </div>
+    
+    <div class="gene bod">Antepenultima</div>
+    <div class="bod des">
+        <input class="lf10" type="number" [(ngModel)]="ficha[0].ante_estudiantes_egresados">
+    </div>
+    <div class="bod iDes">
+        <input class="lf10" type="number" [(ngModel)]="ficha[0].ante_alumnos_examen">
+    </div>
+    <div class="bod rep">
+        <input class="por" type="number" [(ngModel)]="ficha[0].ante_indice_aplicacion">
+    </div>
+    <div class="bod iRep">
+        <input class="lf10" type="number" [(ngModel)]="ficha[0].ante_alumnos_aprobados">
+    </div>
+    <div class="bod egre">
+        <input class="por" type="number" [(ngModel)]="ficha[0].ante_indice_aprobacion">
+    </div>
+   
+</div>    

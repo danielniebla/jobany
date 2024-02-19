@@ -138,9 +138,12 @@ export class CrudzonasComponent {
       });
 
       }
+  private async loadData() {
+    this.server = this.storage.getDataItem('server') || '';
+  }
   ngOnInit(): void {
     
-    this.server = this.storage.getDataItem('server') ?? '';
+    this.loadData();
     this.actualizarDatosRecomendacion();
   }
   actualizarRecomendacion(zona: any) {

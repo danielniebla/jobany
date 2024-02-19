@@ -23,6 +23,7 @@ export class IndicadorComponent implements OnInit {
   pages=1;
   paged=7;
   userType='';
+  idCarreraString='';
   paginador(i:number){
     this.page=this.page+i;
     this.page = Math.round(this.page);
@@ -125,9 +126,14 @@ export class IndicadorComponent implements OnInit {
     }
       
   }
+  async initializeUserData() {
+    // Usa la función 'getDataItem' del servicio 'StorageServiceService'
+    this.userType = this.storage.getDataItem('userTipe') || '';
+    this.server = this.storage.getDataItem('server') || '';
+    this.idCarreraString = this.storage.getDataItem('idCarrera') || '';
+  }
   ngOnInit(): void {
-    this.server = this.storage.getDataItem('server') ?? '';
-    this.userType =this.storage.getDataItem('userTipe')?? '';
+    this.initializeUserData();
     this.Carrera();
     setTimeout(() => {
       this.actualizarDatosIndicador();
@@ -168,10 +174,8 @@ export class IndicadorComponent implements OnInit {
       
   }
   Carrera(){
-    const idCarreraString = this.storage.getDataItem('idCarrera');
-
-    if (idCarreraString !== null) {
-      const idCarrera: number = parseInt(idCarreraString, 10);
+    if (this.idCarreraString !== null) {
+      const idCarrera: number = parseInt(this.idCarreraString, 10);
 
       if (!isNaN(idCarrera)) {
         this.carrera = idCarrera;

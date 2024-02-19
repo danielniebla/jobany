@@ -90,8 +90,11 @@ export class Ficha1Component implements OnInit {
         lugarf.readOnly = true;
       }
   }
+  private async loadData() {
+    this.server = this.storage.getDataItem('server') || '';
+  }
   ngOnInit(): void {
-    this.server = this.storage.getDataItem('server') ?? '';
+    this.loadData();
     this.getficha(); 
     const lugarf = document.querySelector(`.lf`) as HTMLInputElement;
     if (lugarf) {

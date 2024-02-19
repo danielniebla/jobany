@@ -219,12 +219,17 @@ export class PlaneacionComponent implements OnInit {
     });
      
   }
+  async initializeUserData() {
+    this.userType = this.storageservice.getDataItem('userTipe') || '';
+    this.server = this.storageservice.getDataItem('server') || '';
+  }
+  
   ngOnInit(): void {
-    this.userType =this.storageservice.getDataItem('userTipe')?? '';
+    this.initializeUserData();
+
     if(this.userType=='2'){
       this.typeTable = true;
     }
-    this.server = this.storageservice.getDataItem('server') ?? '';
     this.actualizarDatosRecomendacion();
   }
   validar(accion: any):boolean{

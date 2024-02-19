@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { StorageServiceService } from 'src/app/storage-service.service';
-import { AdmincrudsComponent } from 'src/app/admincruds/admincruds.component';
 @Component({
   selector: 'app-navbar2',
   templateUrl: './navbar2.component.html',
@@ -15,20 +14,27 @@ export class Navbar2Component implements OnInit {
   server = '';
   dinamic = '';
   userTipe = '';
+  r = '';
+  async loadData() {
+    this.server = this.storage.getDataItem('server') || '';
+    this.dinamic = this.storage.getDataItem('idDinamico') || this.storage.getDataItem('idCarrera') || '';
+    this.userTipe = this.storage.getDataItem('userTipe') || '';
+    this.r =this.storage.getDataItem('reload')||'';
+
+  }
   ngOnInit(): void {
-    const r =this.storage.getDataItem('reload');
-    if(r==1){
+    this.loadData(); // Llama a la función que carga los datos al inicializar el componente
+    if(this.r=='1'){
       this.storage.setDataItem('reload','0');
       setTimeout(() => {
         this.router.navigate(['/login']);
       }, 300);
 
     }else{
-    this.storage.logout$.subscribe((value) => {
-      this.server = this.storage.getDataItem('server') ?? '';
-      this.dinamic = this.storage.getDataItem('idDinamico') ?? this.storage.getDataItem('idCarrera');
-      this.userTipe = this.storage.getDataItem('userTipe');
-    });
+      this.storage.logout$.subscribe((value) => {
+        // Actualiza los datos cuando se produce un evento de logout
+        this.loadData();
+      });
     switch (this.userTipe) {
       case '1':///////////superadmin/////////
         this.facultad= 'Administrador de sistema';

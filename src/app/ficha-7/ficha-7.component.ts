@@ -126,8 +126,11 @@ export class Ficha7Component {
       accion.meta_alcanzada =1;
     }
   }
+  private async loadData() {
+    this.server = this.storage.getDataItem('server') || '';
+  }
   ngOnInit(): void {
-    this.server = this.storage.getDataItem('server') ?? '';
+    this.loadData();
     this.getficha();
     const lugares = document.querySelectorAll('.lf7') as NodeListOf<HTMLInputElement>;
     const porcentajes = document.querySelectorAll('.por') as NodeListOf<HTMLInputElement>;

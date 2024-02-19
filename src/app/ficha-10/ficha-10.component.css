@@ -1,0 +1,60 @@
+.grid{
+    display: grid;
+    grid-template-columns: repeat(1fr, 6);
+    width: 100%;
+    border: 2px solid #000;
+    margin-top: 20px;
+}
+.head{
+    background-color: var(--cds-global-color-azure-500);
+    border-left: 1px solid #000;
+    border-bottom: 1px solid #000;
+    font-weight: 600;
+    text-align: center;
+}
+.gene{
+    grid-column: 1 / 2;
+}
+.des{
+    grid-column: 2 / 3;
+}
+.iDes{
+    grid-column: 3 / 4;
+}
+.rep{
+    grid-column: 4 / 5;
+}
+.iRep{
+    grid-column: 5 / 6;
+}
+.egre{
+    grid-column: 6 / 7;
+}
+.bod{
+    border-bottom: 1px solid #000;
+    border-left: 1px solid #000;
+}
+input{
+    width: 100%;
+    border: none;
+}
+img {
+    height: 16px;
+    width: auto;
+    margin: 0;
+}
+.disk10{
+    visibility: hidden;
+    pointer-events: none;
+}
+.editing{
+    visibility: visible !important;
+    pointer-events: auto;
+}
+.edit {
+    pointer-events: auto;
+    background-color: var(--cds-global-color-blue-200) !important;
+}
+.lf10{
+    background-color: var(--cds-alias-status-disabled-shade) ;
+}

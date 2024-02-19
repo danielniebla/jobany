@@ -1,1 +1,21 @@
-<p>ficha-8 works!</p>
+<div class="grid">
+    <h5>Nombre</h5>
+    <h5>Cargo</h5>
+    <div class="flex">
+        <textarea class="lf8" type="string" [(ngModel)]="ficha[0].nombre"></textarea><img
+        class="pen"
+        src="../../assets/lapiz.png"
+        alt="editar"
+        (click)="editar()"
+      />
+      <img
+          src="../../assets/guardar.png"
+          alt="guardar"
+          class="disk8"
+          (click)="editarficha()"
+        />
+    </div>
+    <div class="flex">
+        <textarea class="lf8" type="string" [(ngModel)]="ficha[0].cargo"></textarea>
+    </div>
+</div>

@@ -235,12 +235,16 @@ export class RecomendacionComponent implements OnInit {
       return ''; // Otra clase o ninguna clase
     }
   }
+  async initializeUserData() {
+    this.userType = this.storage.getDataItem('userTipe') || '';
+    this.server = this.storage.getDataItem('server') || '';
+  }
   ngOnInit(): void {
-    this.userType =this.storage.getDataItem('userTipe')?? '';
+    this.initializeUserData();
+
     if(this.userType=='2'){
       this.typeTable = true;
     }
-    this.server = this.storage.getDataItem('server') ?? '';
     this.actualizarDatosRecomendacion();
     setTimeout(() => {
       const textAreas = document.querySelectorAll(`.txtArea`) as NodeListOf<HTMLTextAreaElement>;

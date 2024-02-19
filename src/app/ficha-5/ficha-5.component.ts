@@ -29,7 +29,6 @@ export class Ficha5Component {
         .subscribe((response: any) => {
           // Aquí puedes manejar la respuesta del servidor
           this.ficha = response
-          console.log('ok',response);
 
         }, (error) => {
           console.error('Error:', error);
@@ -108,8 +107,11 @@ export class Ficha5Component {
       accion.meta_alcanzada =1;
     }
   }
+  private async loadData() {
+    this.server = this.storage.getDataItem('server') || '';
+  }
   ngOnInit(): void {
-    this.server = this.storage.getDataItem('server') ?? '';
+    this.loadData();
     this.getficha();
     const lugares = document.querySelectorAll('.lf5') as NodeListOf<HTMLInputElement>;
     const porcentajes = document.querySelectorAll('.por') as NodeListOf<HTMLInputElement>;

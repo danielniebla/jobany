@@ -89,8 +89,11 @@ export class Ficha2Component implements OnInit {
       lugar.readOnly = true;
     });
   }
+  private async loadData() {
+    this.server = this.storage.getDataItem('server') || '';
+  }
   ngOnInit(): void {
-    this.server = this.storage.getDataItem('server') ?? '';
+    this.loadData();
     this.getficha();
     const lugares = document.querySelectorAll('.lf2') as NodeListOf<HTMLInputElement>;
 

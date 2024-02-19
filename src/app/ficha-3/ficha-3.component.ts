@@ -117,8 +117,8 @@ export class Ficha3Component implements OnInit {
       const authEndpoint = `${this.server}/api/Carreras/Consultar_Carrera_Id?id_carrera=${this.carrera}`;
 
     // Encabezados para la solicitud POST
-    const httpOptions = {
-      headers: new HttpHeaders({
+      const httpOptions = {
+      headers: new HttpHeaders({ 
         'Content-Type': 'application/json'
       })
     };
@@ -142,8 +142,11 @@ export class Ficha3Component implements OnInit {
         console.error('Error:', error);
       });
   }
+  private async loadData() {
+    this.server = this.storage.getDataItem('server') || '';
+  }
   ngOnInit(): void {
-    this.server = this.storage.getDataItem('server') ?? '';
+    this.loadData();
     this.getFacultad();
     const lugares = document.querySelectorAll('.lf3') as NodeListOf<HTMLInputElement>;
 
