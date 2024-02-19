@@ -20,7 +20,7 @@ export class MainComponent implements OnInit {
   }
   admin(){
     this.storage.setDataItem('idCarrera','0');
-    window.location.href = 'https://uas-proy.com/';
+    window.location.href = 'hhttps://yobani.onrender.com/';
     // window.location.reload();
 
   }

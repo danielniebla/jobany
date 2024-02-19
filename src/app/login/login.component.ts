@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
         this.storage.setDataItem('userTipe',ut);
         if(token!=''){
           setTimeout(() => {
-            window.location.href = 'https://uas-proy.com/';
+            window.location.href = 'https://yobani.onrender.com/';
             // window.location.reload();
           }, 300);
         }else{
