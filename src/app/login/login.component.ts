@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
         this.storage.setDataItem('userTipe',ut);
         if(token!=''){
           setTimeout(() => {
-            window.location.href = 'https://yobani.onrender.com/'; 
+            window.location.href = 'https://uas-proy.com/'; 
             // window.location.reload();
           }, 300);
         }else{
@@ -92,7 +92,7 @@ export class LoginComponent implements OnInit {
       this.storage.setDataItem('server', this.server);
       if(this.user != '' && this.user != null){
         setTimeout(() => {
-          this.router.navigate(['/Sursumversus']);
+          this.router.navigate(['/Evaluaciones']);
         }, 200);
 
       }

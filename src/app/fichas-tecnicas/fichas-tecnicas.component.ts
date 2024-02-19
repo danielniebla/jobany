@@ -13,13 +13,13 @@ export class FichasTecnicasComponent {
   carrera='';
   salidaFichas: Record<number, boolean> = {};
   fichasTecnicas() {
-    this.router.navigate(['/Sursumversus/Fichas-Tecnicas']);
+    this.router.navigate(['/Evaluaciones/Fichas-Tecnicas']);
   }
   recomendacion() {
-    this.router.navigate(['/Sursumversus']);
+    this.router.navigate(['/Evaluaciones']);
   }
   cruds(){
-    this.router.navigate(['/Sursumversus/Admin']);
+    this.router.navigate(['/Evaluaciones/Admin']);
   }
   private async loadData() {
     this.carrera = this.storage.getDataItem('idCarrera') || '';

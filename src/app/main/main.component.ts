@@ -10,17 +10,17 @@ export class MainComponent implements OnInit {
   constructor(private router: Router, private storage : StorageServiceService) { }
   user= '';
   recomendacion() {
-    this.router.navigate(['/Sursumversus']);
+    this.router.navigate(['/Evaluaciones']);
   }
   fichasTecnicas() {
-    this.router.navigate(['/Sursumversus/FichaTecnica']);
+    this.router.navigate(['/Evaluaciones/FichaTecnica']);
   }
   cruds(){
-    this.router.navigate(['/Sursumversus/Admin']);
+    this.router.navigate(['/Evaluaciones/Admin']);
   }
   admin(){
     this.storage.setDataItem('idCarrera','0');
-    window.location.href = 'hhttps://yobani.onrender.com/';
+    window.location.href = 'https://uas-proy.com/';
     // window.location.reload();
 
   }

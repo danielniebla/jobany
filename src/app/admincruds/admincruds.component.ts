@@ -25,12 +25,12 @@ export class AdmincrudsComponent {
     this.tu=!this.tu;
   }
   fichasTecnicas() {
-    this.router.navigate(['/Sursumversus/FichaTecnica']);
+    this.router.navigate(['/Evaluaciones/FichaTecnica']);
   }
   recomendacion() {
-    this.router.navigate(['/Sursumversus']);
+    this.router.navigate(['/Evaluaciones']);
   }
   cruds(){
-    this.router.navigate(['/Sursumversus/Admin']);
+    this.router.navigate(['/Evaluaciones/Admin']);
   }
 }
