@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   nombre='';
   contrasena='';
   user = '';
-  server = 'https://adminuas-001-site3.gtempurl.com';
+  server = 'https://adminuas-001-site3.gtempurl.com/';
   autenticarUsuario() {
     const spanElement: HTMLElement | null = document.getElementById('error')!;
     const authEndpoint = `${this.server}/api/Usuarios/autenticacion`;
@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
         this.storage.setDataItem('userTipe',ut);
         if(token!=''){
           setTimeout(() => {
-            window.location.href = 'https://yobani.onrender.com'; 
+            window.location.href = 'https://uas-proy.com/login'; 
             // window.location.reload();
           }, 300);
         }else{
