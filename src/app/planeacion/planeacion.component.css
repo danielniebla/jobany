@@ -53,6 +53,9 @@ td,textarea,.tr{
     pointer-events: auto;
     background-color: var(--cds-global-color-blue-100);
 }
+.editando{
+    background-color: var(--cds-global-color-blue-100);
+}
 input{
     border: none;
     width: 100%;

@@ -13,6 +13,7 @@ export class Ficha1Component implements OnInit {
   @Input() carrera: string;
   ficha: any[] = [];
   server='';
+  mensaje='';
   getficha(){
     this.ficha=[];
     const authEndpoint = `${this.server}/api/Informe/Consultar_Informe1?id_carrera=${this.carrera}`;
@@ -33,7 +34,18 @@ export class Ficha1Component implements OnInit {
           console.error('Error:', error);
         });
   }
+  validar(ficha: any):boolean{
+    
+    if(ficha[0].lugar_fecha==''){
+      this.mensaje = 'El campo esta vacio, favor de llanarlo.';
+      
+      return false;
+    }else{    
+        return true;
+    }
+  }
   editar() {
+
     const imagenDisk = document.querySelector(`.disk`) as HTMLImageElement;
 
     // Verifica si se encontró la imagen 'disk'
@@ -51,6 +63,7 @@ export class Ficha1Component implements OnInit {
     }
   }
   editarficha(){
+    if(this.validar(this.ficha)){
     const authEndpoint = `${this.server}/api/Informe/Actualizar_Informe1`;
       const authData = {
         "id_informe": this.ficha[0].id_informe,
@@ -89,6 +102,13 @@ export class Ficha1Component implements OnInit {
         this.renderer.removeClass(lugarf, 'edit');
         lugarf.readOnly = true;
       }
+    }else{
+      window.alert(this.mensaje);
+      setTimeout(() => {
+        this.mensaje='';
+      }, 100);
+    }
+  
   }
   private async loadData() {
     this.server = this.storage.getDataItem('server') || '';

@@ -14,6 +14,7 @@ export class Ficha4Component implements OnInit {
   ficha: any[] = [];
   server='';
   carre='';
+  mensaje = '';
   getficha(){
     const authEndpoint = `${this.server}/api/Informe4/Consultar_Informe4?id_carrera=${this.carrera}`;
     // Encabezados para la solicitud POST
@@ -64,48 +65,89 @@ export class Ficha4Component implements OnInit {
     });
 
   }
-  editarficha(){
-    const authEndpoint = `${this.server}/api/Informe4/Actualizar_Informe4`;
-    const authData = {
-      "id_informe": this.ficha[0].id_informe,
-      "id_carrera": this.carrera,
-      "documento_oficial": this.ficha[0].documento_oficial,
-      "numero_rvoe": this.ficha[0].numero_rvoe,
-      "fecha_rvoe": this.ficha[0].fecha_rvoe,
-      "instituto_rvoe": this.ficha[0].instituto_rvoe,
-      "mision": this.ficha[0].mision,
-      "vision": this.ficha[0].vision,
-      "objetivos_estrategicos": this.ficha[0].objetivos_estrategicos
-    };
-  
-    // Encabezados para la solicitud POST
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-     };
-  
-    // Realizar la solicitud POST para obtener el token
-    this.http.post(authEndpoint,authData, httpOptions)
-      .subscribe((response: any) => {
-        // Aquí puedes manejar la respuesta del servidor
-        this.ficha = response;
-      }, (error) => {
-        console.error('Error:', error);
-      });
-    const imagenDisk = document.querySelector(`.disk4`) as HTMLImageElement;
-
-    // Verifica si se encontró la imagen 'disk'
-    if (imagenDisk) {
-      // Agrega la clase deseada
-      this.renderer.removeClass(imagenDisk, 'editing');
+  validar(ficha: any):boolean{
+    let validaciones: string[] = [];
+    
+    if(ficha[0].numero_rvoe==''){
+      validaciones.push("numero_rvoe");
     }
-    const lugares = document.querySelectorAll('.lf4') as NodeListOf<HTMLInputElement>;
+    if(ficha[0].fecha_rvoe==''){
+      validaciones.push("fecha_rvoe");
+    }
+    if(ficha[0].instituto_rvoe==''){
+      validaciones.push("instituto_rvoe");
+    }
+    if(ficha[0].objetivos_estrategicos==''){
+      validaciones.push("objetivos estrategicos");
+    }
+    if(ficha[0].mision==''){
+      validaciones.push("mision");
+    }
+    if(ficha[0].vision==''){
+      validaciones.push("vision");
+    }
+    if(ficha[0].documento_oficial==''){
+      validaciones.push("documeto oficial");
+    }
 
-    lugares.forEach((lugar) => {
-      this.renderer.removeClass(lugar, 'edit');
-      lugar.readOnly = true;
-    });
+
+
+    if(validaciones.length !=0){
+      this.mensaje = 'los campos: '+ validaciones.join(", ") + ' estan vacios.';
+      return false;
+    }else{
+        return true;
+    }
+  }
+  editarficha(){
+    if(this.validar(this.ficha)){
+      const authEndpoint = `${this.server}/api/Informe4/Actualizar_Informe4`;
+      const authData = {
+        "id_informe": this.ficha[0].id_informe,
+        "id_carrera": this.carrera,
+        "documento_oficial": this.ficha[0].documento_oficial,
+        "numero_rvoe": this.ficha[0].numero_rvoe,
+        "fecha_rvoe": this.ficha[0].fecha_rvoe,
+        "instituto_rvoe": this.ficha[0].instituto_rvoe,
+        "mision": this.ficha[0].mision,
+        "vision": this.ficha[0].vision,
+        "objetivos_estrategicos": this.ficha[0].objetivos_estrategicos
+      };
+    
+      // Encabezados para la solicitud POST
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      };
+    
+      // Realizar la solicitud POST para obtener el token
+      this.http.post(authEndpoint,authData, httpOptions)
+        .subscribe((response: any) => {
+          // Aquí puedes manejar la respuesta del servidor
+          this.getficha();
+        }, (error) => {
+          console.error('Error:', error);
+        });
+      const imagenDisk = document.querySelector(`.disk4`) as HTMLImageElement;
+
+      // Verifica si se encontró la imagen 'disk'
+      if (imagenDisk) {
+        // Agrega la clase deseada
+        this.renderer.removeClass(imagenDisk, 'editing');
+      }
+      const lugares = document.querySelectorAll('.lf4') as NodeListOf<HTMLInputElement>;
+
+      lugares.forEach((lugar) => {
+        this.renderer.removeClass(lugar, 'edit');
+        lugar.readOnly = true;
+      });
+    }else{
+      window.alert(this.mensaje);
+      setTimeout(() => {
+        this.mensaje='';
+      }, 100);
+    }
   }
   private async loadData() {
     this.server = this.storage.getDataItem('server') || '';

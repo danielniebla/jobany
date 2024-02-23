@@ -64,7 +64,6 @@ export class IndicadorComponent implements OnInit {
       }
       if(this.userType=='2'){
   
-
           textAreas.classList.add('edit');
 ;
       }
@@ -223,16 +222,31 @@ export class IndicadorComponent implements OnInit {
         'Content-Type': 'application/json'
       })
     };
-
-    // Realizar la solicitud POST para obtener el token
-    this.http.post(authEndpoint, authData, httpOptions)
-      .subscribe((response: any) => {
-        // Aquí puedes manejar la respuesta del servidor
-        this.indicadores = response;
-        this.actualizarDatosIndicador()
-      }, (error) => {
-        console.error('Error:', error);
-      });
+    if( this.carrera==0){
+      if(this.userType=='1'){
+          // Realizar la solicitud POST para obtener el token
+        this.http.post(authEndpoint, authData, httpOptions)
+        .subscribe((response: any) => {
+          // Aquí puedes manejar la respuesta del servidor
+          this.indicadores = response;
+          this.actualizarDatosIndicador()
+        }, (error) => {
+          console.error('Error:', error);
+        });
+      }
+       
+    }else{
+       // Realizar la solicitud POST para obtener el token
+       this.http.post(authEndpoint, authData, httpOptions)
+       .subscribe((response: any) => {
+         // Aquí puedes manejar la respuesta del servidor
+         this.indicadores = response;
+         this.actualizarDatosIndicador()
+       }, (error) => {
+         console.error('Error:', error);
+       });
+    }
+    
     }
     borrarRecomendacion(idIndicador: number){
       if(this.alert){

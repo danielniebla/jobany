@@ -52,6 +52,9 @@ td,textarea,.tr{
 .incumplio .txtArea, .incumplio{
     background-color: var(--cds-global-color-red-300) !important;
 }
+.editando{
+    background-color: var(--cds-global-color-blue-100);
+}
 .disk1{
     visibility: hidden;
     pointer-events: none;

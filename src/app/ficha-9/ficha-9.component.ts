@@ -13,6 +13,7 @@ export class Ficha9Component {
   @Input() carrera: string;
   ficha: any[] = [];
   server='';
+  mensaje='';
   getficha(){
     const authEndpoint = `${this.server}/api/Informe9/Consultar_Informe9?id_carrera=${this.carrera}`;
 
@@ -49,44 +50,73 @@ export class Ficha9Component {
     });
 
   }
-  editarficha(){
-    const authEndpoint = `${this.server}/api/Informe9/Actualizar_Informe9`;
-      const authData = {
-        "id_informe": this.ficha[0].id_informe,
-        "id_carrera": this.ficha[0].id_carrera,
-        "nombre": this.ficha[0].nombre,
-        "correo": this.ficha[0].correo,
-        "telefonos": this.ficha[0].telefonos
-      };
-  
-      // Encabezados para la solicitud POST
-      const httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json'
-        })
-      };
-  
-      // Realizar la solicitud POST para obtener el token
-      this.http.post(authEndpoint,authData, httpOptions)
-        .subscribe((response: any) => {
-          // Aquí puedes manejar la respuesta del servidor
-          this.getficha();
-        }, (error) => {
-          console.error('Error:', error);
-        });
-      const imagenDisk = document.querySelector(`.disk9`) as HTMLImageElement;
 
-    // Verifica si se encontró la imagen 'disk'
-    if (imagenDisk) {
-      // Agrega la clase deseada
-      this.renderer.removeClass(imagenDisk, 'editing');
+  validar(ficha: any):boolean{
+    let validaciones: string[] = [];
+    
+    if(ficha[0].nombre==''){
+      validaciones.push("nombre");
     }
-    const lugares = document.querySelectorAll('.lf9') as NodeListOf<HTMLInputElement>;
+    if(ficha[0].correo==''){
+      validaciones.push("correo");
+    }
+    if(ficha[0].telefonos==''){
+      validaciones.push("telefonos");
+    }
+    
 
-    lugares.forEach((lugar) => {
-      this.renderer.removeClass(lugar, 'edit');
-      lugar.readOnly = true;
-    });
+    if(validaciones.length !=0){
+      this.mensaje = 'los campos: '+ validaciones.join(", ") + ' estan vacios.';
+      return false;
+    }else{
+        return true;
+    }
+  }
+  editarficha(){
+    if(this.validar(this.ficha)){
+      const authEndpoint = `${this.server}/api/Informe9/Actualizar_Informe9`;
+        const authData = {
+          "id_informe": this.ficha[0].id_informe,
+          "id_carrera": this.ficha[0].id_carrera,
+          "nombre": this.ficha[0].nombre,
+          "correo": this.ficha[0].correo,
+          "telefonos": this.ficha[0].telefonos
+        };
+    
+        // Encabezados para la solicitud POST
+        const httpOptions = {
+          headers: new HttpHeaders({
+            'Content-Type': 'application/json'
+          })
+        };
+    
+        // Realizar la solicitud POST para obtener el token
+        this.http.post(authEndpoint,authData, httpOptions)
+          .subscribe((response: any) => {
+            // Aquí puedes manejar la respuesta del servidor
+            this.getficha();
+          }, (error) => {
+            console.error('Error:', error);
+          });
+        const imagenDisk = document.querySelector(`.disk9`) as HTMLImageElement;
+
+      // Verifica si se encontró la imagen 'disk'
+      if (imagenDisk) {
+        // Agrega la clase deseada
+        this.renderer.removeClass(imagenDisk, 'editing');
+      }
+      const lugares = document.querySelectorAll('.lf9') as NodeListOf<HTMLInputElement>;
+
+      lugares.forEach((lugar) => {
+        this.renderer.removeClass(lugar, 'edit');
+        lugar.readOnly = true;
+      });
+    }else{
+      window.alert(this.mensaje);
+      setTimeout(() => {
+        this.mensaje='';
+      }, 100);
+    }
   }
   private async loadData() {
     this.server = this.storage.getDataItem('server') || '';

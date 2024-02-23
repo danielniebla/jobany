@@ -35,6 +35,7 @@ export class Ficha3Component implements OnInit {
   @Input() carrera: string;
   // ficha: any[] = [];
   faculta='';
+  mensaje = '';
   facultad='';
   getficha(){
     const authEndpoint = `${this.server}/api/Informe3/Consultar_Informe3?id_facultad=${this.facultad}`;
@@ -70,48 +71,85 @@ export class Ficha3Component implements OnInit {
     });
 
   }
-  editarficha(){
-    const authEndpoint = `${this.server}/api/Informe3/Actualizar_Informe3`;
-    const authData = {
-      "id_informe": this.ficha[0].id_informe ?? 0,
-      "id_facultad": this.ficha[0].id_facultad ?? 0,
-      "nombre": this.ficha[0].nombre ?? '',
-      "campus": this.ficha[0].campus ?? '',
-      "fecha_inicio": this.ficha[0].fecha_inicio ?? '',
-      "mision": this.ficha[0].mision ?? '',
-      "vision": this.ficha[0].vision ?? '',
-      "objetivos_estrategicos": this.ficha[0].objetivos_estrategicos ?? ''
-    };
-  
-    // Encabezados para la solicitud POST
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
-  
-      // Realizar la solicitud POST para obtener el token
-    this.http.post(authEndpoint,authData, httpOptions)
-      .subscribe((response: any) => {
-        // Aquí puedes manejar la respuesta del servidor
-        this.ficha = response;
-        // this.getFacultad();
-      }, (error) => {
-        console.error('Error:', error);
-      });
-    const imagenDisk = document.querySelector(`.disk3`) as HTMLImageElement;
-
-    // Verifica si se encontró la imagen 'disk'
-    if (imagenDisk) {
-      // Agrega la clase deseada
-      this.renderer.removeClass(imagenDisk, 'editing');
+  validar(ficha: any):boolean{
+    let validaciones: string[] = [];
+    
+    if(ficha[0].nombre==''){
+      validaciones.push("nombre");
     }
-    const lugares = document.querySelectorAll('.lf3') as NodeListOf<HTMLInputElement>;
+    if(ficha[0].campus==''){
+      validaciones.push("campus");
+    }
+    if(ficha[0].fecha_inicio==''){
+      validaciones.push("fecha_inicio");
+    }
+    if(ficha[0].mision==''){
+      validaciones.push("mision");
+    }
+    if(ficha[0].vision==''){
+      validaciones.push("vision");
+    }
+    if(ficha[0].objetivos_estrategicos==''){
+      validaciones.push("objetivos estrategicos");
+    }
+    
 
-    lugares.forEach((lugar) => {
-      this.renderer.removeClass(lugar, 'edit');
-      lugar.readOnly = true;
-    });
+    if(validaciones.length !=0){
+      this.mensaje = 'los campos: '+ validaciones.join(", ") + ' estan vacios.';
+      return false;
+    }else{
+        return true;
+    }
+  }
+  editarficha(){
+    if(this.validar(this.ficha)){
+      const authEndpoint = `${this.server}/api/Informe3/Actualizar_Informe3`;
+      const authData = {
+        "id_informe": this.ficha[0].id_informe ?? 0,
+        "id_facultad": this.ficha[0].id_facultad ?? 0,
+        "nombre": this.ficha[0].nombre ?? '',
+        "campus": this.ficha[0].campus ?? '',
+        "fecha_inicio": this.ficha[0].fecha_inicio ?? '',
+        "mision": this.ficha[0].mision ?? '',
+        "vision": this.ficha[0].vision ?? '',
+        "objetivos_estrategicos": this.ficha[0].objetivos_estrategicos ?? ''
+      };
+    
+      // Encabezados para la solicitud POST
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      };
+    
+        // Realizar la solicitud POST para obtener el token
+      this.http.post(authEndpoint,authData, httpOptions)
+        .subscribe((response: any) => {
+          // Aquí puedes manejar la respuesta del servidor
+          this.ficha = response;
+          // this.getFacultad();
+        }, (error) => {
+          console.error('Error:', error);
+        });
+      const imagenDisk = document.querySelector(`.disk3`) as HTMLImageElement;
+
+      // Verifica si se encontró la imagen 'disk'
+      if (imagenDisk) {
+        // Agrega la clase deseada
+        this.renderer.removeClass(imagenDisk, 'editing');
+      }
+      const lugares = document.querySelectorAll('.lf3') as NodeListOf<HTMLInputElement>;
+
+      lugares.forEach((lugar) => {
+        this.renderer.removeClass(lugar, 'edit');
+        lugar.readOnly = true;
+      });
+    }else{
+      window.alert(this.mensaje);
+      setTimeout(() => {
+        this.mensaje='';
+      }, 100);
+    }
   }
   getFacultad(){
     const authEndpoint = `${this.server}/api/Carreras/Consultar_Carrera_Id?id_carrera=${this.carrera}`;

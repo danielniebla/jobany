@@ -82,7 +82,7 @@ export class RecomendacionComponent implements OnInit {
     }
     const textAreas = document.querySelectorAll(`.txtArea[data-index="${idRecomendacion}"]`);
     textAreas.forEach((textarea) => {
-      this.renderer.removeClass(textarea as HTMLElement, 'txtArea');
+      this.renderer.addClass(textarea as HTMLElement, 'edit');
       (textarea as HTMLTextAreaElement).readOnly = false;
     });
   }
@@ -194,20 +194,22 @@ export class RecomendacionComponent implements OnInit {
         // Aquí puedes manejar la respuesta del servidor
         this.recomendaciones = response;
         this.pages=Math.ceil(this.recomendaciones.length/this.paged);
-
+        setTimeout(() => {
+          const textAreas = document.querySelectorAll(`.txtArea`) as NodeListOf<HTMLTextAreaElement>;
+  
+          if (textAreas) {
+            textAreas.forEach((textarea: HTMLTextAreaElement) => {
+              // Establece la propiedad readOnly para cada textarea
+              textarea.readOnly = true;
+            });
+          }
+        }, 100);
       }, (error) => {
         console.error('Error:', error);
       });
-      setTimeout(() => {
-        const textAreas = document.querySelectorAll(`.txtArea`) as NodeListOf<HTMLTextAreaElement>;
-  
-        if (textAreas) {
-          textAreas.forEach((textarea: HTMLTextAreaElement) => {
-            // Establece la propiedad readOnly para cada textarea
-            textarea.readOnly = true;
-          });
-        }
-      }, 100);
+      
+        
+      
   }
   determinarClase(recomendacion: any): string {
     recomendacion.fecha_limite = recomendacion.fecha_limite.substring(0, 10);
@@ -246,7 +248,6 @@ export class RecomendacionComponent implements OnInit {
       this.typeTable = true;
     }
     this.actualizarDatosRecomendacion();
-    setTimeout(() => {
       const textAreas = document.querySelectorAll(`.txtArea`) as NodeListOf<HTMLTextAreaElement>;
 
       if (textAreas) {
@@ -255,7 +256,6 @@ export class RecomendacionComponent implements OnInit {
           textarea.readOnly = true;
         });
       }
-    }, 1000);
 
   }
   actualizarRecomendacion(recomendacion: any) {
@@ -278,6 +278,7 @@ export class RecomendacionComponent implements OnInit {
     if(recomendacion.fecha_limite==''){
       notificacion+=', fecha limite';
     }
+    // if(recomendacion.metas)
 
     if(notificacion==''){
     const authEndpoint = `${this.server}/api/Recomendaciones/Actualizar_Recomendacion`;

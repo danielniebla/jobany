@@ -11,6 +11,7 @@ export class Ficha2Component implements OnInit {
   ficha: any[] = [];
   server='';
   carrera=0;
+  mensaje='';
   getficha(){
     const authEndpoint = `${this.server}/api/Informe2/Consultar_Informe2?id_informe=1`;
 
@@ -47,47 +48,77 @@ export class Ficha2Component implements OnInit {
     });
 
   }
-  editarficha(){
-    const authEndpoint = `${this.server}/api/Informe2/Actualizar_Informe2`;
-      const authData = {
-        "id_informe": 1,
-        "nombre": "UNIVERSIDAD AUTONOMA DE SINALOA",
-        "id_carrera": 1,
-        "mision": this.ficha[0].mision,
-        "vision": this.ficha[0].vision,
-        "politicas": this.ficha[0].politicas,
-        "lineas_estrategicas": this.ficha[0].lineas_estrategicas
-      };
-  
-      // Encabezados para la solicitud POST
-      const httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json'
-        })
-      };
-  
-      // Realizar la solicitud POST para obtener el token
-      this.http.post(authEndpoint,authData, httpOptions)
-        .subscribe((response: any) => {
-          // Aquí puedes manejar la respuesta del servidor
-          this.ficha = response
-          this.getficha();
-        }, (error) => {
-          console.error('Error:', error);
-        });
-      const imagenDisk = document.querySelector(`.disk2`) as HTMLImageElement;
-
-    // Verifica si se encontró la imagen 'disk'
-    if (imagenDisk) {
-      // Agrega la clase deseada
-      this.renderer.removeClass(imagenDisk, 'editing');
+  validar(ficha: any):boolean{
+    let validaciones: string[] = [];
+    
+    if(ficha[0].mision==''){
+      validaciones.push("mision");
     }
-    const lugares = document.querySelectorAll('.lf2') as NodeListOf<HTMLInputElement>;
+    if(ficha[0].vision==''){
+      validaciones.push("vision");
+    }
+    if(ficha[0].politicas==''){
+      validaciones.push("politicas");
+    }
+    if(ficha[0].lineas_estrategicas==''){
+      validaciones.push("lineas estrategias");
+    }
 
-    lugares.forEach((lugar) => {
-      this.renderer.removeClass(lugar, 'edit');
-      lugar.readOnly = true;
-    });
+    if(validaciones.length !=0){
+      this.mensaje = 'los campos: '+ validaciones.join(", ") + ' estan vacios.';
+      return false;
+    }else{
+        return true;
+    }
+  }
+  editarficha(){
+    if(this.validar(this.ficha)){
+      const authEndpoint = `${this.server}/api/Informe2/Actualizar_Informe2`;
+        const authData = {
+          "id_informe": 1,
+          "nombre": "UNIVERSIDAD AUTONOMA DE SINALOA",
+          "id_carrera": 1,
+          "mision": this.ficha[0].mision,
+          "vision": this.ficha[0].vision,
+          "politicas": this.ficha[0].politicas,
+          "lineas_estrategicas": this.ficha[0].lineas_estrategicas
+        };
+    
+        // Encabezados para la solicitud POST
+        const httpOptions = {
+          headers: new HttpHeaders({
+            'Content-Type': 'application/json'
+          })
+        };
+    
+        // Realizar la solicitud POST para obtener el token
+        this.http.post(authEndpoint,authData, httpOptions)
+          .subscribe((response: any) => {
+            // Aquí puedes manejar la respuesta del servidor
+            this.ficha = response
+            this.getficha();
+          }, (error) => {
+            console.error('Error:', error);
+          });
+        const imagenDisk = document.querySelector(`.disk2`) as HTMLImageElement;
+
+      // Verifica si se encontró la imagen 'disk'
+      if (imagenDisk) {
+        // Agrega la clase deseada
+        this.renderer.removeClass(imagenDisk, 'editing');
+      }
+      const lugares = document.querySelectorAll('.lf2') as NodeListOf<HTMLInputElement>;
+
+      lugares.forEach((lugar) => {
+        this.renderer.removeClass(lugar, 'edit');
+        lugar.readOnly = true;
+      });
+    }else{
+      window.alert(this.mensaje);
+      setTimeout(() => {
+        this.mensaje='';
+      }, 100);
+    }
   }
   private async loadData() {
     this.server = this.storage.getDataItem('server') || '';

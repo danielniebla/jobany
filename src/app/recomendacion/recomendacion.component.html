@@ -19,28 +19,29 @@
     <div class="cum cabecera"     *ngIf="userType != '2'">Acciones/cumplido</div>
     <ng-container *ngIf="nueva">
       <div class="campo flex Acciones new">
-        <textarea [(ngModel)]="accion" name="accion" id="accion"></textarea>
+        <textarea [(ngModel)]="accion"  name="accion" id="accion"></textarea>
       </div>
       <div class="campo Recomendacion new">
         <form>
-          <textarea [(ngModel)]="nombre" name="recomendacion"> </textarea>
+          <textarea [(ngModel)]="nombre"  name="recomendacion"> </textarea>
         </form>
       </div>
       <div class="campo Objetivos new">
-        <textarea [(ngModel)]="objetivos" name="objetivos"></textarea>
+        <textarea [(ngModel)]="objetivos"  name="objetivos"></textarea>
       </div>
       <div class="campo Responsable new">
-        <textarea [(ngModel)]="responsable" name="responsable"></textarea>
+        <textarea [(ngModel)]="responsable"  name="responsable"></textarea>
       </div>
       <div class="campo Fecha_limite new">
         <input
+          
           type="date"
           [(ngModel)]="fecha_l"
           [min]="fechaMinimaPermitida()"
         />
       </div>
       <div class="campo Metas new">
-        <input type="number" [(ngModel)]="meta" [max]="100" [min]="1" (change)="minMax(meta)"/>
+        <input type="number" [(ngModel)]="meta"  [max]="100" [min]="1" (change)="minMax(meta)"/>
       </div>
       <div class="campo cum new">
         <img

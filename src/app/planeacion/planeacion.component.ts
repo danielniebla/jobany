@@ -32,6 +32,7 @@ export class PlaneacionComponent implements OnInit {
   pages=1;
   userType='';
   typeTable=false;
+  mensaje='';
   paginador(i:number){
     this.page=this.page+i;
     this.page = Math.round(this.page);
@@ -188,14 +189,17 @@ export class PlaneacionComponent implements OnInit {
         // Aquí puedes manejar la respuesta del servidor
         this.acciones= response;
         this.setearFecha()
-        const textAreas = document.querySelectorAll(`.txtArea`) as NodeListOf<HTMLTextAreaElement>;
+        setTimeout(() => {
+          const textAreas = document.querySelectorAll(`.txtArea`) as NodeListOf<HTMLTextAreaElement>;
   
-        if (textAreas) {
-          textAreas.forEach((textarea: HTMLTextAreaElement) => {
-            // Establece la propiedad readOnly para cada textarea
-            textarea.readOnly = true;
-          });
-        }
+          if (textAreas) {
+            textAreas.forEach((textarea: HTMLTextAreaElement) => {
+              // Establece la propiedad readOnly para cada textarea
+              textarea.readOnly = true;
+            });
+          }
+        }, 100);
+        
 
       }, (error) => {
         console.error('Error:', error);
@@ -231,6 +235,14 @@ export class PlaneacionComponent implements OnInit {
       this.typeTable = true;
     }
     this.actualizarDatosRecomendacion();
+    const textAreas = document.querySelectorAll(`.txtArea`) as NodeListOf<HTMLTextAreaElement>;
+  
+        if (textAreas) {
+          textAreas.forEach((textarea: HTMLTextAreaElement) => {
+            // Establece la propiedad readOnly para cada textarea
+            textarea.readOnly = true;
+          });
+        }
   }
   validar(accion: any):boolean{
     let validaciones: string[] = [];
@@ -244,7 +256,7 @@ export class PlaneacionComponent implements OnInit {
       validaciones.push("meta");
     }
     if(validaciones.length !=0){
-      let mensaje = 'los campos: '+ validaciones.join(", ") + ' estan vacios.';
+      this.mensaje = 'los campos: '+ validaciones.join(", ") + ' estan vacios.';
       return false;
     }else{
       return true;
@@ -278,6 +290,11 @@ export class PlaneacionComponent implements OnInit {
         }, (error) => {
           console.error('Error:', error);
         });
+    }else{
+      window.alert(this.mensaje);
+      setTimeout(() => {
+        this.mensaje='';
+      }, 100);
     }
    
 
@@ -294,7 +311,7 @@ export class PlaneacionComponent implements OnInit {
       validaciones.push("meta");
     }
     if(validaciones.length !=0){
-      let mensaje = 'los campos: '+ validaciones.join(", ") + ' estan vacios.';
+      this.mensaje = 'los campos: '+ validaciones.join(", ") + ' estan vacios.';
       return false;
     }else{
       return true;
@@ -303,7 +320,7 @@ export class PlaneacionComponent implements OnInit {
   nuevaRecomendacion(){
     if(this.validarn()){
       const authEndpoint = `${this.server}/api/Cumplimiento/Agregar_Cumplimiento`;
-    const authData = {
+      const authData = {
       "id_cumplimiento": 0,
       "id_pregunta": this.pregunta2,
       "id_recomendacion": 0,
@@ -329,6 +346,11 @@ export class PlaneacionComponent implements OnInit {
       }, (error) => {
         console.error('Error:', error);
       });
+    }else{
+      window.alert(this.mensaje);
+      setTimeout(() => {
+        this.mensaje='';
+      }, 100);
     }
     
   }

@@ -14,6 +14,7 @@ export class Ficha7Component {
   @Input() carrera: string;
   ficha: any[] = [];
   server='';
+  mensaje='';
   getficha(){
     const authEndpoint = `${this.server}/api/Informe7/Consultar_Informe7?id_carrera=${this.carrera}`;
 
@@ -50,7 +51,81 @@ export class Ficha7Component {
     });
 
   }
+  validar(ficha: any):boolean{
+    let validaciones: string[] = [];
+    let val: string[] = [];
+    let ult= 0, penul= 0, ante = 0;
+    
+    if(ficha[0].ultima_decersion==''){
+      validaciones.push("desercion ultima generacion");
+    }else{
+      ult +=parseInt(ficha[0].ultima_decersion);
+    }
+    if(ficha[0].ultima_reprobacion==''){
+      validaciones.push("reprobacion ultima generacion");
+    }else{
+      ult += parseInt(ficha[0].ultima_reprobacion);
+    }
+    if(ficha[0].ultima_estudiantes_ingresados==''){
+      validaciones.push("estudiantes ingresados ultima generacion");
+    }else{
+      if(ult>parseInt(ficha[0].ultima_estudiantes_ingresados)){
+        val.push(" no puede haber mas desercion y reprobados que ingreso.(penul) ")
+      }
+    }
+
+    
+    if(ficha[0].penul_decersion==''){
+      validaciones.push("desercion penultima generacion");
+    }else{
+      penul +=parseInt(ficha[0].penul_decersion);
+    }
+    if(ficha[0].penul_reprobacion==''){
+      validaciones.push("reprobacion penultima generacion");
+    }else{
+      penul += parseInt(ficha[0].penul_reprobacion);
+    }
+    if(ficha[0].penul_estudiantes_ingresados==''){
+      validaciones.push("estudiantes ingresados penultima generacion");
+    }else{
+      if(ult>parseInt(ficha[0].penul_estudiantes_ingresados)){
+        val.push(" no puede haber mas desercion y reprobados que ingreso.(penultima) ")
+      }
+    }
+
+    
+    if(ficha[0].ante_decersion==''){
+      validaciones.push("desercion antetima generacion");
+    }else{
+      ante +=parseInt(ficha[0].ante_decersion);
+    }
+    if(ficha[0].ante_reprobacion==''){
+      validaciones.push("reprobacion antetima generacion");
+    }else{
+      ante += parseInt(ficha[0].ante_reprobacion);
+    }
+    if(ficha[0].ante_estudiantes_ingresados==''){
+      validaciones.push("estudiantes ingresados antetima generacion");
+    }else{
+      if(ult>parseInt(ficha[0].ante_estudiantes_ingresados)){
+        val.push(" no puede haber mas desercion y reprobados que ingreso.(antepenultima) ")
+      }
+    }
+
+    if(validaciones.length !=0){
+      this.mensaje = 'los campos: '+ validaciones.join(", ") + ' estan vacios.';
+      return false;
+    }else{
+      if(val.length !=0){
+        this.mensaje = val.join(", ");
+        return false;
+      }else{
+        return true;
+      }
+    }
+  }
   editarficha(){
+    if(this.validar(this.ficha)){
     const authEndpoint = `${this.server}/api/Informe7/Actualizar_Informe7`;
     const car = parseInt(this.carrera);
     let authData = {
@@ -58,34 +133,16 @@ export class Ficha7Component {
       "id_carrera": car,
       "ultima_estudiantes_ingresados": this.ficha[0].ultima_estudiantes_ingresados,
       "ultima_decersion": this.ficha[0].ultima_decersion,
-      "ultima_indice_decersion": 0,
       "ultima_reprobacion": this.ficha[0].ultima_reprobacion,
-      "ultima_indice_reprobacion": 0,
-      "ultima_egresados": 0,
-      "ultima_indice_eficiencia": 0,
       "ultima_titulados": this.ficha[0].ultima_titulados,
-      "ultima_indice_titulacion": 0,
-      "ultima_indice_neto": 0,
       "penul_estudiantes_ingresados": this.ficha[0].penul_estudiantes_ingresados,
       "penul_decersion": this.ficha[0].penul_decersion,
-      "penul_indice_decersion": 0,
       "penul_reprobacion": this.ficha[0].penul_reprobacion,
-      "penul_indice_reprobacion": 0,
-      "penul_egresados": 0,
-      "penul_indice_eficiencia": 0,
       "penul_titulados": this.ficha[0].penul_titulados,
-      "penul_indice_titulacion": 0,
-      "penul_indice_neto": 0,
       "ante_estudiantes_ingresados": this.ficha[0].ante_estudiantes_ingresados,
       "ante_decersion": this.ficha[0].ante_decersion,
-      "ante_indice_decersion": 0,
       "ante_reprobacion": this.ficha[0].ante_reprobacion,
-      "ante_indice_reprobacion": 0,
-      "ante_egresados": 0,
-      "ante_indice_eficiencia": 0,
       "ante_titulados": this.ficha[0].ante_titulados,
-      "ante_indice_titulacion": 0,
-      "ante_indice_neto": 0
     };
   
     // Encabezados para la solicitud POST
@@ -104,6 +161,7 @@ export class Ficha7Component {
         this.getficha();
       }, (error) => {
         console.error('Error:', error);
+        this.getficha();
       });
     const imagenDisk = document.querySelector(`.disk7`) as HTMLImageElement;
 
@@ -118,6 +176,12 @@ export class Ficha7Component {
       this.renderer.removeClass(lugar, 'edit');
       lugar.readOnly = true;
     });
+    }else{
+      window.alert(this.mensaje);
+      setTimeout(() => {
+        this.mensaje='';
+      }, 100);
+    }
   }
   minMax(accion:any){
     if(accion.meta_alcanzada>100){
