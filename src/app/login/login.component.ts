@@ -67,8 +67,8 @@ export class LoginComponent implements OnInit {
         this.storage.setDataItem('userTipe',ut);
         if(token!=''){
           setTimeout(() => {
-            // window.location.href = 'https://uas-proy.com/'; 
-            window.location.reload();
+            window.location.href = 'https://uas-proy.com/'; 
+            // window.location.reload();
           }, 300);
         }else{
           spanElement.textContent = 'no se encontraron coincidencias usuario-contraseña';

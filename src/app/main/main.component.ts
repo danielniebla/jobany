@@ -20,8 +20,8 @@ export class MainComponent implements OnInit {
   }
   admin(){
     this.storage.setDataItem('idCarrera','0');
-    // window.location.href = 'https://uas-proy.com/';
-    window.location.reload();
+    window.location.href = 'https://uas-proy.com/';
+    // window.location.reload();
 
   }
   async initializeUserData() {
