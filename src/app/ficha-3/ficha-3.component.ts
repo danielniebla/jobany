@@ -33,11 +33,11 @@ export class Ficha3Component implements OnInit {
   }];
   server='';
   @Input() carrera: string;
+  // ficha: any[] = [];
   faculta='';
   facultad='';
   getficha(){
-    const authEndpoint = `${this.server}/api/Informe3/Consultar_Informe3?id_carrera=${this.facultad}`;
-  
+    const authEndpoint = `${this.server}/api/Informe3/Consultar_Informe3?id_facultad=${this.facultad}`;
       // Encabezados para la solicitud POST
       const httpOptions = {
         headers: new HttpHeaders({
@@ -95,7 +95,7 @@ export class Ficha3Component implements OnInit {
       .subscribe((response: any) => {
         // Aquí puedes manejar la respuesta del servidor
         this.ficha = response;
-        this.getFacultad();
+        // this.getFacultad();
       }, (error) => {
         console.error('Error:', error);
       });
@@ -114,7 +114,7 @@ export class Ficha3Component implements OnInit {
     });
   }
   getFacultad(){
-      const authEndpoint = `${this.server}/api/Carreras/Consultar_Carrera_Id?id_carrera=${this.carrera}`;
+    const authEndpoint = `${this.server}/api/Carreras/Consultar_Carrera_Id?id_carrera=${this.carrera}`;
 
     // Encabezados para la solicitud POST
       const httpOptions = {
@@ -128,15 +128,6 @@ export class Ficha3Component implements OnInit {
       .subscribe((response: any) => {
         // Aquí puedes manejar la respuesta del servidor
         this.facultad = response[0].id_facultad;
-        this.getficha();
-        const authEndpoint2 = `${this.server}/api/Facultades/Consultar_Facultad_Id?id_facultad=${this.facultad}`;
-            this.http.get(authEndpoint2, httpOptions)
-            .subscribe((response: any) => {
-              // Aquí puedes manejar la respuesta del servidor
-              this.faculta = response[0].nombre;
-            }, (error) => {
-              console.error('Error:', error);
-            });
         this.getficha();
       }, (error) => {
         console.error('Error:', error);

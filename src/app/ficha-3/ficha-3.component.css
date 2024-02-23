@@ -23,6 +23,7 @@ h4{
     width: 100%;
     margin: 0 !important;
     padding: 0;
+    background-color: var(--cds-global-color-azure-500);
 }
 img {
     height: 16px;

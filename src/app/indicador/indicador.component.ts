@@ -18,7 +18,7 @@ export class IndicadorComponent implements OnInit {
   contador=0;
   option: boolean | null | undefined;
   flag : boolean = false;
-  title= '';
+  title= 'Seleccionar una unidad academica';
   page=1;
   pages=1;
   paged=7;

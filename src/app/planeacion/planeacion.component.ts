@@ -259,7 +259,7 @@ export class PlaneacionComponent implements OnInit {
         "id_recomendacion": accion.id_recomendacion,
         "acciones_realizadas": accion.acciones_realizadas,
         "fecha": accion.fecha,
-        "meta_alcanzada": accion.meta,
+        "meta_alcanzada": accion.meta_alcanzada,
         "documentos": accion.documentos
       };
   
