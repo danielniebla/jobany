@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   nombre='';
   contrasena='';
   user = '';
-  server = 'https://adminuas-001-site3.gtempurl.com/';
+  server = 'https://adminuas-001-site3.gtempurl.com';
   autenticarUsuario() {
     const spanElement: HTMLElement | null = document.getElementById('error')!;
     const authEndpoint = `${this.server}/api/Usuarios/autenticacion`;
