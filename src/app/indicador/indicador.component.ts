@@ -13,6 +13,7 @@ export class IndicadorComponent implements OnInit {
   flagIndicador: { [key: number]: boolean } = {};
   indi='';
   carrera?:number;
+  tCarrera='';
   server= '';
   alert = false;
   contador=0;
@@ -23,6 +24,7 @@ export class IndicadorComponent implements OnInit {
   pages=1;
   paged=7;
   userType='';
+  text='Agregar indicador';
   idCarreraString='';
   paginador(i:number){
     this.page=this.page+i;
@@ -42,9 +44,11 @@ export class IndicadorComponent implements OnInit {
     if (elemento) {
       if (elemento.style.display === "none") {
         this.flag = true;
+        this.text='';
         elemento.style.display = "block";
       } else {
         this.flag = false;
+        this.text='Agregar indicador';
         elemento.style.display = "none";
       }
     } else {
@@ -191,6 +195,7 @@ export class IndicadorComponent implements OnInit {
           .subscribe((response: any) => {
             // Aquí puedes manejar la respuesta del servidor
             this.title = response[0].nombre;
+            this.tCarrera = 'Carrera:';
           }, (error) => {
             console.error('Error:', error);
           });
@@ -305,7 +310,6 @@ export class IndicadorComponent implements OnInit {
     }
     
     cancelarBorrado() {
-      this.option = false;
     }
     async eleccion(){
       if (this.option != null && this.option === true) {

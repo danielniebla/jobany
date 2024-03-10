@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'Evaluaciones', component:MainComponent },
   { path: 'Evaluaciones/Admin', component:AdmincrudsComponent },
   { path: 'Evaluaciones/FichaTecnica', component:FichasTecnicasComponent },
-  { path: 'telefono_ver_mejor', component:PhoneComponent},
+  { path: 'Ayuda', component:PhoneComponent},
 
   
 ];

@@ -1,6 +1,6 @@
 @import '@clr/ui/clr-ui.css';
 img {
-    height: 16px;
+    height: 20px;
     width: auto;
     margin: 0;
 }
@@ -15,7 +15,7 @@ img {
     padding: 0;
 }
 .butt {
-    height: 20px;
+    height: 25px;
     width: auto;
     margin: 24px auto auto 1%;
 
@@ -36,7 +36,7 @@ button{
     background-color: var(--cds-global-color-blue-200) !important;
 }
 .txtArea{
-    background-color: var(--cds-global-color-yellow-200);
+    background-color: var(--cds-global-color-yellow-100);
 }
 td,textarea,.tr{
     margin: 0 !important;
@@ -47,7 +47,7 @@ td,textarea,.tr{
 
 }
 .cumplio .txtArea, .cumplio{
-    background-color: var(--cds-global-color-green-200) !important;
+    background-color: var(--cds-global-color-green-100) !important;
 }
 .incumplio .txtArea, .incumplio{
     background-color: var(--cds-global-color-red-300) !important;
@@ -105,7 +105,7 @@ clr-textarea-container {
     text-align: left;
     align-content: flex-start;
     width: 100%;
-    background-color: var(--cds-global-color-yellow-200);
+    background-color: var(--cds-global-color-yellow-100);
 }
 .tabla{
     display: grid;

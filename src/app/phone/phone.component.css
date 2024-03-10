@@ -1,0 +1,20 @@
+.icon{
+    height: 30px;
+    width: auto;
+    margin-right: 30px;
+}
+.icons{
+    padding: 20px;
+    width: calc(100%-60px);
+    margin: 30px;
+    box-shadow: .2rem .2rem .5rem 0rem var(--cds-alias-status-info) ;  
+    -webkit-box-shadow: .2rem .2rem .5rem 0rem var(--cds-alias-status-info);
+    -moz-box-shadow: .2rem .2rem .5rem 0rem var(--cds-alias-status-info) ;
+    border-radius: 20px;
+}
+h4{
+    margin: 0;
+}
+.regresar{
+    margin: 30px;
+}

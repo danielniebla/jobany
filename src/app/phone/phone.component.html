@@ -1,1 +1,32 @@
-<p>phone works!</p>
+<div class="regresar">
+    <button class="boton btn" (click)="recomendacion()">Regresar</button>
+</div>
+<div class="icons">
+    
+    <h4><img src="../../assets/lapiz.png" alt="" class="icon">Editar, donde sea que vea este icono significa que ese campo se puede edita(si no preciona el icono el campo no podra editarse).</h4>
+</div>
+<div class="icons">
+    <h4><img src="../../assets/borrar.png" alt="" class="icon">Borrar, siempre que presione este icono se le pedira confirmar(para evitar borrado accidental).</h4>
+</div>
+<div class="icons">
+    <h4><img src="../../assets/guardar.png" alt="" class="icon">Guardar, este icono saldra para conservar cambios hechos en el modo de edicion.</h4>
+</div>
+<div class="icons">
+    <h4><img src="../../assets/mas.png" alt="" class="icon">Agregar, este boton lanzara un espacio nuevo para llenar los datos necesarios.</h4>
+</div>
+<div class="icons">
+    <h4><button class="boton btn" (click)="recomendacion()">Recomendaciones</button> Apartado en el que se trabajara con las recomendaciones de los organizmos evaluadores.</h4>
+</div>
+
+<div class="icons">
+    <h4><button class="boton btn" (click)="fichasTecnicas()">Fichas tecnicas</button> Apartado en el que podra ver y actualizar datos institucionales importantes.</h4>
+</div>
+<ng-container *ngIf="user == '1'||'2'" >
+    <div class="icons">
+        <h4><button class="boton btn" >Administrar credenciales</button> Apartado en el que podra manejar las credenciales de los usuarios ademas de las zonas,facultades y carreras de la universidad.</h4>
+    </div>
+    <div class="icons">
+        <h4><button class="boton btn" >Zona administrativa</button> Apartado de recomendaciones al que tienen acceso los administradores generales que no esta relacionado a una carrera y sirve para anotar recomendaciones generales de la universidad.</h4>
+    </div>
+
+</ng-container>

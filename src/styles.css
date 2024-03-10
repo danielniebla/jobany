@@ -5,14 +5,7 @@ body{
     font-size: 1.6rem;
     line-height: 2;
 }
-.btn{
-    background-color: var(--cds-global-color-blue-100);
-    border-color: var(--cds-global-color-blue-300);
-    color: var(--cds-global-color-black);
-    font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif;
-    margin: 0;
-}
+
 .cont{
     /*background-color: var(--cds-global-color-ice-1000); darkmode*/
     background-color: var(--cds-global-color-blue-50);
@@ -39,22 +32,26 @@ a {
     text-decoration: none;
 }
 h1, h2, h3, h4,h5,h6{
-    line-height: 3rem;
+    line-height: 3.5rem;
 }
+/*verificar especificidad o verificar si estan afectando realmente.*/
 h1{
-    font-size: 3.0rem;
+    font-size:  4.1rem; /*4.1*/
 }
 h2{
-    font-size: 2.8rem;
+    font-size: 3.7rem;/*3.7*/
 }
 h3{
-    font-size: 2.2rem;
+    font-size: 3.2rem;/*3.2*/
 }
 h4{
-    font-size: 1.6rem;
+    font-size: 3rem;/*3*/
+}
+h5{
+    font-size: 2.6rem;/*2.6*/
 }
 h6{
-    font-size: .6rem !important;
+    font-size: .9rem !important;
 }
 img {
     max-width: 100%;

@@ -1,6 +1,6 @@
 @import '@clr/ui/clr-ui.css';
 img {
-    height: 16px;
+    height: 20px;
     width: auto;
     margin: 0;
 }
@@ -15,7 +15,7 @@ img {
     padding: 0;
 }
 .butt {
-    height: 20px;
+    height: 25px;
     width: auto;
     margin: 24px auto auto 1%;
 

@@ -318,6 +318,8 @@ export class PlaneacionComponent implements OnInit {
     }
   }
   nuevaRecomendacion(){
+    this.nueva=false;
+
     if(this.validarn()){
       const authEndpoint = `${this.server}/api/Cumplimiento/Agregar_Cumplimiento`;
       const authData = {
@@ -342,12 +344,13 @@ export class PlaneacionComponent implements OnInit {
       .subscribe((response: any) => {
         // Aquí puedes manejar la respuesta del servidor
         this.actualizarDatosRecomendacion();
-        this.nueva=false;
+        
       }, (error) => {
         console.error('Error:', error);
       });
     }else{
       window.alert(this.mensaje);
+      this.nueva=true;
       setTimeout(() => {
         this.mensaje='';
       }, 100);

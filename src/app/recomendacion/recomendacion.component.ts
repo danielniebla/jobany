@@ -317,6 +317,7 @@ export class RecomendacionComponent implements OnInit {
     }
   }
   nuevaRecomendacion(){
+    this.nueva=false;
     var notificacion ='';
     if(this.nombre==''){
       notificacion +=', recomendacion';
@@ -366,11 +367,12 @@ export class RecomendacionComponent implements OnInit {
         .subscribe((response: any) => {
           // Aquí puedes manejar la respuesta del servidor
           this.actualizarDatosRecomendacion();
-          this.nueva=false;
+          
         }, (error) => {
           console.error('Error:', error);
         });
     }else{
+      this.nueva=true;
       window.alert(`Favor de llenar todos los campos, falto por llenar: ${notificacion}`);
     }
 

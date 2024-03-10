@@ -8,9 +8,8 @@ import { Router } from '@angular/router';
 })
 export class Navbar1Component {
   constructor(private Router: Router){}
-  phone(){
-    this.Router.navigate(['/telefono_ver_mejor']);
+
+  help(){
+    this.Router.navigate(['/Ayuda']);
   }
-
-
 }

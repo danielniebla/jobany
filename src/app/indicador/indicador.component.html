@@ -1,7 +1,7 @@
-<h3>Carrera: {{title}}</h3>
-<div class="flex"  *ngIf="userType != '2'">
+<h2> {{tCarrera}} {{title}}</h2>
+<div class="flex"  *ngIf="userType != '2'&& tCarrera != ''">
   <form class="clr-form">
-    <div class="clr-form-control" id="indicador">
+    <div class="clr-form-control" id="indicador" >
       <label class="clr-control-label">indicador</label>
       <div class="clr-control-container">
         <div class="clr-input-wrapper" appClickAway>
@@ -18,8 +18,7 @@
           ></cds-icon>
           <clr-control-error>El campo es requerido!</clr-control-error>
           <clr-control-helper
-            >Escriba el nombre del indicador.</clr-control-helper
-          >
+            >Escriba el nombre del indicador.</clr-control-helper>
         </div>
       </div>
       <br />
@@ -31,11 +30,11 @@
       </div>
     </div>
   </form>
-  <img class="but" [src]="flag ? '../../assets/boton-menos.png'  : '../../assets/mas.png' " alt="+" (click)="agregar()" />
+  <h3 (click)="agregar()">{{text}} <img class="but" [src]="flag ? '../../assets/boton-menos.png'  : '../../assets/mas.png' " alt="+"  /></h3>
 </div>
 <ng-container *ngFor="let indicador of indicadores.slice((page - 1) * paged, page * paged)">
   <form clrForm>
-    <div (click)="indicadorToggle(indicador)">
+    <div (click)="indicadorToggle(indicador)" >
       <img
         [src]="
           flagIndicador[indicador.id_pregunta]
@@ -43,7 +42,7 @@
             : '../../assets/mass.png'
         "
         class="indi"
-        *ngIf="userType != '2'"
+        
       />
       <h4 class="indi">{{ indicador.nombre }}</h4>
       <img
@@ -92,7 +91,7 @@
           <img
             class="pen"
             src="../../assets/lapiz.png"
-            alt="+"
+            alt="edit"
             (click)="editarIndicador(indicador)"
           />
           <img
@@ -107,18 +106,18 @@
       </div>
       
 
-      <app-recomendacion [pregunta]="indicador.id_pregunta" [paged]="paged" [margen]=indicador.margen></app-recomendacion>
+      <app-recomendacion [pregunta]="indicador.id_pregunta" [paged]="paged" [margen]=indicador.margen ></app-recomendacion>
       <app-planeacion [pregunta2]="indicador.id_pregunta" [paged]="paged"></app-planeacion>
     </ng-container>
   </form>
 
 </ng-container>
-<div class="pages">
+<div class="pages" *ngIf="tCarrera != ''">
   <img src="../../assets/anterior.png" (click)="paginador(-1)">
   <input type="number" id="pageNumber" class="page" [(ngModel)]="page" (change)="paginador(0)"> de {{ pages }}
   <img src="../../assets/flecha-correcta.png" class="right" (click)="paginador(1)">
 </div>
-<div class="pages">
+<div class="pages" *ngIf="tCarrera != ''">
   Numero de elementos  <input type="number" id="pageNumber" class="page" [(ngModel)]="paged" (change)="paginas()" >
 </div>
 <div class="modal static bump-down" *ngIf="alert">

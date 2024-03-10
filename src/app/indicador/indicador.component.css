@@ -21,13 +21,14 @@ h5{
 }
 .flex {
     display: flex;
+    width: 30%;
 }
 .indi {
     display: inline;
     user-select: none;
 }
 img {
-    height: 16px;
+    height: 25px;
     width: auto;
     margin: 0 15px;
     margin-bottom: 8px;
@@ -43,12 +44,9 @@ h4 {
     width: auto;
     margin: auto 1% auto auto;
 }
-.flex {
-    display: flex;
-}
 
 .pen {
-    height: 15px;
+    height: 25px;
     width: auto;
 }
 .title {
@@ -66,12 +64,12 @@ h5{
 textarea {
     width: 98%;
     margin: 0 1% 0 1%;
-    background-color: var(--cds-alias-status-disabled-shade) !important;
+    background-color: var(--cds-alias-status-disabled-tint) !important;
     overflow: auto;
 }
 
 .txtArea{
-    background-color: var(--cds-alias-status-disabled-shade) !important;
+    background-color: var(--cds-alias-status-disabled-tint) !important;
 
 }
 clr-textarea-container {
@@ -96,6 +94,8 @@ clr-textarea-container {
 }
 h3{
     margin: 5px 20px;
+    display: flex;
+    width: 100%;
 }
 .page{
     width: 40px;
