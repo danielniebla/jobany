@@ -14,7 +14,8 @@ export class LoginComponent implements OnInit {
   nombre='';
   contrasena='';
   user = '';
-  server = 'https://adminuas-001-site3.gtempurl.com';
+  server = 'https://localhost:7005';
+
   autenticarUsuario() {
     const spanElement: HTMLElement | null = document.getElementById('error')!;
     const authEndpoint = `${this.server}/api/Usuarios/autenticacion`;
@@ -67,8 +68,8 @@ export class LoginComponent implements OnInit {
         this.storage.setDataItem('userTipe',ut);
         if(token!=''){
           setTimeout(() => {
-            // window.location.href = 'https://uas-proy.com/login'; 
-            window.location.reload();
+            window.location.href = this.server; 
+            // window.location.reload();
           }, 300);
         }else{
           spanElement.textContent = 'no se encontraron coincidencias usuario-contraseña';

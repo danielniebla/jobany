@@ -117,8 +117,8 @@ export class Navbar2Component implements OnInit {
     localStorage.clear();
     this.storage.setDataItem('reload','1');
     setTimeout(() => {
-      window.location.reload();
-      // window.location.href = 'https://uas-proy.com/login';
+      // window.location.reload();
+      window.location.href = 'https://localhost:7005';
 
     }, 100);
   }
