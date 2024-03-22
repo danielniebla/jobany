@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
         this.storage.setDataItem('userTipe',ut);
         if(token!=''){
           setTimeout(() => {
-            window.location.href = 'https://localhost:80'; 
+            window.location.href = 'http://localhost:80'; 
             // window.location.reload();
           }, 300);
         }else{
