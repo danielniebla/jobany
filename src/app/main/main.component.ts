@@ -20,7 +20,7 @@ export class MainComponent implements OnInit {
   }
   admin(){
     this.storage.setDataItem('idCarrera','0');
-    window.location.href = 'https://localhost:7005';
+    window.location.href = 'https://localhost:80';
     // window.location.reload();
 
   }

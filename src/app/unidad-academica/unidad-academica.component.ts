@@ -103,7 +103,7 @@ export class UnidadAcademicaComponent implements OnInit{
   }
   cambiarCarrera(id: number){
     localStorage.setItem('idCarrera', id.toString());
-    window.location.href = 'https://localhost:7005';
+    window.location.href = 'https://localhost:80';
     // window.location.reload();
   }
   dropDown() {

@@ -118,7 +118,7 @@ export class Navbar2Component implements OnInit {
     this.storage.setDataItem('reload','1');
     setTimeout(() => {
       // window.location.reload();
-      window.location.href = 'https://localhost:7005';
+      window.location.href = 'https://localhost:80';
 
     }, 100);
   }
