@@ -75,7 +75,16 @@ import { PhoneComponent } from './phone/phone.component';
     FormsModule,
     HttpClientModule,
     HeaderModule,
-    provideFirebaseApp(() => initializeApp({"projectId":"indicadores-b465a","appId":"1:680958424249:web:f501e47574f8f5ad75d768","storageBucket":"indicadores-b465a.appspot.com","apiKey":"AIzaSyDkK1SIq8yX4FPDgHH5ttAkc_qbx7oTTxM","authDomain":"indicadores-b465a.firebaseapp.com","messagingSenderId":"680958424249","measurementId":"G-42046H3C8S"})),
+    // provideFirebaseApp(() => initializeApp({"projectId":"indicadores-b465a","appId":"1:680958424249:web:f501e47574f8f5ad75d768","storageBucket":"indicadores-b465a.appspot.com","apiKey":"AIzaSyDkK1SIq8yX4FPDgHH5ttAkc_qbx7oTTxM","authDomain":"indicadores-b465a.firebaseapp.com","messagingSenderId":"680958424249","measurementId":"G-42046H3C8S"})),
+    provideFirebaseApp(() => initializeApp({
+      apiKey: "AIzaSyDr491XZvuMRets3rJke3a1WfXN2nUsMaM",
+      authDomain: "adminuas.firebaseapp.com",
+      projectId: "adminuas",
+      storageBucket: "adminuas.appspot.com",
+      messagingSenderId: "178941247664",
+      appId: "1:178941247664:web:bb4049aa4a421946c87b75",
+      measurementId: "G-4SYQ3HSTDM"
+    })),
     provideStorage(() => getStorage())
   ],
   providers: [
